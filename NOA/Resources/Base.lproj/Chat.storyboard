@@ -25,11 +25,13 @@
             </objects>
             <point key="canvasLocation" x="1042.0289855072465" y="115.84821428571428"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Item-->
         <scene sceneID="wzn-wq-zVr">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="H0B-ic-ANo" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="mrD-AR-2JA"/>
                     <toolbarItems/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="htn-Lk-9xO">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
