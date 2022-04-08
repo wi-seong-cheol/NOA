@@ -22,6 +22,7 @@
 		4DCCD13C280080F40035002A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DCCD138280080F40035002A /* Main.storyboard */; };
 		4DCCD13D280080F40035002A /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DCCD13A280080F40035002A /* Home.storyboard */; };
 		4DCCD140280081150035002A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DCCD13E280081150035002A /* LaunchScreen.storyboard */; };
+		4DCCD143280081EA0035002A /* Feed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DCCD141280081EA0035002A /* Feed.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		4DCCD139280080F40035002A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Main.storyboard; sourceTree = "<group>"; };
 		4DCCD13B280080F40035002A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Home.storyboard; sourceTree = "<group>"; };
 		4DCCD13F280081150035002A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		4DCCD142280081EA0035002A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Feed.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,6 +194,7 @@
 			children = (
 				4DCCD138280080F40035002A /* Main.storyboard */,
 				4DCCD13A280080F40035002A /* Home.storyboard */,
+				4DCCD141280081EA0035002A /* Feed.storyboard */,
 				4DCCD12C28007EBA0035002A /* Create.storyboard */,
 				4DCCD12828007E510035002A /* Chat.storyboard */,
 				4DCCD12A28007E570035002A /* Profile.storyboard */,
@@ -308,6 +311,7 @@
 			files = (
 				4DCCD12928007E510035002A /* Chat.storyboard in Resources */,
 				4DCCD140280081150035002A /* LaunchScreen.storyboard in Resources */,
+				4DCCD143280081EA0035002A /* Feed.storyboard in Resources */,
 				4DCCD13D280080F40035002A /* Home.storyboard in Resources */,
 				4DCCD12B28007E570035002A /* Profile.storyboard in Resources */,
 				4DCCD12E28007EBA0035002A /* Create.storyboard in Resources */,
@@ -408,6 +412,14 @@
 				4DCCD13F280081150035002A /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		4DCCD141280081EA0035002A /* Feed.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4DCCD142280081EA0035002A /* Base */,
+			);
+			name = Feed.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
