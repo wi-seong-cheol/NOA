@@ -15,6 +15,9 @@
 		4D33603027E8C8EB007640F7 /* NOATests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D33602F27E8C8EB007640F7 /* NOATests.swift */; };
 		4D33603A27E8C8EB007640F7 /* NOAUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D33603927E8C8EB007640F7 /* NOAUITests.swift */; };
 		4D33603C27E8C8EB007640F7 /* NOAUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D33603B27E8C8EB007640F7 /* NOAUITestsLaunchTests.swift */; };
+		4D6D35532801CC6D0001B18F /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6D35522801CC6D0001B18F /* FeedCell.swift */; };
+		4D6D35562801CD080001B18F /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6D35552801CD080001B18F /* Feed.swift */; };
+		4D6D35582801CEA30001B18F /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6D35572801CEA30001B18F /* HomeViewModel.swift */; };
 		4DCCD11A28007C330035002A /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCCD11928007C330035002A /* SplashViewController.swift */; };
 		4DCCD12928007E510035002A /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DCCD12828007E510035002A /* Chat.storyboard */; };
 		4DCCD12B28007E570035002A /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DCCD12A28007E570035002A /* Profile.storyboard */; };
@@ -55,6 +58,9 @@
 		4D33603527E8C8EB007640F7 /* NOAUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NOAUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D33603927E8C8EB007640F7 /* NOAUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOAUITests.swift; sourceTree = "<group>"; };
 		4D33603B27E8C8EB007640F7 /* NOAUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOAUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		4D6D35522801CC6D0001B18F /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
+		4D6D35552801CD080001B18F /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
+		4D6D35572801CEA30001B18F /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		4DCCD11928007C330035002A /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		4DCCD12828007E510035002A /* Chat.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
 		4DCCD12A28007E570035002A /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
@@ -145,9 +151,18 @@
 			path = NOAUITests;
 			sourceTree = "<group>";
 		};
+		4D6D35542801CC760001B18F /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				4D6D35522801CC6D0001B18F /* FeedCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		4DCCD11228007A5D0035002A /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				4D6D35542801CC760001B18F /* Cells */,
 				4DCCD14A280084E10035002A /* Splash */,
 				4DCCD144280084AD0035002A /* Home */,
 				4DCCD148280084C80035002A /* Feed */,
@@ -161,6 +176,7 @@
 		4DCCD11328007A7F0035002A /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				4D6D35572801CEA30001B18F /* HomeViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -168,6 +184,7 @@
 		4DCCD11428007AF80035002A /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				4D6D35552801CD080001B18F /* Feed.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -392,8 +409,11 @@
 				4D33601A27E8C8E9007640F7 /* HomeViewController.swift in Sources */,
 				4D33601627E8C8E9007640F7 /* AppDelegate.swift in Sources */,
 				4D33602027E8C8E9007640F7 /* NOA.xcdatamodeld in Sources */,
+				4D6D35582801CEA30001B18F /* HomeViewModel.swift in Sources */,
+				4D6D35562801CD080001B18F /* Feed.swift in Sources */,
 				4D33601827E8C8E9007640F7 /* SceneDelegate.swift in Sources */,
 				4DCCD11A28007C330035002A /* SplashViewController.swift in Sources */,
+				4D6D35532801CC6D0001B18F /* FeedCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
