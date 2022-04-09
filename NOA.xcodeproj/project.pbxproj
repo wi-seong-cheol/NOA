@@ -148,8 +148,12 @@
 		4DCCD11228007A5D0035002A /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				4D33601927E8C8E9007640F7 /* HomeViewController.swift */,
-				4DCCD11928007C330035002A /* SplashViewController.swift */,
+				4DCCD14A280084E10035002A /* Splash */,
+				4DCCD144280084AD0035002A /* Home */,
+				4DCCD148280084C80035002A /* Feed */,
+				4DCCD147280084C00035002A /* Create */,
+				4DCCD146280084BB0035002A /* Chat */,
+				4DCCD145280084B20035002A /* Profile */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -203,6 +207,50 @@
 			);
 			name = Resources;
 			path = Resources/Base.lproj;
+			sourceTree = "<group>";
+		};
+		4DCCD144280084AD0035002A /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				4D33601927E8C8E9007640F7 /* HomeViewController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		4DCCD145280084B20035002A /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		4DCCD146280084BB0035002A /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		4DCCD147280084C00035002A /* Create */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Create;
+			sourceTree = "<group>";
+		};
+		4DCCD148280084C80035002A /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Feed;
+			sourceTree = "<group>";
+		};
+		4DCCD14A280084E10035002A /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				4DCCD11928007C330035002A /* SplashViewController.swift */,
+			);
+			path = Splash;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
