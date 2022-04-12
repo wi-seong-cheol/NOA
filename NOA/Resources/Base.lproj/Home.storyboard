@@ -33,6 +33,7 @@
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Blw-4J-QsT">
                                                             <rect key="frame" x="10" y="0.0" width="32" height="32"/>
+                                                            <color key="backgroundColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="32" id="2MQ-z7-VsZ"/>
                                                                 <constraint firstAttribute="width" constant="32" id="LCx-mw-Sof"/>
@@ -40,12 +41,14 @@
                                                         </imageView>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="N5K-HX-nN8">
                                                             <rect key="frame" x="0.0" y="40" width="390" height="390"/>
+                                                            <color key="backgroundColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="N5K-HX-nN8" secondAttribute="height" multiplier="1:1" id="N4Q-HG-mfS"/>
                                                             </constraints>
                                                         </imageView>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xZr-g9-ndk">
                                                             <rect key="frame" x="356" y="440" width="24" height="24"/>
+                                                            <color key="backgroundColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="24" id="8YN-eU-fdu"/>
                                                                 <constraint firstAttribute="height" constant="24" id="OtY-eQ-JNn"/>
