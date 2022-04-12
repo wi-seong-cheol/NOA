@@ -18,7 +18,7 @@ class HomeViewModel: NSObject {
     var lectureListUpdated: () -> Void = { }
     
     func feedsCount() -> Int {
-        return feedList.list.count
+        return 3//feedList.list.count
     }
 
     func lecture(at index: Int) -> Feed {
