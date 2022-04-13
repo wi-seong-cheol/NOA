@@ -26,6 +26,9 @@ target 'NOA' do
   # pod SwiftyJSON
   pod 'SwiftyJSON'
   
+  # pod Alamofire
+  pod 'Alamofire'
+  
   # pod Socket.io
   pod 'Socket.IO-Client-Swift'
   
