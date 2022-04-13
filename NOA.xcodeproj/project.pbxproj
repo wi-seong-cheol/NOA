@@ -24,6 +24,16 @@
 		4DC03D2028069B4900CEE554 /* Feed.json in Resources */ = {isa = PBXBuildFile; fileRef = 4DC03D1F28069B4900CEE554 /* Feed.json */; };
 		4DC03D232806A9E500CEE554 /* NotoSansCJKkr-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4DC03D212806A9E300CEE554 /* NotoSansCJKkr-Medium.otf */; };
 		4DC03D242806A9E500CEE554 /* NotoSansCJKkr-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4DC03D222806A9E500CEE554 /* NotoSansCJKkr-Regular.otf */; };
+		4DC03D262806AD0100CEE554 /* APIRequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC03D252806AD0100CEE554 /* APIRequestService.swift */; };
+		4DC03D2C2806B3F100CEE554 /* ObservableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC03D2B2806B3F100CEE554 /* ObservableType.swift */; };
+		4DC03D2F2806B44C00CEE554 /* Inject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC03D2E2806B44C00CEE554 /* Inject.swift */; };
+		4DC03D312806B4B100CEE554 /* GlobalAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC03D302806B4B100CEE554 /* GlobalAlert.swift */; };
+		4DC03D332806B58C00CEE554 /* APIUrlService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC03D322806B58C00CEE554 /* APIUrlService.swift */; };
+		4DC03D352806BA6C00CEE554 /* HeaderCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC03D342806BA6C00CEE554 /* HeaderCommon.swift */; };
+		4DC03D372806BAE500CEE554 /* ReadPList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC03D362806BAE500CEE554 /* ReadPList.swift */; };
+		4DC03D392806BB0500CEE554 /* FeedService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC03D382806BB0500CEE554 /* FeedService.swift */; };
+		4DC03D3C2806BBCE00CEE554 /* DIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC03D3B2806BBCE00CEE554 /* DIContainer.swift */; };
+		4DC03D3E2806BDE100CEE554 /* BaseInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC03D3D2806BDE100CEE554 /* BaseInterceptor.swift */; };
 		4DCCD11A28007C330035002A /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCCD11928007C330035002A /* SplashViewController.swift */; };
 		4DCCD12928007E510035002A /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DCCD12828007E510035002A /* Chat.storyboard */; };
 		4DCCD12B28007E570035002A /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DCCD12A28007E570035002A /* Profile.storyboard */; };
@@ -79,6 +89,16 @@
 		4DC03D1F28069B4900CEE554 /* Feed.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Feed.json; sourceTree = "<group>"; };
 		4DC03D212806A9E300CEE554 /* NotoSansCJKkr-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansCJKkr-Medium.otf"; sourceTree = "<group>"; };
 		4DC03D222806A9E500CEE554 /* NotoSansCJKkr-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansCJKkr-Regular.otf"; sourceTree = "<group>"; };
+		4DC03D252806AD0100CEE554 /* APIRequestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequestService.swift; sourceTree = "<group>"; };
+		4DC03D2B2806B3F100CEE554 /* ObservableType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableType.swift; sourceTree = "<group>"; };
+		4DC03D2E2806B44C00CEE554 /* Inject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Inject.swift; sourceTree = "<group>"; };
+		4DC03D302806B4B100CEE554 /* GlobalAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalAlert.swift; sourceTree = "<group>"; };
+		4DC03D322806B58C00CEE554 /* APIUrlService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIUrlService.swift; sourceTree = "<group>"; };
+		4DC03D342806BA6C00CEE554 /* HeaderCommon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCommon.swift; sourceTree = "<group>"; };
+		4DC03D362806BAE500CEE554 /* ReadPList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadPList.swift; sourceTree = "<group>"; };
+		4DC03D382806BB0500CEE554 /* FeedService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedService.swift; sourceTree = "<group>"; };
+		4DC03D3B2806BBCE00CEE554 /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
+		4DC03D3D2806BDE100CEE554 /* BaseInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseInterceptor.swift; sourceTree = "<group>"; };
 		4DCCD11928007C330035002A /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		4DCCD12828007E510035002A /* Chat.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
 		4DCCD12A28007E570035002A /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
@@ -144,6 +164,7 @@
 		4D33601427E8C8E9007640F7 /* NOA */ = {
 			isa = PBXGroup;
 			children = (
+				4DC03D3A2806BBC300CEE554 /* DI */,
 				4DC03D1E28069B2D00CEE554 /* Json */,
 				4DCCD11728007B0F0035002A /* Services */,
 				4DCCD11628007B080035002A /* Utiles */,
@@ -152,6 +173,8 @@
 				4DCCD11328007A7F0035002A /* ViewModels */,
 				4DCCD11228007A5D0035002A /* ViewControllers */,
 				4DCCD11828007B1D0035002A /* Resources */,
+				4DC03D2A2806B3C500CEE554 /* Extension */,
+				4DC03D2D2806B43400CEE554 /* PropertyWrapper */,
 				4D33601527E8C8E9007640F7 /* AppDelegate.swift */,
 				4D33601727E8C8E9007640F7 /* SceneDelegate.swift */,
 				4D33602627E8C8EB007640F7 /* Info.plist */,
@@ -191,6 +214,30 @@
 				4DC03D1F28069B4900CEE554 /* Feed.json */,
 			);
 			path = Json;
+			sourceTree = "<group>";
+		};
+		4DC03D2A2806B3C500CEE554 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				4DC03D2B2806B3F100CEE554 /* ObservableType.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		4DC03D2D2806B43400CEE554 /* PropertyWrapper */ = {
+			isa = PBXGroup;
+			children = (
+				4DC03D2E2806B44C00CEE554 /* Inject.swift */,
+			);
+			path = PropertyWrapper;
+			sourceTree = "<group>";
+		};
+		4DC03D3A2806BBC300CEE554 /* DI */ = {
+			isa = PBXGroup;
+			children = (
+				4DC03D3B2806BBCE00CEE554 /* DIContainer.swift */,
+			);
+			path = DI;
 			sourceTree = "<group>";
 		};
 		4DCCD11228007A5D0035002A /* ViewControllers */ = {
@@ -236,6 +283,8 @@
 		4DCCD11628007B080035002A /* Utiles */ = {
 			isa = PBXGroup;
 			children = (
+				4DC03D302806B4B100CEE554 /* GlobalAlert.swift */,
+				4DC03D362806BAE500CEE554 /* ReadPList.swift */,
 			);
 			path = Utiles;
 			sourceTree = "<group>";
@@ -243,6 +292,11 @@
 		4DCCD11728007B0F0035002A /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				4DC03D252806AD0100CEE554 /* APIRequestService.swift */,
+				4DC03D3D2806BDE100CEE554 /* BaseInterceptor.swift */,
+				4DC03D342806BA6C00CEE554 /* HeaderCommon.swift */,
+				4DC03D322806B58C00CEE554 /* APIUrlService.swift */,
+				4DC03D382806BB0500CEE554 /* FeedService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -578,14 +632,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D33601A27E8C8E9007640F7 /* HomeViewController.swift in Sources */,
+				4DC03D332806B58C00CEE554 /* APIUrlService.swift in Sources */,
 				4D33601627E8C8E9007640F7 /* AppDelegate.swift in Sources */,
 				4D33602027E8C8E9007640F7 /* NOA.xcdatamodeld in Sources */,
+				4DC03D2F2806B44C00CEE554 /* Inject.swift in Sources */,
+				4DC03D3E2806BDE100CEE554 /* BaseInterceptor.swift in Sources */,
 				4D77B5582805D26A00C2E90D /* SplashViewModel.swift in Sources */,
+				4DC03D372806BAE500CEE554 /* ReadPList.swift in Sources */,
 				4D6D35582801CEA30001B18F /* HomeViewModel.swift in Sources */,
+				4DC03D312806B4B100CEE554 /* GlobalAlert.swift in Sources */,
+				4DC03D2C2806B3F100CEE554 /* ObservableType.swift in Sources */,
 				4D6D35562801CD080001B18F /* Feed.swift in Sources */,
+				4DC03D262806AD0100CEE554 /* APIRequestService.swift in Sources */,
 				4D33601827E8C8E9007640F7 /* SceneDelegate.swift in Sources */,
 				4DCCD11A28007C330035002A /* SplashViewController.swift in Sources */,
 				4D6D35532801CC6D0001B18F /* FeedCell.swift in Sources */,
+				4DC03D352806BA6C00CEE554 /* HeaderCommon.swift in Sources */,
+				4DC03D3C2806BBCE00CEE554 /* DIContainer.swift in Sources */,
+				4DC03D392806BB0500CEE554 /* FeedService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
