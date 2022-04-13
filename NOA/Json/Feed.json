@@ -1,0 +1,58 @@
+/* 
+  Feed.json
+  NOA
+
+  Created by wi_seong on 2022/04/13.
+  
+*/
+
+{
+    "pagination": {
+        "count": 2093,
+        "previous": null,
+        "num_pages": 210,
+        "next": "http://www.kmooc.kr/api/courses/v1/course/list/?Mobile=1&SG_APIM=2ug8Dm9qNBfD32JLZGPN64f3EoTlkpD8kSOHWfXpyrY&page=2&serviceKey=LwG%2BoHC0C5JRfLyvNtKkR94KYuT2QYNXOT5ONKk65iVxzMXLHF7SMWcuDqKMnT%2BfSMP61nqqh6Nj7cloXRQXLA%3D%3D"
+    },
+    "list": [
+        {
+            "effort": "00:15@07#01:40$07:00",
+            "id": "course-v1:ACRCEDU+ACRC01+2019_01",
+            "feed_image": "/asset-v1:ACRCEDU+ACRC01+2019_01+type@asset+block@1022_청렴_저용량__썸네일.png",
+            "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. "
+            "hidden": false,
+            "liked": true,
+            "artist_name": "홍길동",
+            "created": "2019-11-07T06:20:49Z",
+        },
+        {
+            "effort": "00:15@07#01:40$07:00",
+            "id": "course-v1:ACRCEDU+ACRC01+2019_01",
+            "feed_image": "/asset-v1:ACRCEDU+ACRC01+2019_01+type@asset+block@1022_청렴_저용량__썸네일.png",
+            "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. "
+            "hidden": false,
+            "liked": true,
+            "artist_name": "홍길동",
+            "created": "2019-11-07T06:20:49Z",
+        },
+        {
+            "effort": "00:15@07#01:40$07:00",
+            "id": "course-v1:ACRCEDU+ACRC01+2019_01",
+            "feed_image": "/asset-v1:ACRCEDU+ACRC01+2019_01+type@asset+block@1022_청렴_저용량__썸네일.png",
+            "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. "
+            "hidden": false,
+            "liked": true,
+            "artist_name": "홍길동",
+            "created": "2019-11-07T06:20:49Z",
+        },
+        {
+            "effort": "00:15@07#01:40$07:00",
+            "id": "course-v1:ACRCEDU+ACRC01+2019_01",
+            "feed_image": "/asset-v1:ACRCEDU+ACRC01+2019_01+type@asset+block@1022_청렴_저용량__썸네일.png",
+            "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. "
+            "hidden": false,
+            "liked": true,
+            "artist_name": "홍길동",
+            "created": "2019-11-07T06:20:49Z",
+        },
+    ]
+}
