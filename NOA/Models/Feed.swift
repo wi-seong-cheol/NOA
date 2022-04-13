@@ -11,9 +11,24 @@ protocol NetworkResponse {
     var statusCode: Int { get }
 }
 
+protocol PaginationType {
+    var count: Int { get }
+    var previios: String? { get }
+    var num_page: Int { get }
+    var next: String? { get }
+}
+
 struct FeedResponse: NetworkResponse, Codable {
     let statusCode: Int
+    let pagination: Pagination
     let body: FeedResult
+}
+
+struct Pagination: PaginationType, Codable {
+    let count: Int
+    let previios: String?
+    let num_page: Int
+    let next: String?
 }
 
 struct FeedResult: Codable {
@@ -21,10 +36,38 @@ struct FeedResult: Codable {
 }
 
 struct Feed: Codable {
-    let projectID: Int
+    let effort: String
+    let id: String
+    let feed_image: String
+    let description: String
+    let hidden: Bool
+    let artist_name: String
+    let created: String
 
     enum CodingKeys: String, CodingKey {
-        case projectID = "projectId"
+        case effort
+        case id
+        case feed_image
+        case description
+        case hidden
+        case artist_name
+        case created
+    }
+
+    init(effort: String,
+         id: String,
+         feed_image: String,
+         description: String,
+         hidden: Bool,
+         artist_name: String,
+         created: String) {
+        self.effort = effort
+        self.id = id
+        self.feed_image = feed_image
+        self.description = description
+        self.hidden = hidden
+        self.artist_name = artist_name
+        self.created = created
     }
 }
 

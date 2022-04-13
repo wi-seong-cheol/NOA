@@ -41,6 +41,7 @@ target 'NOA' do
   
   # pod NVActivityIndicatorView
   pod 'NVActivityIndicatorView'
+  
   target 'NOATests' do
     inherit! :search_paths
     # Pods for testing
