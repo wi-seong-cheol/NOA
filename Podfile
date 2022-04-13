@@ -9,20 +9,19 @@ target 'NOA' do
   
   # Pods for NOA
   
-  # pod Firebase Auth
+  # Pods for RxSwift+MVVM
+  pod 'RxSwift'
+  pod 'RxCocoa'
+  pod 'RxRelay'
+  pod 'RxOptional'
+  pod 'RxViewController'
+  pod 'RxAlamofire'
+  
+  # pod for Firebase
   pod 'Firebase/Auth'
-  
-  # pod Cloud Firestore
   pod 'Firebase/Firestore'
-  
-  # add the Firebase pod for Google Analytics
   pod 'Firebase/Analytics'
-  
-  # pod Firebase Messaging
   pod 'Firebase/Messaging'
-  
-  # pod Alamofire
-  pod 'Alamofire'
   
   # pod SwiftyJSON
   pod 'SwiftyJSON'
