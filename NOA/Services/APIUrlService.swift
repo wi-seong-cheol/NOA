@@ -13,6 +13,6 @@ class APIUrlService {
     
     func serviceUrl(version: String, path: String) -> String {
        //개발
-        return readPList.getAPIUrlPlistInfo() + version + path
+        return DBInfo.service_url + version + path
    }
 }
