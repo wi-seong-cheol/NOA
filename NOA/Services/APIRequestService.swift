@@ -24,23 +24,13 @@ class APIRequestService {
             print("wertyui")
         }
         if isInternetAvailable() {
-            print("123")
             print(query)
-            if RxAlamofire.requestData(.get, URL,
-                                       parameters: query,
-                                       encoding: URLEncoding.default,
-                                       headers: header.headerSetting(),
-                                       interceptor: interceptor)
-                .mapObject(type: T.self) == nil {
-                print("2131")
-            } else {
-                print("12415135")
-            }
             return RxAlamofire.requestData(.get, URL,
                                            parameters: query,
                                            encoding: URLEncoding.default,
                                            headers: header.headerSetting(),
                                            interceptor: interceptor)
+                .debug()
                 .mapObject(type: T.self)
         } else {
             let window = UIApplication.shared.windows.first {$0.isKeyWindow} //최상단 뷰 select
@@ -49,7 +39,6 @@ class APIRequestService {
             }
             return nil
         }
-        
     }
     
     func postable<T:Codable>(URL: String, body:[String:Any]?, interceptor: Interceptor?)-> Observable<T>? {
