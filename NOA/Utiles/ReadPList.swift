@@ -39,6 +39,7 @@ class ReadPList {
         if  let path = Bundle.main.path(forResource: name , ofType: "plist"),
             let xml = FileManager.default.contents(atPath: path)
         {
+            print(path)
             return (try? PropertyListSerialization.propertyList(from: xml, options: .mutableContainersAndLeaves, format: nil)) as? [String: Any]
         }
         return nil
