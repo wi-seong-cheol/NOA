@@ -17,7 +17,25 @@ class APIRequestService {
     @Inject var globalAlert: GlobalAlert
     
     func getable<T:Codable>(URL: String, query:[String:Any]?, interceptor: Interceptor?)-> Observable<T>? {
+        if let vc = UIApplication.topViewController() {
+            print("2134")
+            globalAlert.commonAlert(title: "네트워크 연결 확인\n", content: "네트워크 연결이 되어있지 않습니다.\n연결상태를 확인해주세요.", vc: vc)
+        } else {
+            print("wertyui")
+        }
         if isInternetAvailable() {
+            print("123")
+            print(query)
+            if RxAlamofire.requestData(.get, URL,
+                                       parameters: query,
+                                       encoding: URLEncoding.default,
+                                       headers: header.headerSetting(),
+                                       interceptor: interceptor)
+                .mapObject(type: T.self) == nil {
+                print("2131")
+            } else {
+                print("12415135")
+            }
             return RxAlamofire.requestData(.get, URL,
                                            parameters: query,
                                            encoding: URLEncoding.default,
@@ -25,8 +43,8 @@ class APIRequestService {
                                            interceptor: interceptor)
                 .mapObject(type: T.self)
         } else {
-            let window = UIApplication.shared.windows.first { $0.isKeyWindow } //최상단 뷰 select
-            if let vc = window?.rootViewController {
+            let window = UIApplication.shared.windows.first {$0.isKeyWindow} //최상단 뷰 select
+            if let vc = UIApplication.topViewController() {
                 globalAlert.commonAlert(title: "네트워크 연결 확인\n", content: "네트워크 연결이 되어있지 않습니다.\n연결상태를 확인해주세요.", vc: vc)
             }
             return nil
