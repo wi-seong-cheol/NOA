@@ -32,12 +32,10 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="viewModel" destination="WTB-ba-hTl" id="Xds-86-SnD"/>
                         <segue destination="WWM-gV-zpi" kind="presentation" identifier="MainSegue" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="haL-od-EcR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FKf-yG-2Zn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <customObject id="WTB-ba-hTl" customClass="SplashViewModel" customModule="NOA" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="-604" y="116"/>
         </scene>
