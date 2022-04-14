@@ -17,9 +17,12 @@ class HeaderCommon {
         
         let headers: HTTPHeaders = [
             "Content-Type":"application/json",
-            "Accept":"application/json",
-            "X-Request-Id":requestUUID,
-            "user-agent":userAgent
+//            "User-Agent": "Postman v9.0.8",
+//            "Accept": "application/json",
+//            "Accept-Encoding": "gzip",
+//            "Connection": "keep-alive"
+//            "X-Naver-Client-Id": Const.NaverClientId,
+//            "X-Naver-Client-Secret": Const.NaverClientSecret,
         ]
 
         return headers
