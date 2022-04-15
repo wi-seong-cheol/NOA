@@ -53,9 +53,12 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.refreshControl = UIRefreshControl()
         setupBindings()
     }
-    
+}
+
+extension HomeViewController {
     // MARK: - UI Binding
     func setupBindings() {
         // ------------------------------
@@ -113,23 +116,16 @@ class HomeViewController: UIViewController {
                 
         // 테이블뷰 아이템들
         viewModel.lectureList
-            .bind(to: tableView.rx.items(cellIdentifier: FeedCell.identifier,
+                .map { $0 }
+                .map { response -> [Lecture] in
+                    return response.lectures
+                }
+                .bind(to: tableView.rx.items(cellIdentifier: FeedCell.identifier,
                                          cellType: FeedCell.self)) {
                     _, item, cell in
                     print(item)
                     cell.onData.onNext(item)
-//                    cell.onChanged
-//                        .map { (item, $0) }
-//                        .
-//                        .bind(to: self.viewModel.increaseMenuCount)
-//                        .disposed(by: cell.disposeBag)
                 }
             .disposed(by: disposeBag)
-        
-//        viewModel.lectureList
-//            .bind() { result in
-//                print(result)
-//            }
-//            .disposed(by: disposeBag)
     }
 }
