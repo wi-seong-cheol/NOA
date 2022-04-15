@@ -36,15 +36,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DIContainer.shared.register(HeaderCommon())
         DIContainer.shared.register(APIRequestService())
         DIContainer.shared.register(APIUrlService())
-        DIContainer.shared.register(PostService())
+        DIContainer.shared.register(FeedService())
         let headerCommon: HeaderCommon = DIContainer.shared.resolve()
         let apiRequestService: APIRequestService = DIContainer.shared.resolve()
         let apiUrlService: APIUrlService = DIContainer.shared.resolve()
-        let postService: PostService = DIContainer.shared.resolve()
+        let feedService: FeedService = DIContainer.shared.resolve()
         DIContainer.shared.register(headerCommon)
         DIContainer.shared.register(apiRequestService)
         DIContainer.shared.register(apiUrlService)
-        DIContainer.shared.register(postService)
+        DIContainer.shared.register(feedService)
     }
     
     // MARK: UISceneSession Lifecycle
