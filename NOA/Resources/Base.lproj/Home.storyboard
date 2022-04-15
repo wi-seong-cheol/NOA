@@ -142,6 +142,10 @@
                                                 <constraint firstItem="vTK-iE-iiQ" firstAttribute="top" secondItem="4ZA-Xo-962" secondAttribute="top" id="jZY-r8-HCU"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="name" destination="FSd-z5-4lI" id="V2C-91-umB"/>
+                                            <outlet property="orgName" destination="aNO-Pl-KEY" id="UCd-3P-04j"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -159,11 +163,9 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="Fyt-TC-1tk" id="1xd-Mc-v81"/>
-                        <outlet property="viewModel" destination="ab1-EQ-dnf" id="QCd-4U-ibk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <customObject id="ab1-EQ-dnf" customClass="HomeViewModel" customModule="NOA" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="1042.0289855072465" y="115.84821428571428"/>
         </scene>
