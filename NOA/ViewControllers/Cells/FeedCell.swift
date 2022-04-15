@@ -35,7 +35,11 @@ class FeedCell: UITableViewCell {
 
         data.observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] lecture in
-//                self?.thumbnail.image =  price.text = "\(lecture.price)"
+                ImageLoader.loadImage(from: lecture.courseImage)
+                    .observe(on: MainScheduler.instance)
+                    // ! Refactoring 필요
+                    .bind(to: (self?.thumbnail.rx.image)!)
+                    .disposed(by: self!.cellDisposeBag)
                 self?.name.text = lecture.number
                 self?.orgName.text = lecture.id
             })
