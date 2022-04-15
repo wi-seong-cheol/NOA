@@ -6,33 +6,44 @@
 //
 
 import UIKit
+import RxSwift
 
 class FeedCell: UITableViewCell {
     static let identifier = "FeedCell"
-
+   
     @IBOutlet var thumbnail: UIImageView!
     @IBOutlet var name: UILabel!
     @IBOutlet var orgName: UILabel!
     @IBOutlet var duration: UILabel!
+    
+    private let onCountChanged: (Int) -> Void
+    private let cellDisposeBag = DisposeBag()
+    
+    var disposeBag = DisposeBag()
+    let onData: AnyObserver<Lecture>
+    let onChanged: Observable<Int>
+    
+    required init?(coder aDecoder: NSCoder) {
+        let data = PublishSubject<Lecture>()
+        let changing = PublishSubject<Int>()
+        onCountChanged = { changing.onNext($0) }
 
-    var feed: Feed?
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
+        onData = data.asObserver()
+        onChanged = changing
+
+        super.init(coder: aDecoder)
+
+        data.observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] lecture in
+//                self?.thumbnail.image =  price.text = "\(lecture.price)"
+                self?.name.text = lecture.number
+                self?.orgName.text = lecture.id
+            })
+            .disposed(by: cellDisposeBag)
     }
-    
-    func configure(with feed: Feed) {
-//        if let l = self.lecture, l.id == lecture.id { return }
-//        
-//        self.lecture = lecture
-//        
-//        thumbnail.image = nil
-//        name.text = lecture.classfyName
-//        orgName.text = lecture.orgName
-//        duration.text = DateUtil.dueString(lecture.start, lecture.end)
-//        
-//        ImageLoader.loadImage(url: lecture.courseImage) { [weak self] image in
-//            self?.thumbnail.image = image
-//        }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
     }
 }
