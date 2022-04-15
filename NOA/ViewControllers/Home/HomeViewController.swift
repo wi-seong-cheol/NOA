@@ -82,6 +82,14 @@ extension HomeViewController {
         // ------------------------------
 
         // 페이지 이동
+        tableView.rx.itemSelected
+          .subscribe(onNext: { [weak self] indexPath in
+//            let cell = self?.tableView.cellForRow(at: indexPath) as? FeedCell
+//              cel
+//              cell.button.isEnabled = false
+              self?.performSegue(withIdentifier: "FeedDetailSegue",
+                                 sender: nil)
+          }).disposed(by: disposeBag)
 //        viewModel.activated
 //            .filter { !$0 }
 //            .subscribe(onNext: { [weak self] _ in
@@ -125,6 +133,10 @@ extension HomeViewController {
                     _, item, cell in
                     print(item)
                     cell.onData.onNext(item)
+//                    cell.onLike
+//                        .map { (item, $0) }
+//                        .bind(to: self.viewModel.increaseMenuCount)
+//                        .disposed(by: cell.disposeBag)
                 }
             .disposed(by: disposeBag)
     }
