@@ -14,6 +14,7 @@ class FeedCell: UITableViewCell {
     @IBOutlet var thumbnail: UIImageView!
     @IBOutlet var name: UILabel!
     @IBOutlet var orgName: UILabel!
+    @IBOutlet weak var like: UIButton!
     @IBOutlet var duration: UILabel!
     
     private let onCountChanged: (Int) -> Void
@@ -37,9 +38,9 @@ class FeedCell: UITableViewCell {
             .subscribe(onNext: { [weak self] lecture in
                 ImageLoader.loadImage(from: lecture.courseImage)
                     .observe(on: MainScheduler.instance)
-                    // ! Refactoring 필요
-                    .bind(to: (self?.thumbnail.rx.image)!)
-                    .disposed(by: self!.cellDisposeBag)
+                    .subscribe(onNext: { (image) in
+                        self?.thumbnail.image = image})
+                    .disposed(by: self!.disposeBag)
                 self?.name.text = lecture.number
                 self?.orgName.text = lecture.id
             })
