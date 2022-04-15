@@ -12,6 +12,7 @@ import RxRelay
 protocol HomeViewModelType {
     // MARK: INPUT
     var fetchList: AnyObserver<Void> { get }
+    var likeTap: AnyObserver<Void> { get }
     
     // MARK: OUTPUT
     var lectureList: Observable<LectureList> { get }
@@ -26,6 +27,7 @@ class HomeViewModel: HomeViewModelType {
     // MARK: INPUT
     
     let fetchList: AnyObserver<Void>
+    let likeTap: AnyObserver<Void>
     
     // MARK: OUTPUT
     
@@ -35,6 +37,7 @@ class HomeViewModel: HomeViewModelType {
     
     init(service: FeedFetchable = FeedService()) {
         let fetching = PublishSubject<Void>()
+        let liking = PublishSubject<Void>()
         
         let list = BehaviorSubject<LectureList>(value: LectureList.EMPTY)
         let activating = BehaviorSubject<Bool>(value: false)
@@ -51,14 +54,15 @@ class HomeViewModel: HomeViewModelType {
             .subscribe(onNext: list.onNext)
             .disposed(by: disposeBag)
                 
+        likeTap = liking.asObserver()
+                
+//        liking.withLatestFrom(list)
+//                .map{ $0.lectures.map { $0.teachers("123") } }
+//            .subscribe(onNext: list.onNext)
+//                .disposed(by: disposeBag)
+                
         // MARK: OUTPUT
-        lectureList = list 
-//        list
-//            .map { $0 }
-//            .map { response -> [Lecture] in
-//                return response.lectures
-//            }.bind(to: lectureList)
-//            .disposed(by: disposeBag)
+        lectureList = list
         
         errorMessage = error.map { $0 as NSError }
         
