@@ -27,9 +27,10 @@ class UserService: UserFetchable {
     
     // Test 메소드
     func getTestData()-> Observable<LectureList> {
-        let URL = "http://apis.data.go.kr/B552881/kmooc/courseList?serviceKey=LwG%2BoHC0C5JRfLyvNtKkR94KYuT2QYNXOT5ONKk65iVxzMXLHF7SMWcuDqKMnT%2BfSMP61nqqh6Nj7cloXRQXLA%3D%3D"//apiUrlService.serviceUrl(version: "", path: "/courseList")
-        print("-> \(URL)")
-        let query: [String: Any] = ["Mobile": 1]//["serviceKey": DBInfo.serviceKey, "Mobile": 1]
+        let URL = "http://apis.data.go.kr/B552881/kmooc/courseList?serviceKey=LwG%2BoHC0C5JRfLyvNtKkR94KYuT2QYNXOT5ONKk65iVxzMXLHF7SMWcuDqKMnT%2BfSMP61nqqh6Nj7cloXRQXLA%3D%3D"
+//        let URL = apiUrlService.serviceUrl(version: "", path: "/courseList")
+        let query: [String: Any] = ["Mobile": 1]
+//        let query: [String: Any] = ["serviceKey": DBInfo.serviceKey, "Mobile": 1]
         return apiRequestService.getable(URL: URL, query: query, interceptor: .none) ?? Observable.empty()
     }
 }
