@@ -14,7 +14,7 @@ protocol HomeViewModelType {
     var fetchList: AnyObserver<Void> { get }
     
     // MARK: OUTPUT
-    var lectureList: PublishSubject<[Lecture]> { get }
+    var lectureList: Observable<LectureList> { get }
     var activated: Observable<Bool> { get }
     var errorMessage: Observable<NSError> { get }
 }
@@ -29,7 +29,7 @@ class HomeViewModel: HomeViewModelType {
     
     // MARK: OUTPUT
     
-    let lectureList = PublishSubject<[Lecture]>()
+    let lectureList: Observable<LectureList>
     let activated: Observable<Bool>
     let errorMessage: Observable<NSError>
     
@@ -52,12 +52,13 @@ class HomeViewModel: HomeViewModelType {
             .disposed(by: disposeBag)
                 
         // MARK: OUTPUT
-        list
-            .map { $0 }
-            .map { response -> [Lecture] in
-                return response.lectures
-            }.bind(to: lectureList)
-            .disposed(by: disposeBag)
+        lectureList = list 
+//        list
+//            .map { $0 }
+//            .map { response -> [Lecture] in
+//                return response.lectures
+//            }.bind(to: lectureList)
+//            .disposed(by: disposeBag)
         
         errorMessage = error.map { $0 as NSError }
         
