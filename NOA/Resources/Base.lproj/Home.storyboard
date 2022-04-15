@@ -145,6 +145,7 @@
                                         <connections>
                                             <outlet property="name" destination="FSd-z5-4lI" id="V2C-91-umB"/>
                                             <outlet property="orgName" destination="aNO-Pl-KEY" id="UCd-3P-04j"/>
+                                            <outlet property="thumbnail" destination="N5K-HX-nN8" id="oBF-DS-own"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
