@@ -5,44 +5,131 @@
 //  Created by wi_seong on 2022/03/21.
 //
 
+import RxCocoa
+import RxSwift
+import RxViewController
+import NVActivityIndicatorView
 import UIKit
 
 class HomeViewController: UIViewController {
+    
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet var viewModel: HomeViewModel!
+    
+    lazy var indicator: NVActivityIndicatorView = {
+        let indicator = NVActivityIndicatorView(
+            frame: CGRect(
+                x: self.view.frame.width/2 - 25,
+                y: self.view.frame.height/2 - 25,
+                width: 50,
+                height: 50),
+            type: .ballScaleMultiple,
+            color: .black,
+            padding: 0)
+        
+        indicator.center = self.view.center
+                
+        // 기타 옵션
+        indicator.color = .purple
+        
+        indicator.stopAnimating()
+        return indicator
+    }()
+    
+    let viewModel: HomeViewModelType
+    var disposeBag = DisposeBag()
+
+    // MARK: - Life Cycle
+
+    init(viewModel: HomeViewModelType = HomeViewModel()) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        viewModel = HomeViewModel()
+        super.init(coder: aDecoder)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configure()
+        setupBindings()
     }
     
-    func configure() {
-        tableView.delegate = self
-        tableView.dataSource = self
-    }
-}
+    // MARK: - UI Binding
+    func setupBindings() {
+        // ------------------------------
+        //     INPUT
+        // ------------------------------
 
-extension HomeViewController: UITableViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        // 처음 로딩할 때 하고, 당겨서 새로고침 할 때
+        let firstLoad = rx.viewWillAppear
+            .take(1)
+            .map { _ in () }
+        let reload = tableView.refreshControl?.rx
+            .controlEvent(.valueChanged)
+            .map { _ in () } ?? Observable.just(())
         
-    }
-}
+        Observable.merge([firstLoad, reload])
+            .bind(to: viewModel.fetchList)
+            .disposed(by: disposeBag)
 
-extension HomeViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        print(viewModel.feedsCount())
-        return viewModel.feedsCount()
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: FeedCell.identifier, for: indexPath) as? FeedCell else {
-            return UITableViewCell()
-        }
-        
-//        let feed = viewModel (at: indexPath.row)
-//        cell.configure(with: feed)
+        // ------------------------------
+        //     Page Move
+        // ------------------------------
 
-        return cell
+        // 페이지 이동
+//        viewModel.activated
+//            .filter { !$0 }
+//            .subscribe(onNext: { [weak self] _ in
+//                self?.performSegue(withIdentifier: "MainSegue",
+//                                   sender: nil)
+//            })
+//            .disposed(by: disposeBag)
+
+        // ------------------------------
+        //     OUTPUT
+        // ------------------------------
+
+        // 에러 처리
+        viewModel.errorMessage
+            .map { $0.domain }
+            .subscribe(onNext: { [weak self] message in
+                self?.OKDialog("Order Fail")
+            })
+            .disposed(by: disposeBag)
+        
+        // 액티비티 인디케이터
+        viewModel.activated
+            .map { !$0 }
+            .observe(on: MainScheduler.instance)
+            .do(onNext: { [weak self] finished in
+                if finished {
+                    self?.tableView.refreshControl?.endRefreshing()
+                }
+            })
+            .bind(to: indicator.rx.isHidden)
+            .disposed(by: disposeBag)
+                
+        // 테이블뷰 아이템들
+        viewModel.lectureList
+            .bind(to: tableView.rx.items(cellIdentifier: FeedCell.identifier,
+                                         cellType: FeedCell.self)) {
+                    _, item, cell in
+                    print(item)
+                    cell.onData.onNext(item)
+//                    cell.onChanged
+//                        .map { (item, $0) }
+//                        .
+//                        .bind(to: self.viewModel.increaseMenuCount)
+//                        .disposed(by: cell.disposeBag)
+                }
+            .disposed(by: disposeBag)
+        
+//        viewModel.lectureList
+//            .bind() { result in
+//                print(result)
+//            }
+//            .disposed(by: disposeBag)
     }
 }
