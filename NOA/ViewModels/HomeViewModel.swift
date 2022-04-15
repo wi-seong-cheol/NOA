@@ -7,47 +7,60 @@
 
 import Foundation
 import RxSwift
+import RxRelay
 
-class HomeViewModel: NSObject {
-//    @IBOutlet var service: NoaRepository!
-
-    private var feedList: FeedResult = FeedResult.EMPTY
-    private var loading = false
+protocol HomeViewModelType {
+    // MARK: INPUT
+    var fetchList: AnyObserver<Void> { get }
     
-    var loadingStarted: () -> Void = { }
-    var loadingEnded: () -> Void = { }
-    var lectureListUpdated: () -> Void = { }
+    // MARK: OUTPUT
+    var lectureList: PublishSubject<[Lecture]> { get }
+    var activated: Observable<Bool> { get }
+    var errorMessage: Observable<NSError> { get }
+}
+
+class HomeViewModel: HomeViewModelType {
     
-    func feedsCount() -> Int {
-        return 3//feedList.list.count
-    }
-
-    func lecture(at index: Int) -> Feed {
-        return feedList.list[index]
-    }
-
-    func list() {
-//        loading = true
-//        loadingStarted()
-//        service.list {
-//            self.lectureList = $0
-//            self.lectureListUpdated()
-//            self.loadingEnded()
-//            self.loading = false
-//        }
-    }
-
-    func next() {
-//        if loading { return }
-//        loading = true
-//        loadingStarted()
-//        service.next(currentPage: lectureList) {
-//            var lectureList = $0
-//            lectureList.lectures.insert(contentsOf: self.lectureList.lectures, at: 0)
-//            self.lectureList = lectureList
-//            self.lectureListUpdated()
-//            self.loadingEnded()
-//            self.loading = false
-//        }
+    let disposeBag = DisposeBag()
+    
+    // MARK: INPUT
+    
+    let fetchList: AnyObserver<Void>
+    
+    // MARK: OUTPUT
+    
+    let lectureList = PublishSubject<[Lecture]>()
+    let activated: Observable<Bool>
+    let errorMessage: Observable<NSError>
+    
+    init(service: FeedFetchable = FeedService()) {
+        let fetching = PublishSubject<Void>()
+        
+        let list = BehaviorSubject<LectureList>(value: LectureList.EMPTY)
+        let activating = BehaviorSubject<Bool>(value: false)
+        let error = PublishSubject<Error>()
+        
+        // MARK: INPUT
+        fetchList = fetching.asObserver()
+        
+        fetching
+            .do(onNext: { _ in activating.onNext(true) })
+            .flatMap(service.getFeedList)
+            .do(onNext: { _ in activating.onNext(false) })
+            .do(onError: { err in error.onNext(err) })
+            .subscribe(onNext: list.onNext)
+            .disposed(by: disposeBag)
+                
+        // MARK: OUTPUT
+        list
+            .map { $0 }
+            .map { response -> [Lecture] in
+                return response.lectures
+            }.bind(to: lectureList)
+            .disposed(by: disposeBag)
+        
+        errorMessage = error.map { $0 as NSError }
+        
+        activated = activating.distinctUntilChanged()
     }
 }
