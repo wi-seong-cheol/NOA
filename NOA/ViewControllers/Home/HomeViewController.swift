@@ -76,6 +76,19 @@ extension HomeViewController {
         Observable.merge([firstLoad, reload])
             .bind(to: viewModel.fetchList)
             .disposed(by: disposeBag)
+        
+        // 무한 스크롤
+        tableView.rx.didScroll
+            .subscribe { [weak self] _ in
+                guard let self = self else { return }
+                let offSetY = self.tableView.contentOffset.y
+                let contentHeight = self.tableView.contentSize.height
+
+                if offSetY > (contentHeight - self.tableView.frame.size.height - 100) {
+                    self.viewModel.nextList.onNext(())
+                }
+            }
+            .disposed(by: disposeBag)
 
         // ------------------------------
         //     Page Move
