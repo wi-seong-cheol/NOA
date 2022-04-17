@@ -10,6 +10,7 @@ import RxSwift
 
 protocol FeedFetchable {
     func getFeedList()-> Observable<LectureList>
+    func getFeedNextList(currentPage: LectureList) -> Observable<LectureList>
 }
 
 class FeedService: FeedFetchable {
@@ -24,5 +25,10 @@ class FeedService: FeedFetchable {
         //        let URL = apiUrlService.serviceUrl(version: "", path: "/courseList")
         //        let query: [String: Any] = ["serviceKey": DBInfo.serviceKey, "Mobile": 1]
         return apiRequestService.getable(URL: URL, query: query, interceptor: .none) ?? Observable.empty()
+    }
+    
+    func getFeedNextList(currentPage: LectureList) -> Observable<LectureList> {
+        let URL = currentPage.next
+        return apiRequestService.getable(URL: URL, query: [:], interceptor: .none) ?? Observable.empty()
     }
 }
