@@ -14,6 +14,7 @@ target 'NOA' do
   pod 'RxCocoa'
   pod 'RxRelay'
   pod 'RxOptional'
+  pod 'RxDataSources'
   pod 'RxViewController'
   pod 'RxAlamofire'
   
