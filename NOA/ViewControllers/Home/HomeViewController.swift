@@ -7,6 +7,7 @@
 
 import RxCocoa
 import RxSwift
+import RxDataSources
 import RxViewController
 import NVActivityIndicatorView
 import UIKit
@@ -74,20 +75,13 @@ extension HomeViewController {
             .map { _ in () } ?? Observable.just(())
         
         Observable.merge([firstLoad, reload])
-            .bind(to: viewModel.fetchList)
+            .bind(to: self.viewModel.fetchList)
             .disposed(by: disposeBag)
         
         // 무한 스크롤
-        tableView.rx.didScroll
-            .subscribe { [weak self] _ in
-                guard let self = self else { return }
-                let offSetY = self.tableView.contentOffset.y
-                let contentHeight = self.tableView.contentSize.height
-
-                if offSetY > (contentHeight - self.tableView.frame.size.height - 100) {
-                    self.viewModel.nextList.onNext(())
-                }
-            }
+        self.tableView.rx_reachedBottom
+            .map { _ in () }
+            .bind(to: self.viewModel.moreFetchList)
             .disposed(by: disposeBag)
 
         // ------------------------------
@@ -97,19 +91,9 @@ extension HomeViewController {
         // 페이지 이동
         tableView.rx.itemSelected
           .subscribe(onNext: { [weak self] indexPath in
-//            let cell = self?.tableView.cellForRow(at: indexPath) as? FeedCell
-//              cel
-//              cell.button.isEnabled = false
               self?.performSegue(withIdentifier: "FeedDetailSegue",
                                  sender: nil)
           }).disposed(by: disposeBag)
-//        viewModel.activated
-//            .filter { !$0 }
-//            .subscribe(onNext: { [weak self] _ in
-//                self?.performSegue(withIdentifier: "MainSegue",
-//                                   sender: nil)
-//            })
-//            .disposed(by: disposeBag)
 
         // ------------------------------
         //     OUTPUT
@@ -120,8 +104,7 @@ extension HomeViewController {
             .map { $0.domain }
             .subscribe(onNext: { [weak self] message in
                 self?.OKDialog("Order Fail")
-            })
-            .disposed(by: disposeBag)
+            }).disposed(by: disposeBag)
         
         // 액티비티 인디케이터
         viewModel.activated
@@ -136,21 +119,12 @@ extension HomeViewController {
             .disposed(by: disposeBag)
                 
         // 테이블뷰 아이템들
-        viewModel.lectureList
-                .map { $0 }
-                .map { response -> [Lecture] in
-                    return response.lectures
-                }
-                .bind(to: tableView.rx.items(cellIdentifier: FeedCell.identifier,
-                                         cellType: FeedCell.self)) {
-                    _, item, cell in
-                    print(item)
-                    cell.onData.onNext(item)
-//                    cell.onLike
-//                        .map { (item, $0) }
-//                        .bind(to: self.viewModel.increaseMenuCount)
-//                        .disposed(by: cell.disposeBag)
-                }
+        viewModel
+            .items
+            .bind(to: tableView.rx.items(cellIdentifier: FeedCell.identifier, cellType: FeedCell.self)) {
+                _, item, cell in
+                cell.onData.onNext(item)
+            }
             .disposed(by: disposeBag)
     }
 }
