@@ -42,6 +42,7 @@ class HomeViewModel: HomeViewModelType {
         
         let itemsList = BehaviorRelay<[Lecture]>(value: [])
         let nextPage = BehaviorRelay<String>(value: "")
+        let state = BehaviorRelay<Bool>(value: false)
         
         let activating = BehaviorSubject<Bool>(value: false)
         let error = PublishSubject<Error>()
@@ -62,10 +63,12 @@ class HomeViewModel: HomeViewModelType {
             .disposed(by: disposeBag)
                 
         moreFetching
+            .filter{!state.value}
+            .do(onNext: { _ in state.accept(true)})
             .do(onNext: { _ in activating.onNext(true) })
             .flatMapLatest{ service.next(nextPage: nextPage.value) }
-            .share(replay: 1)
             .do(onNext: { _ in activating.onNext(false) })
+            .do(onNext: { _ in state.accept(false)})
             .do(onError: { err in error.onNext(err) })
             .subscribe(onNext: { response in
                 itemsList.accept(itemsList.value + response.lectures)
