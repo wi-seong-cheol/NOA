@@ -8,8 +8,8 @@
 import UIKit
 import RxSwift
 
-class FeedCell: UITableViewCell {
-    static let identifier = "FeedCell"
+class HomeTableCell: UITableViewCell {
+    static let identifier = "HomeTableCell"
    
     @IBOutlet var thumbnail: UIImageView!
     @IBOutlet var name: UILabel!
