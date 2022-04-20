@@ -12,9 +12,9 @@ import RxViewController
 import NVActivityIndicatorView
 import UIKit
 
-class FeedViewController: UIViewController {
+class HomeDetailViewController: UIViewController {
     
-    static let identifier = "FeedViewController"
+    static let identifier = "DetailViewController"
     @IBOutlet weak var work: UIImageView!
     
     lazy var indicator: NVActivityIndicatorView = {
@@ -59,7 +59,7 @@ class FeedViewController: UIViewController {
     }
 }
 
-extension FeedViewController {
+extension HomeDetailViewController {
     // MARK: - UI Binding
     func setupBindings() {
         viewModel.work
