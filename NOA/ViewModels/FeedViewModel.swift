@@ -11,19 +11,15 @@ import RxRelay
 import UIKit
 
 protocol FeedViewModelType {
+    // MARK: OUTPUT
     var work: Observable<UIImage> { get }
-    //    var orderedList: Observable<String> { get }
-    //    var itemsPriceText: Observable<String> { get }
-    //    var itemsVatText: Observable<String> { get }
-    //    var totalPriceText: Observable<String> { get }
 }
 
 class FeedViewModel: FeedViewModelType {
     var disposeBag = DisposeBag()
+    
+    // MARK: OUTPUT
     let work: Observable<UIImage>
-    //    let itemsPriceText: Observable<String>
-    //    let itemsVatText: Observable<String>
-    //    let totalPriceText: Observable<String>
     let errorMessage: Observable<NSError>
     
     init(_ selectedFeed: Lecture = Lecture.EMPTY) {
@@ -31,9 +27,7 @@ class FeedViewModel: FeedViewModelType {
         let workImage = BehaviorRelay<UIImage>(value: UIImage())
         let error = PublishSubject<Error>()
         
-        errorMessage = error.map { $0 as NSError }
-        work = workImage.asObservable()
-        
+        // MARK: INPUT
         feed
             .map{ $0.courseImage }
             .filter{ $0 != "" }
@@ -42,5 +36,10 @@ class FeedViewModel: FeedViewModelType {
             .subscribe(onNext: {(image) in
                 workImage.accept(image ?? UIImage())})
             .disposed(by: disposeBag)
+                
+        // MARK: OUTPUT
+        work = workImage.asObservable()
+                
+        errorMessage = error.map { $0 as NSError }
     }
 }
