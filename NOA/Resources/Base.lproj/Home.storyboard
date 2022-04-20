@@ -172,17 +172,33 @@
             </objects>
             <point key="canvasLocation" x="1042.0289855072465" y="115.84821428571428"/>
         </scene>
-        <!--View Controller-->
+        <!--Feed View Controller-->
         <scene sceneID="bft-Y6-kvV">
             <objects>
-                <viewController id="89d-RW-6fk" sceneMemberID="viewController">
+                <viewController id="89d-RW-6fk" customClass="FeedViewController" customModule="NOA" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HVD-g9-ZLc">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uoY-Ho-FuF">
+                                <rect key="frame" x="75" y="358" width="240" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="1SJ-6b-mH7"/>
+                                    <constraint firstAttribute="width" constant="240" id="8so-ra-B28"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="ZFr-RH-MuI"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="uoY-Ho-FuF" firstAttribute="centerX" secondItem="HVD-g9-ZLc" secondAttribute="centerX" id="ZCL-ea-ChH"/>
+                            <constraint firstItem="uoY-Ho-FuF" firstAttribute="centerY" secondItem="HVD-g9-ZLc" secondAttribute="centerY" id="hFc-0G-CuX"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="X9s-iE-bBz"/>
+                    <connections>
+                        <outlet property="work" destination="uoY-Ho-FuF" id="BmW-Jb-a2a"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="URg-eg-h1k" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
