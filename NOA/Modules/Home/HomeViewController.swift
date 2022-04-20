@@ -64,7 +64,7 @@ class HomeViewController: UIViewController {
         if identifier == "HomeDetailSegue",
            let selectedFeed = sender as? Lecture,
            let feedVC = segue.destination as? HomeDetailViewController {
-            let feedViewModel = FeedViewModel(selectedFeed)
+            let feedViewModel = HomeDetailViewModel(selectedFeed)
             feedVC.viewModel = feedViewModel
         }
     }
