@@ -10,12 +10,12 @@ import RxSwift
 import RxRelay
 import UIKit
 
-protocol FeedViewModelType {
+protocol HomeDetailViewModelType {
     // MARK: OUTPUT
     var work: Observable<UIImage> { get }
 }
 
-class FeedViewModel: FeedViewModelType {
+class HomeDetailViewModel: HomeDetailViewModelType {
     var disposeBag = DisposeBag()
     
     // MARK: OUTPUT
