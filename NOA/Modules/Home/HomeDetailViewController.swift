@@ -14,7 +14,7 @@ import UIKit
 
 class HomeDetailViewController: UIViewController {
     
-    static let identifier = "DetailViewController"
+    static let identifier = "HomeDetailViewController"
     @IBOutlet weak var work: UIImageView!
     
     lazy var indicator: NVActivityIndicatorView = {
@@ -37,18 +37,18 @@ class HomeDetailViewController: UIViewController {
         return indicator
     }()
     
-    var viewModel: FeedViewModelType
+    var viewModel: HomeDetailViewModelType
     var disposeBag = DisposeBag()
 
     // MARK: - Life Cycle
 
-    init(viewModel: FeedViewModelType = FeedViewModel()) {
+    init(viewModel: HomeDetailViewModelType = HomeDetailViewModel()) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
 
     required init?(coder aDecoder: NSCoder) {
-        viewModel = FeedViewModel()
+        viewModel = HomeDetailViewModel()
         super.init(coder: aDecoder)
     }
     
