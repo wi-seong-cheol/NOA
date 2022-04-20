@@ -61,9 +61,9 @@ class HomeViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let identifier = segue.identifier ?? ""
         
-        if identifier == "FeedDetailSegue",
+        if identifier == "HomeDetailSegue",
            let selectedFeed = sender as? Lecture,
-           let feedVC = segue.destination as? FeedViewController {
+           let feedVC = segue.destination as? HomeDetailViewController {
             let feedViewModel = FeedViewModel(selectedFeed)
             feedVC.viewModel = feedViewModel
         }
@@ -101,7 +101,7 @@ extension HomeViewController {
 
         // 페이지 이동
         Observable.zip(tableView.rx.modelSelected(Lecture.self), tableView.rx.itemSelected) .bind { [weak self] item, indexPath in
-            self?.performSegue(withIdentifier: "FeedDetailSegue", sender: item)
+            self?.performSegue(withIdentifier: "HomeDetailSegue", sender: item)
             
         } .disposed(by: disposeBag)
 
@@ -131,7 +131,7 @@ extension HomeViewController {
         // 테이블뷰 아이템들
         viewModel
             .items
-            .bind(to: tableView.rx.items(cellIdentifier: FeedCell.identifier, cellType: FeedCell.self)) {
+            .bind(to: tableView.rx.items(cellIdentifier: HomeTableCell.identifier, cellType: HomeTableCell.self)) {
                 _, item, cell in
                 cell.onData.onNext(item)
             }
