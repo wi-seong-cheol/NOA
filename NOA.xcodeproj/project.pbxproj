@@ -49,6 +49,8 @@
 		4DCCD13C280080F40035002A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DCCD138280080F40035002A /* Main.storyboard */; };
 		4DCCD13D280080F40035002A /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DCCD13A280080F40035002A /* Home.storyboard */; };
 		4DCCD143280081EA0035002A /* Feed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DCCD141280081EA0035002A /* Feed.storyboard */; };
+		4DEEEF0E280EA07700AF5169 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEEEF0D280EA07700AF5169 /* FeedViewController.swift */; };
+		4DEEEF10280EA2DF00AF5169 /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEEEF0F280EA2DF00AF5169 /* FeedViewModel.swift */; };
 		5F0DE96CB390D9F3E25098CB /* Pods_NOA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EEFA3EE9D77FAB2EE80F4B7 /* Pods_NOA.framework */; };
 		8EB894A07D482B7090C765F8 /* Pods_NOA_NOAUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1406363956635FC4E8AAE9D6 /* Pods_NOA_NOAUITests.framework */; };
 /* End PBXBuildFile section */
@@ -122,6 +124,8 @@
 		4DCCD139280080F40035002A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Main.storyboard; sourceTree = "<group>"; };
 		4DCCD13B280080F40035002A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Home.storyboard; sourceTree = "<group>"; };
 		4DCCD142280081EA0035002A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Feed.storyboard; sourceTree = "<group>"; };
+		4DEEEF0D280EA07700AF5169 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
+		4DEEEF0F280EA2DF00AF5169 /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
 		B7D77AF13124344D25470DC3 /* Pods_NOATests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NOATests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D784DC834A5849DE441B8E9E /* Pods-NOA-NOAUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NOA-NOAUITests.debug.xcconfig"; path = "Target Support Files/Pods-NOA-NOAUITests/Pods-NOA-NOAUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		E3CC7C966B3D14D3E20BFAA5 /* Pods-NOATests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NOATests.release.xcconfig"; path = "Target Support Files/Pods-NOATests/Pods-NOATests.release.xcconfig"; sourceTree = "<group>"; };
@@ -186,6 +190,7 @@
 				4DCCD11728007B0F0035002A /* Services */,
 				4DCCD11628007B080035002A /* Utiles */,
 				4DCCD11428007AF80035002A /* Models */,
+				4DCCD11528007AFD0035002A /* Fonts */,
 				4DCCD11328007A7F0035002A /* ViewModels */,
 				4DCCD11228007A5D0035002A /* ViewControllers */,
 				4DCCD11828007B1D0035002A /* Resources */,
@@ -286,6 +291,7 @@
 			children = (
 				4D77B5572805D26A00C2E90D /* SplashViewModel.swift */,
 				4D6D35572801CEA30001B18F /* HomeViewModel.swift */,
+				4DEEEF0F280EA2DF00AF5169 /* FeedViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -294,7 +300,6 @@
 			isa = PBXGroup;
 			children = (
 				4D6D35552801CD080001B18F /* Feed.swift */,
-				4DCCD11528007AFD0035002A /* Fonts */,
 				4DC03D412806C82600CEE554 /* User.swift */,
 				4D8C47E22806F57500E667B1 /* Test.swift */,
 			);
@@ -353,6 +358,7 @@
 			isa = PBXGroup;
 			children = (
 				4D33601927E8C8E9007640F7 /* HomeViewController.swift */,
+				4DEEEF0D280EA07700AF5169 /* FeedViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -669,6 +675,7 @@
 				4D33601627E8C8E9007640F7 /* AppDelegate.swift in Sources */,
 				4D33602027E8C8E9007640F7 /* NOA.xcdatamodeld in Sources */,
 				4DC03D2F2806B44C00CEE554 /* Inject.swift in Sources */,
+				4DEEEF0E280EA07700AF5169 /* FeedViewController.swift in Sources */,
 				4DC03D3E2806BDE100CEE554 /* BaseInterceptor.swift in Sources */,
 				4D77B5582805D26A00C2E90D /* SplashViewModel.swift in Sources */,
 				4DC03D372806BAE500CEE554 /* ReadPList.swift in Sources */,
@@ -678,6 +685,7 @@
 				4D8C47E5280709ED00E667B1 /* UIViewController + Extension.swift in Sources */,
 				4DC03D2C2806B3F100CEE554 /* ObservableType + Extension.swift in Sources */,
 				4D8C47E12806F3A400E667B1 /* DBInfo.swift in Sources */,
+				4DEEEF10280EA2DF00AF5169 /* FeedViewModel.swift in Sources */,
 				4D6D35562801CD080001B18F /* Feed.swift in Sources */,
 				4DC03D262806AD0100CEE554 /* APIRequestService.swift in Sources */,
 				4D33601827E8C8E9007640F7 /* SceneDelegate.swift in Sources */,

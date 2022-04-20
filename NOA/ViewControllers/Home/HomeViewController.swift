@@ -57,6 +57,17 @@ class HomeViewController: UIViewController {
         tableView.refreshControl = UIRefreshControl()
         setupBindings()
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let identifier = segue.identifier ?? ""
+        
+        if identifier == "FeedDetailSegue",
+           let selectedFeed = sender as? Lecture,
+           let feedVC = segue.destination as? FeedViewController {
+            let feedViewModel = FeedViewModel(selectedFeed)
+            feedVC.viewModel = feedViewModel
+        }
+    }
 }
 
 extension HomeViewController {
@@ -89,11 +100,10 @@ extension HomeViewController {
         // ------------------------------
 
         // 페이지 이동
-        tableView.rx.itemSelected
-          .subscribe(onNext: { [weak self] indexPath in
-              self?.performSegue(withIdentifier: "FeedDetailSegue",
-                                 sender: nil)
-          }).disposed(by: disposeBag)
+        Observable.zip(tableView.rx.modelSelected(Lecture.self), tableView.rx.itemSelected) .bind { [weak self] item, indexPath in
+            self?.performSegue(withIdentifier: "FeedDetailSegue", sender: item)
+            
+        } .disposed(by: disposeBag)
 
         // ------------------------------
         //     OUTPUT
