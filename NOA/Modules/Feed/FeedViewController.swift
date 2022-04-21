@@ -9,6 +9,7 @@ import Foundation
 import RxSwift
 import RxViewController
 import NVActivityIndicatorView
+import UIKit
 
 class FeedViewController: UIViewController {
     
@@ -134,5 +135,15 @@ extension FeedViewController {
                 cell.onData.onNext(item)
             }
             .disposed(by: disposeBag)
+        
+        collectionView.rx.setDelegate(self).disposed(by: disposeBag)
+    }
+}
+
+extension FeedViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = collectionView.bounds.width/2 - 1
+        let height = width
+        return CGSize(width: width, height: height)
     }
 }
