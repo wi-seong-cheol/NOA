@@ -7,7 +7,6 @@
 
 import RxCocoa
 import RxSwift
-import RxDataSources
 import RxViewController
 import NVActivityIndicatorView
 import UIKit
@@ -129,8 +128,7 @@ extension HomeViewController {
             .disposed(by: disposeBag)
                 
         // 테이블뷰 아이템들
-        viewModel
-            .items
+        viewModel.items
             .bind(to: tableView.rx.items(cellIdentifier: HomeTableCell.identifier, cellType: HomeTableCell.self)) {
                 _, item, cell in
                 cell.onData.onNext(item)
