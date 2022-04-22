@@ -7,7 +7,6 @@
 
 import RxCocoa
 import RxSwift
-import RxDataSources
 import RxViewController
 import NVActivityIndicatorView
 import UIKit
