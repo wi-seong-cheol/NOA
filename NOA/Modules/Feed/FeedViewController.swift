@@ -100,7 +100,7 @@ extension FeedViewController {
 
         // 페이지 이동
         Observable.zip(collectionView.rx.modelSelected(Lecture.self), collectionView.rx.itemSelected) .bind { [weak self] item, indexPath in
-            self?.performSegue(withIdentifier: "HomeDetailSegue", sender: item)
+            self?.performSegue(withIdentifier: "FeedDetailSegue", sender: item)
             
         } .disposed(by: disposeBag)
 
@@ -131,7 +131,7 @@ extension FeedViewController {
         viewModel
             .items
             .bind(to: collectionView.rx.items(cellIdentifier: FeedCollectionCell.identifier, cellType: FeedCollectionCell.self)) {
-                _, item, cell in
+                indexPath, item, cell in
                 cell.onData.onNext(item)
             }
             .disposed(by: disposeBag)
