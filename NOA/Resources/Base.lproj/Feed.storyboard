@@ -81,17 +81,33 @@
             </objects>
             <point key="canvasLocation" x="1042.0289855072465" y="115.84821428571428"/>
         </scene>
-        <!--View Controller-->
+        <!--Feed Detail View Controller-->
         <scene sceneID="xMR-7O-mOq">
             <objects>
-                <viewController id="tsq-XN-KR2" sceneMemberID="viewController">
+                <viewController id="tsq-XN-KR2" customClass="FeedDetailViewController" customModule="NOA" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="f6E-9R-JGD">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vfC-Yn-tHe">
+                                <rect key="frame" x="87" y="384" width="240" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="CD3-NB-eNc"/>
+                                    <constraint firstAttribute="height" constant="128" id="QB9-tD-lNd"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="BXb-dG-loR"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="vfC-Yn-tHe" firstAttribute="centerX" secondItem="f6E-9R-JGD" secondAttribute="centerX" id="caS-S1-KoT"/>
+                            <constraint firstItem="vfC-Yn-tHe" firstAttribute="centerY" secondItem="f6E-9R-JGD" secondAttribute="centerY" id="eMT-TB-9RT"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="KVG-2T-qGs"/>
+                    <connections>
+                        <outlet property="work" destination="vfC-Yn-tHe" id="AfT-l4-PFz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="luA-ZF-lfa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
