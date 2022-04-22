@@ -36,13 +36,14 @@ class HomeTableCell: UITableViewCell {
 
         data.observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] lecture in
+                self?.thumbnail.image = UIImage()
+                self?.name.text = lecture.number
+                self?.orgName.text = lecture.id
                 ImageLoader.loadImage(from: lecture.courseImage)
                     .observe(on: MainScheduler.instance)
                     .subscribe(onNext: { (image) in
                         self?.thumbnail.image = image})
                     .disposed(by: self!.disposeBag)
-                self?.name.text = lecture.number
-                self?.orgName.text = lecture.id
             })
             .disposed(by: cellDisposeBag)
     }
