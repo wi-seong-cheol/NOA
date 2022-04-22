@@ -28,6 +28,10 @@
 		4D8C47E5280709ED00E667B1 /* UIViewController + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8C47E4280709ED00E667B1 /* UIViewController + Extension.swift */; };
 		4D8C47EA2807312400E667B1 /* UIApplication + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8C47E92807312400E667B1 /* UIApplication + Extension.swift */; };
 		4D9A4DDA280FD663007DC685 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9A4DD9280FD663007DC685 /* FeedViewController.swift */; };
+		4D9A4DDD280FD90F007DC685 /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9A4DDC280FD90F007DC685 /* FeedViewModel.swift */; };
+		4D9A4DDF280FD9A0007DC685 /* FeedDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9A4DDE280FD9A0007DC685 /* FeedDetailViewController.swift */; };
+		4D9A4DE1280FD9AF007DC685 /* FeedCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9A4DE0280FD9AF007DC685 /* FeedCollectionCell.swift */; };
+		4D9A4DE3280FD9DE007DC685 /* FeedDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9A4DE2280FD9DE007DC685 /* FeedDetailViewModel.swift */; };
 		4DC03D2028069B4900CEE554 /* Feed.json in Resources */ = {isa = PBXBuildFile; fileRef = 4DC03D1F28069B4900CEE554 /* Feed.json */; };
 		4DC03D232806A9E500CEE554 /* NotoSansCJKkr-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4DC03D212806A9E300CEE554 /* NotoSansCJKkr-Medium.otf */; };
 		4DC03D242806A9E500CEE554 /* NotoSansCJKkr-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4DC03D222806A9E500CEE554 /* NotoSansCJKkr-Regular.otf */; };
@@ -104,6 +108,10 @@
 		4D8C47E4280709ED00E667B1 /* UIViewController + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extension.swift"; sourceTree = "<group>"; };
 		4D8C47E92807312400E667B1 /* UIApplication + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication + Extension.swift"; sourceTree = "<group>"; };
 		4D9A4DD9280FD663007DC685 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
+		4D9A4DDC280FD90F007DC685 /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
+		4D9A4DDE280FD9A0007DC685 /* FeedDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedDetailViewController.swift; sourceTree = "<group>"; };
+		4D9A4DE0280FD9AF007DC685 /* FeedCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCollectionCell.swift; sourceTree = "<group>"; };
+		4D9A4DE2280FD9DE007DC685 /* FeedDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedDetailViewModel.swift; sourceTree = "<group>"; };
 		4DC03D1F28069B4900CEE554 /* Feed.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Feed.json; sourceTree = "<group>"; };
 		4DC03D212806A9E300CEE554 /* NotoSansCJKkr-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansCJKkr-Medium.otf"; sourceTree = "<group>"; };
 		4DC03D222806A9E500CEE554 /* NotoSansCJKkr-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansCJKkr-Regular.otf"; sourceTree = "<group>"; };
@@ -372,7 +380,11 @@
 		4DCCD148280084C80035002A /* Feed */ = {
 			isa = PBXGroup;
 			children = (
+				4D9A4DE0280FD9AF007DC685 /* FeedCollectionCell.swift */,
+				4D9A4DDC280FD90F007DC685 /* FeedViewModel.swift */,
 				4D9A4DD9280FD663007DC685 /* FeedViewController.swift */,
+				4D9A4DE2280FD9DE007DC685 /* FeedDetailViewModel.swift */,
+				4D9A4DDE280FD9A0007DC685 /* FeedDetailViewController.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -656,6 +668,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D9A4DE1280FD9AF007DC685 /* FeedCollectionCell.swift in Sources */,
 				4D33601A27E8C8E9007640F7 /* HomeViewController.swift in Sources */,
 				4D8A2DE528094442007F3EF2 /* ImageLoader.swift in Sources */,
 				4DC03D332806B58C00CEE554 /* APIUrlService.swift in Sources */,
@@ -663,12 +676,14 @@
 				4D33602027E8C8E9007640F7 /* NOA.xcdatamodeld in Sources */,
 				4DC03D2F2806B44C00CEE554 /* Inject.swift in Sources */,
 				4DEEEF0E280EA07700AF5169 /* HomeDetailViewController.swift in Sources */,
+				4D9A4DDD280FD90F007DC685 /* FeedViewModel.swift in Sources */,
 				4DC03D3E2806BDE100CEE554 /* BaseInterceptor.swift in Sources */,
 				4D77B5582805D26A00C2E90D /* SplashViewModel.swift in Sources */,
 				4DC03D372806BAE500CEE554 /* ReadPList.swift in Sources */,
 				4D6D35582801CEA30001B18F /* HomeViewModel.swift in Sources */,
 				4D8C47EA2807312400E667B1 /* UIApplication + Extension.swift in Sources */,
 				4DC03D312806B4B100CEE554 /* GlobalAlert.swift in Sources */,
+				4D9A4DE3280FD9DE007DC685 /* FeedDetailViewModel.swift in Sources */,
 				4D8C47E5280709ED00E667B1 /* UIViewController + Extension.swift in Sources */,
 				4DC03D2C2806B3F100CEE554 /* ObservableType + Extension.swift in Sources */,
 				4D8C47E12806F3A400E667B1 /* DBInfo.swift in Sources */,
@@ -686,6 +701,7 @@
 				4D54C7C6280E846400F2AC0D /* UIScrollView + Extension.swift in Sources */,
 				4DC03D392806BB0500CEE554 /* FeedService.swift in Sources */,
 				4DC03D422806C82600CEE554 /* User.swift in Sources */,
+				4D9A4DDF280FD9A0007DC685 /* FeedDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,6 +7,7 @@
 
 import UIKit
 import RxSwift
+import RxRelay
 
 class FeedCollectionCell: UICollectionViewCell {
     static let identifier = "FeedCollectionCell"
@@ -22,15 +23,17 @@ class FeedCollectionCell: UICollectionViewCell {
         let data = PublishSubject<Lecture>()
 
         onData = data.asObserver()
-
+        
         super.init(coder: aDecoder)
-
+        
         data.observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] lecture in
-                ImageLoader.loadImage(from: lecture.courseImage)
+                self?.thumbnail.image = UIImage()
+                ImageLoader.cache_loadImage(url: lecture.courseImage)
                     .observe(on: MainScheduler.instance)
                     .subscribe(onNext: { (image) in
-                        self?.thumbnail.image = image})
+                        self?.thumbnail.image = image
+                    })
                     .disposed(by: self!.disposeBag)
             })
             .disposed(by: cellDisposeBag)
