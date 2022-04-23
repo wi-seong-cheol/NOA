@@ -56,6 +56,8 @@
 		4DCCD143280081EA0035002A /* Feed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DCCD141280081EA0035002A /* Feed.storyboard */; };
 		4DEEEF0E280EA07700AF5169 /* HomeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEEEF0D280EA07700AF5169 /* HomeDetailViewController.swift */; };
 		4DEEEF10280EA2DF00AF5169 /* HomeDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEEEF0F280EA2DF00AF5169 /* HomeDetailViewModel.swift */; };
+		4DFA75262814469E00468763 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFA75252814469E00468763 /* ChatViewController.swift */; };
+		4DFA7528281446F000468763 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFA7527281446F000468763 /* ChatViewModel.swift */; };
 		5F0DE96CB390D9F3E25098CB /* Pods_NOA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EEFA3EE9D77FAB2EE80F4B7 /* Pods_NOA.framework */; };
 		8EB894A07D482B7090C765F8 /* Pods_NOA_NOAUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1406363956635FC4E8AAE9D6 /* Pods_NOA_NOAUITests.framework */; };
 /* End PBXBuildFile section */
@@ -136,6 +138,8 @@
 		4DCCD142280081EA0035002A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Feed.storyboard; sourceTree = "<group>"; };
 		4DEEEF0D280EA07700AF5169 /* HomeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDetailViewController.swift; sourceTree = "<group>"; };
 		4DEEEF0F280EA2DF00AF5169 /* HomeDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDetailViewModel.swift; sourceTree = "<group>"; };
+		4DFA75252814469E00468763 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		4DFA7527281446F000468763 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
 		B7D77AF13124344D25470DC3 /* Pods_NOATests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NOATests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D784DC834A5849DE441B8E9E /* Pods-NOA-NOAUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NOA-NOAUITests.debug.xcconfig"; path = "Target Support Files/Pods-NOA-NOAUITests/Pods-NOA-NOAUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		E3CC7C966B3D14D3E20BFAA5 /* Pods-NOATests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NOATests.release.xcconfig"; path = "Target Support Files/Pods-NOATests/Pods-NOATests.release.xcconfig"; sourceTree = "<group>"; };
@@ -366,6 +370,8 @@
 		4DCCD146280084BB0035002A /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				4DFA75252814469E00468763 /* ChatViewController.swift */,
+				4DFA7527281446F000468763 /* ChatViewModel.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -671,6 +677,7 @@
 				4D9A4DE1280FD9AF007DC685 /* FeedCollectionCell.swift in Sources */,
 				4D33601A27E8C8E9007640F7 /* HomeViewController.swift in Sources */,
 				4D8A2DE528094442007F3EF2 /* ImageLoader.swift in Sources */,
+				4DFA75262814469E00468763 /* ChatViewController.swift in Sources */,
 				4DC03D332806B58C00CEE554 /* APIUrlService.swift in Sources */,
 				4D33601627E8C8E9007640F7 /* AppDelegate.swift in Sources */,
 				4D33602027E8C8E9007640F7 /* NOA.xcdatamodeld in Sources */,
@@ -701,6 +708,7 @@
 				4D54C7C6280E846400F2AC0D /* UIScrollView + Extension.swift in Sources */,
 				4DC03D392806BB0500CEE554 /* FeedService.swift in Sources */,
 				4DC03D422806C82600CEE554 /* User.swift in Sources */,
+				4DFA7528281446F000468763 /* ChatViewModel.swift in Sources */,
 				4D9A4DDF280FD9A0007DC685 /* FeedDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
