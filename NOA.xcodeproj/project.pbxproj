@@ -32,6 +32,7 @@
 		4D9A4DDF280FD9A0007DC685 /* FeedDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9A4DDE280FD9A0007DC685 /* FeedDetailViewController.swift */; };
 		4D9A4DE1280FD9AF007DC685 /* FeedCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9A4DE0280FD9AF007DC685 /* FeedCollectionCell.swift */; };
 		4D9A4DE3280FD9DE007DC685 /* FeedDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9A4DE2280FD9DE007DC685 /* FeedDetailViewModel.swift */; };
+		4DBF570C28159A170056967C /* ChatTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBF570B28159A170056967C /* ChatTableCell.swift */; };
 		4DC03D2028069B4900CEE554 /* Feed.json in Resources */ = {isa = PBXBuildFile; fileRef = 4DC03D1F28069B4900CEE554 /* Feed.json */; };
 		4DC03D232806A9E500CEE554 /* NotoSansCJKkr-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4DC03D212806A9E300CEE554 /* NotoSansCJKkr-Medium.otf */; };
 		4DC03D242806A9E500CEE554 /* NotoSansCJKkr-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4DC03D222806A9E500CEE554 /* NotoSansCJKkr-Regular.otf */; };
@@ -114,6 +115,7 @@
 		4D9A4DDE280FD9A0007DC685 /* FeedDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedDetailViewController.swift; sourceTree = "<group>"; };
 		4D9A4DE0280FD9AF007DC685 /* FeedCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCollectionCell.swift; sourceTree = "<group>"; };
 		4D9A4DE2280FD9DE007DC685 /* FeedDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedDetailViewModel.swift; sourceTree = "<group>"; };
+		4DBF570B28159A170056967C /* ChatTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableCell.swift; sourceTree = "<group>"; };
 		4DC03D1F28069B4900CEE554 /* Feed.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Feed.json; sourceTree = "<group>"; };
 		4DC03D212806A9E300CEE554 /* NotoSansCJKkr-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansCJKkr-Medium.otf"; sourceTree = "<group>"; };
 		4DC03D222806A9E500CEE554 /* NotoSansCJKkr-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansCJKkr-Regular.otf"; sourceTree = "<group>"; };
@@ -370,6 +372,7 @@
 		4DCCD146280084BB0035002A /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				4DBF570B28159A170056967C /* ChatTableCell.swift */,
 				4DFA75252814469E00468763 /* ChatViewController.swift */,
 				4DFA7527281446F000468763 /* ChatViewModel.swift */,
 			);
@@ -708,6 +711,7 @@
 				4D54C7C6280E846400F2AC0D /* UIScrollView + Extension.swift in Sources */,
 				4DC03D392806BB0500CEE554 /* FeedService.swift in Sources */,
 				4DC03D422806C82600CEE554 /* User.swift in Sources */,
+				4DBF570C28159A170056967C /* ChatTableCell.swift in Sources */,
 				4DFA7528281446F000468763 /* ChatViewModel.swift in Sources */,
 				4D9A4DDF280FD9A0007DC685 /* FeedDetailViewController.swift in Sources */,
 			);
