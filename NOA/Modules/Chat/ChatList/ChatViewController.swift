@@ -58,14 +58,14 @@ class ChatViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        let identifier = segue.identifier ?? ""
-//
-//        if identifier == "ChatDetailSegue",
-//           let selectedFeed = sender as? Lecture,
-//           let feedVC = segue.destination as? HomeDetailViewController {
-//            let feedViewModel = HomeDetailViewModel(selectedFeed)
-//            feedVC.viewModel = feedViewModel
-//        }
+        let identifier = segue.identifier ?? ""
+
+        if identifier == "ChattingSegue",
+           let selectedFeed = sender as? Lecture,
+           let chatVC = segue.destination as? ChattingViewController {
+            let chatViewModel = ChattingViewModel(selectedFeed)
+            chatVC.viewModel = chatViewModel
+        }
     }
 }
 
@@ -95,7 +95,7 @@ extension ChatViewController {
 
         // 페이지 이동
         Observable.zip(tableView.rx.modelSelected(Lecture.self), tableView.rx.itemSelected) .bind { [weak self] item, indexPath in
-            self?.performSegue(withIdentifier: "ChatDetailSegue", sender: item)
+            self?.performSegue(withIdentifier: "ChattingSegue", sender: item)
 
         } .disposed(by: disposeBag)
 
