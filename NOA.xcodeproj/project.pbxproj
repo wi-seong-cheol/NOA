@@ -33,6 +33,9 @@
 		4D9A4DE1280FD9AF007DC685 /* FeedCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9A4DE0280FD9AF007DC685 /* FeedCollectionCell.swift */; };
 		4D9A4DE3280FD9DE007DC685 /* FeedDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9A4DE2280FD9DE007DC685 /* FeedDetailViewModel.swift */; };
 		4DBF570C28159A170056967C /* ChatTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBF570B28159A170056967C /* ChatTableCell.swift */; };
+		4DBF570E2816A0A90056967C /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBF570D2816A0A90056967C /* Chat.swift */; };
+		4DBF57102816A1200056967C /* ChatLocalDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBF570F2816A1200056967C /* ChatLocalDB.swift */; };
+		4DBF57142816A4840056967C /* ChatListLocalDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBF57132816A4840056967C /* ChatListLocalDB.swift */; };
 		4DC03D2028069B4900CEE554 /* Feed.json in Resources */ = {isa = PBXBuildFile; fileRef = 4DC03D1F28069B4900CEE554 /* Feed.json */; };
 		4DC03D232806A9E500CEE554 /* NotoSansCJKkr-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4DC03D212806A9E300CEE554 /* NotoSansCJKkr-Medium.otf */; };
 		4DC03D242806A9E500CEE554 /* NotoSansCJKkr-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4DC03D222806A9E500CEE554 /* NotoSansCJKkr-Regular.otf */; };
@@ -116,6 +119,9 @@
 		4D9A4DE0280FD9AF007DC685 /* FeedCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCollectionCell.swift; sourceTree = "<group>"; };
 		4D9A4DE2280FD9DE007DC685 /* FeedDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedDetailViewModel.swift; sourceTree = "<group>"; };
 		4DBF570B28159A170056967C /* ChatTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableCell.swift; sourceTree = "<group>"; };
+		4DBF570D2816A0A90056967C /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
+		4DBF570F2816A1200056967C /* ChatLocalDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLocalDB.swift; sourceTree = "<group>"; };
+		4DBF57132816A4840056967C /* ChatListLocalDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListLocalDB.swift; sourceTree = "<group>"; };
 		4DC03D1F28069B4900CEE554 /* Feed.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Feed.json; sourceTree = "<group>"; };
 		4DC03D212806A9E300CEE554 /* NotoSansCJKkr-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansCJKkr-Medium.otf"; sourceTree = "<group>"; };
 		4DC03D222806A9E500CEE554 /* NotoSansCJKkr-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansCJKkr-Regular.otf"; sourceTree = "<group>"; };
@@ -205,6 +211,7 @@
 				4DC03D1E28069B2D00CEE554 /* Json */,
 				4DCCD11728007B0F0035002A /* Services */,
 				4DCCD11628007B080035002A /* Utiles */,
+				4DBF57112816A1570056967C /* LocalDB */,
 				4DCCD11428007AF80035002A /* Models */,
 				4DCCD11528007AFD0035002A /* Fonts */,
 				4D9A4DDB280FD746007DC685 /* Modules */,
@@ -257,6 +264,23 @@
 			path = Modules;
 			sourceTree = "<group>";
 		};
+		4DBF57112816A1570056967C /* LocalDB */ = {
+			isa = PBXGroup;
+			children = (
+				4DBF57122816A1620056967C /* Realm */,
+			);
+			path = LocalDB;
+			sourceTree = "<group>";
+		};
+		4DBF57122816A1620056967C /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				4DBF570F2816A1200056967C /* ChatLocalDB.swift */,
+				4DBF57132816A4840056967C /* ChatListLocalDB.swift */,
+			);
+			path = Realm;
+			sourceTree = "<group>";
+		};
 		4DC03D1E28069B2D00CEE554 /* Json */ = {
 			isa = PBXGroup;
 			children = (
@@ -298,6 +322,7 @@
 				4D6D35552801CD080001B18F /* Feed.swift */,
 				4DC03D412806C82600CEE554 /* User.swift */,
 				4D8C47E22806F57500E667B1 /* Test.swift */,
+				4DBF570D2816A0A90056967C /* Chat.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -373,8 +398,8 @@
 			isa = PBXGroup;
 			children = (
 				4DBF570B28159A170056967C /* ChatTableCell.swift */,
-				4DFA75252814469E00468763 /* ChatViewController.swift */,
 				4DFA7527281446F000468763 /* ChatViewModel.swift */,
+				4DFA75252814469E00468763 /* ChatViewController.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -678,6 +703,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D9A4DE1280FD9AF007DC685 /* FeedCollectionCell.swift in Sources */,
+				4DBF57102816A1200056967C /* ChatLocalDB.swift in Sources */,
 				4D33601A27E8C8E9007640F7 /* HomeViewController.swift in Sources */,
 				4D8A2DE528094442007F3EF2 /* ImageLoader.swift in Sources */,
 				4DFA75262814469E00468763 /* ChatViewController.swift in Sources */,
@@ -698,6 +724,7 @@
 				4DC03D2C2806B3F100CEE554 /* ObservableType + Extension.swift in Sources */,
 				4D8C47E12806F3A400E667B1 /* DBInfo.swift in Sources */,
 				4DEEEF10280EA2DF00AF5169 /* HomeDetailViewModel.swift in Sources */,
+				4DBF570E2816A0A90056967C /* Chat.swift in Sources */,
 				4D6D35562801CD080001B18F /* Feed.swift in Sources */,
 				4DC03D262806AD0100CEE554 /* APIRequestService.swift in Sources */,
 				4D33601827E8C8E9007640F7 /* SceneDelegate.swift in Sources */,
@@ -712,6 +739,7 @@
 				4DC03D392806BB0500CEE554 /* FeedService.swift in Sources */,
 				4DC03D422806C82600CEE554 /* User.swift in Sources */,
 				4DBF570C28159A170056967C /* ChatTableCell.swift in Sources */,
+				4DBF57142816A4840056967C /* ChatListLocalDB.swift in Sources */,
 				4DFA7528281446F000468763 /* ChatViewModel.swift in Sources */,
 				4D9A4DDF280FD9A0007DC685 /* FeedDetailViewController.swift in Sources */,
 			);
