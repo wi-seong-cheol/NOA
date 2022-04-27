@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		08B6A19C8BCD75727DAD8188 /* Pods_NOATests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7D77AF13124344D25470DC3 /* Pods_NOATests.framework */; };
+		4D26A0AE2818FDA700D0C75F /* ChattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D26A0AD2818FDA700D0C75F /* ChattingViewController.swift */; };
+		4D26A0B02818FDB500D0C75F /* ChattingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D26A0AF2818FDB500D0C75F /* ChattingViewModel.swift */; };
 		4D33601627E8C8E9007640F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D33601527E8C8E9007640F7 /* AppDelegate.swift */; };
 		4D33601827E8C8E9007640F7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D33601727E8C8E9007640F7 /* SceneDelegate.swift */; };
 		4D33601A27E8C8E9007640F7 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D33601927E8C8E9007640F7 /* HomeViewController.swift */; };
@@ -90,6 +92,8 @@
 		3DC7554BA6DD1A2D53679242 /* Pods-NOA-NOAUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NOA-NOAUITests.release.xcconfig"; path = "Target Support Files/Pods-NOA-NOAUITests/Pods-NOA-NOAUITests.release.xcconfig"; sourceTree = "<group>"; };
 		3EEFA3EE9D77FAB2EE80F4B7 /* Pods_NOA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NOA.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		463155DA60952C99D9637A1C /* Pods-NOA.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NOA.release.xcconfig"; path = "Target Support Files/Pods-NOA/Pods-NOA.release.xcconfig"; sourceTree = "<group>"; };
+		4D26A0AD2818FDA700D0C75F /* ChattingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingViewController.swift; sourceTree = "<group>"; };
+		4D26A0AF2818FDB500D0C75F /* ChattingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingViewModel.swift; sourceTree = "<group>"; };
 		4D33601227E8C8E9007640F7 /* NOA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NOA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D33601527E8C8E9007640F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4D33601727E8C8E9007640F7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -181,6 +185,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4D26A0AB2818FD8800D0C75F /* ChatList */ = {
+			isa = PBXGroup;
+			children = (
+				4DBF570B28159A170056967C /* ChatTableCell.swift */,
+				4DFA7527281446F000468763 /* ChatViewModel.swift */,
+				4DFA75252814469E00468763 /* ChatViewController.swift */,
+			);
+			path = ChatList;
+			sourceTree = "<group>";
+		};
+		4D26A0AC2818FD9500D0C75F /* Chatting */ = {
+			isa = PBXGroup;
+			children = (
+				4D26A0AF2818FDB500D0C75F /* ChattingViewModel.swift */,
+				4D26A0AD2818FDA700D0C75F /* ChattingViewController.swift */,
+			);
+			path = Chatting;
+			sourceTree = "<group>";
+		};
 		4D33600927E8C8E9007640F7 = {
 			isa = PBXGroup;
 			children = (
@@ -397,9 +420,8 @@
 		4DCCD146280084BB0035002A /* Chat */ = {
 			isa = PBXGroup;
 			children = (
-				4DBF570B28159A170056967C /* ChatTableCell.swift */,
-				4DFA7527281446F000468763 /* ChatViewModel.swift */,
-				4DFA75252814469E00468763 /* ChatViewController.swift */,
+				4D26A0AB2818FD8800D0C75F /* ChatList */,
+				4D26A0AC2818FD9500D0C75F /* Chatting */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -720,6 +742,7 @@
 				4D8C47EA2807312400E667B1 /* UIApplication + Extension.swift in Sources */,
 				4DC03D312806B4B100CEE554 /* GlobalAlert.swift in Sources */,
 				4D9A4DE3280FD9DE007DC685 /* FeedDetailViewModel.swift in Sources */,
+				4D26A0B02818FDB500D0C75F /* ChattingViewModel.swift in Sources */,
 				4D8C47E5280709ED00E667B1 /* UIViewController + Extension.swift in Sources */,
 				4DC03D2C2806B3F100CEE554 /* ObservableType + Extension.swift in Sources */,
 				4D8C47E12806F3A400E667B1 /* DBInfo.swift in Sources */,
@@ -735,6 +758,7 @@
 				4DC03D402806C78600CEE554 /* UserService.swift in Sources */,
 				4DC03D352806BA6C00CEE554 /* HeaderCommon.swift in Sources */,
 				4DC03D3C2806BBCE00CEE554 /* DIContainer.swift in Sources */,
+				4D26A0AE2818FDA700D0C75F /* ChattingViewController.swift in Sources */,
 				4D54C7C6280E846400F2AC0D /* UIScrollView + Extension.swift in Sources */,
 				4DC03D392806BB0500CEE554 /* FeedService.swift in Sources */,
 				4DC03D422806C82600CEE554 /* User.swift in Sources */,
