@@ -41,7 +41,7 @@
         <scene sceneID="qv1-jb-6VN">
             <objects>
                 <navigationController storyboardIdentifier="Upload" automaticallyAdjustsScrollViewInsets="NO" id="NRZ-18-qsi" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="업로드" id="IdG-62-WpY"/>
+                    <tabBarItem key="tabBarItem" title="업로드" image="upload_asset" selectedImage="upload_asset" id="IdG-62-WpY"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="8js-dN-cSt">
@@ -59,6 +59,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="upload_asset" width="24" height="24"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

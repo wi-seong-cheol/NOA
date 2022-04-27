@@ -296,7 +296,7 @@
         <scene sceneID="Q28-9V-Hk2">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="nbt-pl-gKH" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="af7-a3-xHb"/>
+                    <tabBarItem key="tabBarItem" title="Item" image="profile_asset" selectedImage="profile_asset" id="af7-a3-xHb"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="VAv-p7-ovL">
@@ -319,6 +319,7 @@
                     <view key="view" contentMode="scaleToFill" id="Rdx-A3-7yb">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="38"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="m92-jn-WSd"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                 </viewController>
@@ -333,6 +334,7 @@
                     <view key="view" contentMode="scaleToFill" id="wmu-Zv-QUS">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="604"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="5Ou-lz-kzv"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                 </viewController>
@@ -342,6 +344,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="profile_asset" width="24" height="24"/>
         <image name="seal" catalog="system" width="128" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

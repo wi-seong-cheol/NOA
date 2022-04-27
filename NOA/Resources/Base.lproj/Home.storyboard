@@ -39,7 +39,7 @@
                                                                 <constraint firstAttribute="width" constant="32" id="LCx-mw-Sof"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="N5K-HX-nN8">
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="N5K-HX-nN8">
                                                             <rect key="frame" x="0.0" y="40" width="390" height="390"/>
                                                             <color key="backgroundColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                                             <constraints>
@@ -204,11 +204,13 @@
             </objects>
             <point key="canvasLocation" x="1855" y="115"/>
         </scene>
-        <!--Item-->
+        <!--홈-->
         <scene sceneID="cC1-On-hON">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2Oh-CK-eCK" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="DHc-S0-0W5"/>
+                    <tabBarItem key="tabBarItem" title="홈" image="home_asset" selectedImage="home_asset" id="DHc-S0-0W5">
+                        <color key="badgeColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Lbz-GK-Z88">
@@ -226,6 +228,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="home_asset" width="24" height="24"/>
         <image name="square" catalog="system" width="128" height="114"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

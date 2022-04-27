@@ -113,11 +113,11 @@
             </objects>
             <point key="canvasLocation" x="1817" y="116"/>
         </scene>
-        <!--Item-->
+        <!--탐색-->
         <scene sceneID="Nfp-34-Wcv">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ikg-6i-6Nh" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="qxz-dK-VZ9"/>
+                    <tabBarItem key="tabBarItem" title="탐색" image="search_asset" selectedImage="search_asset" id="qxz-dK-VZ9"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="EqT-3S-shv">
@@ -135,6 +135,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="search_asset" width="24" height="24"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

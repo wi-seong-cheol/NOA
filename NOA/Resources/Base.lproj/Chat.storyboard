@@ -142,7 +142,7 @@
         <scene sceneID="wzn-wq-zVr">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="H0B-ic-ANo" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="mrD-AR-2JA"/>
+                    <tabBarItem key="tabBarItem" title="Item" image="chat_asset" selectedImage="chat_asset" id="mrD-AR-2JA"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="htn-Lk-9xO">
@@ -160,6 +160,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="chat_asset" width="24" height="24"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
