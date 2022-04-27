@@ -45,6 +45,9 @@ target 'NOA' do
   # pod NVActivityIndicatorView
   pod 'NVActivityIndicatorView'
   
+  # Pods for PagingKit
+  pod "PagingKit"
+  
   target 'NOATests' do
     inherit! :search_paths
     # Pods for testing

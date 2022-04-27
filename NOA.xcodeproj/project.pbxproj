@@ -10,6 +10,19 @@
 		08B6A19C8BCD75727DAD8188 /* Pods_NOATests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7D77AF13124344D25470DC3 /* Pods_NOATests.framework */; };
 		4D26A0AE2818FDA700D0C75F /* ChattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D26A0AD2818FDA700D0C75F /* ChattingViewController.swift */; };
 		4D26A0B02818FDB500D0C75F /* ChattingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D26A0AF2818FDB500D0C75F /* ChattingViewModel.swift */; };
+		4D26A0B22819057A00D0C75F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D26A0B12819057A00D0C75F /* ProfileViewController.swift */; };
+		4D26A0B42819058100D0C75F /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D26A0B32819058100D0C75F /* ProfileViewModel.swift */; };
+		4D26A0B7281905A700D0C75F /* AllWorkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D26A0B6281905A700D0C75F /* AllWorkViewController.swift */; };
+		4D26A0B9281905B100D0C75F /* AllWorkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D26A0B8281905B100D0C75F /* AllWorkViewModel.swift */; };
+		4D26A0BE28190EEB00D0C75F /* NFTWorkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D26A0BD28190EEB00D0C75F /* NFTWorkViewController.swift */; };
+		4D26A0C028190EF800D0C75F /* NFTWorkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D26A0BF28190EF800D0C75F /* NFTWorkViewModel.swift */; };
+		4D26A0C228190F5A00D0C75F /* AllWorkCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D26A0C128190F5A00D0C75F /* AllWorkCollectionCell.swift */; };
+		4D26A0C428190F6B00D0C75F /* NFTCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D26A0C328190F6B00D0C75F /* NFTCollectionCell.swift */; };
+		4D26A0C72819143A00D0C75F /* MenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D26A0C52819143A00D0C75F /* MenuCell.xib */; };
+		4D26A0CA2819144100D0C75F /* FocusView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D26A0C82819144100D0C75F /* FocusView.xib */; };
+		4D26A0CC2819147B00D0C75F /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D26A0CB2819147B00D0C75F /* MenuCell.swift */; };
+		4D26A0CE281914C000D0C75F /* UIColor + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D26A0CD281914C000D0C75F /* UIColor + Extension.swift */; };
+		4D26A0D12819259200D0C75F /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D26A0D02819259200D0C75F /* TabBarViewController.swift */; };
 		4D33601627E8C8E9007640F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D33601527E8C8E9007640F7 /* AppDelegate.swift */; };
 		4D33601827E8C8E9007640F7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D33601727E8C8E9007640F7 /* SceneDelegate.swift */; };
 		4D33601A27E8C8E9007640F7 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D33601927E8C8E9007640F7 /* HomeViewController.swift */; };
@@ -56,7 +69,7 @@
 		4DCCD11A28007C330035002A /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCCD11928007C330035002A /* SplashViewController.swift */; };
 		4DCCD12928007E510035002A /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DCCD12828007E510035002A /* Chat.storyboard */; };
 		4DCCD12B28007E570035002A /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DCCD12A28007E570035002A /* Profile.storyboard */; };
-		4DCCD12E28007EBA0035002A /* Create.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DCCD12C28007EBA0035002A /* Create.storyboard */; };
+		4DCCD12E28007EBA0035002A /* Upload.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DCCD12C28007EBA0035002A /* Upload.storyboard */; };
 		4DCCD13C280080F40035002A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DCCD138280080F40035002A /* Main.storyboard */; };
 		4DCCD13D280080F40035002A /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DCCD13A280080F40035002A /* Home.storyboard */; };
 		4DCCD143280081EA0035002A /* Feed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DCCD141280081EA0035002A /* Feed.storyboard */; };
@@ -94,6 +107,19 @@
 		463155DA60952C99D9637A1C /* Pods-NOA.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NOA.release.xcconfig"; path = "Target Support Files/Pods-NOA/Pods-NOA.release.xcconfig"; sourceTree = "<group>"; };
 		4D26A0AD2818FDA700D0C75F /* ChattingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingViewController.swift; sourceTree = "<group>"; };
 		4D26A0AF2818FDB500D0C75F /* ChattingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingViewModel.swift; sourceTree = "<group>"; };
+		4D26A0B12819057A00D0C75F /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		4D26A0B32819058100D0C75F /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		4D26A0B6281905A700D0C75F /* AllWorkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllWorkViewController.swift; sourceTree = "<group>"; };
+		4D26A0B8281905B100D0C75F /* AllWorkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllWorkViewModel.swift; sourceTree = "<group>"; };
+		4D26A0BD28190EEB00D0C75F /* NFTWorkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTWorkViewController.swift; sourceTree = "<group>"; };
+		4D26A0BF28190EF800D0C75F /* NFTWorkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTWorkViewModel.swift; sourceTree = "<group>"; };
+		4D26A0C128190F5A00D0C75F /* AllWorkCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllWorkCollectionCell.swift; sourceTree = "<group>"; };
+		4D26A0C328190F6B00D0C75F /* NFTCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTCollectionCell.swift; sourceTree = "<group>"; };
+		4D26A0C62819143A00D0C75F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = MenuCell.xib; sourceTree = "<group>"; };
+		4D26A0C92819144100D0C75F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = FocusView.xib; sourceTree = "<group>"; };
+		4D26A0CB2819147B00D0C75F /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
+		4D26A0CD281914C000D0C75F /* UIColor + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Extension.swift"; sourceTree = "<group>"; };
+		4D26A0D02819259200D0C75F /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		4D33601227E8C8E9007640F7 /* NOA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NOA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D33601527E8C8E9007640F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4D33601727E8C8E9007640F7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -144,7 +170,7 @@
 		4DCCD11928007C330035002A /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		4DCCD12828007E510035002A /* Chat.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
 		4DCCD12A28007E570035002A /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
-		4DCCD12D28007EBA0035002A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Create.storyboard; sourceTree = "<group>"; };
+		4DCCD12D28007EBA0035002A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Upload.storyboard; sourceTree = "<group>"; };
 		4DCCD139280080F40035002A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Main.storyboard; sourceTree = "<group>"; };
 		4DCCD13B280080F40035002A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Home.storyboard; sourceTree = "<group>"; };
 		4DCCD142280081EA0035002A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Feed.storyboard; sourceTree = "<group>"; };
@@ -202,6 +228,34 @@
 				4D26A0AD2818FDA700D0C75F /* ChattingViewController.swift */,
 			);
 			path = Chatting;
+			sourceTree = "<group>";
+		};
+		4D26A0B52819059B00D0C75F /* AllWork */ = {
+			isa = PBXGroup;
+			children = (
+				4D26A0B8281905B100D0C75F /* AllWorkViewModel.swift */,
+				4D26A0B6281905A700D0C75F /* AllWorkViewController.swift */,
+				4D26A0C128190F5A00D0C75F /* AllWorkCollectionCell.swift */,
+			);
+			path = AllWork;
+			sourceTree = "<group>";
+		};
+		4D26A0BC28190ECD00D0C75F /* NFTWork */ = {
+			isa = PBXGroup;
+			children = (
+				4D26A0BF28190EF800D0C75F /* NFTWorkViewModel.swift */,
+				4D26A0BD28190EEB00D0C75F /* NFTWorkViewController.swift */,
+				4D26A0C328190F6B00D0C75F /* NFTCollectionCell.swift */,
+			);
+			path = NFTWork;
+			sourceTree = "<group>";
+		};
+		4D26A0CF2819258400D0C75F /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				4D26A0D02819259200D0C75F /* TabBarViewController.swift */,
+			);
+			path = TabBar;
 			sourceTree = "<group>";
 		};
 		4D33600927E8C8E9007640F7 = {
@@ -277,6 +331,7 @@
 		4D9A4DDB280FD746007DC685 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				4D26A0CF2819258400D0C75F /* TabBar */,
 				4DCCD14A280084E10035002A /* Splash */,
 				4DCCD144280084AD0035002A /* Home */,
 				4DCCD148280084C80035002A /* Feed */,
@@ -319,6 +374,7 @@
 				4D54C7C5280E846400F2AC0D /* UIScrollView + Extension.swift */,
 				4D8C47E4280709ED00E667B1 /* UIViewController + Extension.swift */,
 				4D8C47E92807312400E667B1 /* UIApplication + Extension.swift */,
+				4D26A0CD281914C000D0C75F /* UIColor + Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -388,9 +444,11 @@
 				4DCCD138280080F40035002A /* Main.storyboard */,
 				4DCCD13A280080F40035002A /* Home.storyboard */,
 				4DCCD141280081EA0035002A /* Feed.storyboard */,
-				4DCCD12C28007EBA0035002A /* Create.storyboard */,
+				4DCCD12C28007EBA0035002A /* Upload.storyboard */,
 				4DCCD12828007E510035002A /* Chat.storyboard */,
 				4DCCD12A28007E570035002A /* Profile.storyboard */,
+				4D26A0C52819143A00D0C75F /* MenuCell.xib */,
+				4D26A0C82819144100D0C75F /* FocusView.xib */,
 				4D33602127E8C8EB007640F7 /* Assets.xcassets */,
 				4D77B5592805D75900C2E90D /* GoogleService-Info.plist */,
 			);
@@ -413,6 +471,11 @@
 		4DCCD145280084B20035002A /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				4D26A0CB2819147B00D0C75F /* MenuCell.swift */,
+				4D26A0B32819058100D0C75F /* ProfileViewModel.swift */,
+				4D26A0B12819057A00D0C75F /* ProfileViewController.swift */,
+				4D26A0BC28190ECD00D0C75F /* NFTWork */,
+				4D26A0B52819059B00D0C75F /* AllWork */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -586,13 +649,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D26A0CA2819144100D0C75F /* FocusView.xib in Resources */,
 				4DCCD12928007E510035002A /* Chat.storyboard in Resources */,
 				4D77B55A2805D75900C2E90D /* GoogleService-Info.plist in Resources */,
 				4DCCD143280081EA0035002A /* Feed.storyboard in Resources */,
 				4DCCD13D280080F40035002A /* Home.storyboard in Resources */,
 				4DCCD12B28007E570035002A /* Profile.storyboard in Resources */,
 				4DC03D2028069B4900CEE554 /* Feed.json in Resources */,
-				4DCCD12E28007EBA0035002A /* Create.storyboard in Resources */,
+				4D26A0C72819143A00D0C75F /* MenuCell.xib in Resources */,
+				4DCCD12E28007EBA0035002A /* Upload.storyboard in Resources */,
 				4DCCD13C280080F40035002A /* Main.storyboard in Resources */,
 				4D33602227E8C8EB007640F7 /* Assets.xcassets in Resources */,
 				4DC03D232806A9E500CEE554 /* NotoSansCJKkr-Medium.otf in Resources */,
@@ -724,6 +789,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D26A0BE28190EEB00D0C75F /* NFTWorkViewController.swift in Sources */,
 				4D9A4DE1280FD9AF007DC685 /* FeedCollectionCell.swift in Sources */,
 				4DBF57102816A1200056967C /* ChatLocalDB.swift in Sources */,
 				4D33601A27E8C8E9007640F7 /* HomeViewController.swift in Sources */,
@@ -731,25 +797,33 @@
 				4DFA75262814469E00468763 /* ChatViewController.swift in Sources */,
 				4DC03D332806B58C00CEE554 /* APIUrlService.swift in Sources */,
 				4D33601627E8C8E9007640F7 /* AppDelegate.swift in Sources */,
+				4D26A0C028190EF800D0C75F /* NFTWorkViewModel.swift in Sources */,
 				4D33602027E8C8E9007640F7 /* NOA.xcdatamodeld in Sources */,
 				4DC03D2F2806B44C00CEE554 /* Inject.swift in Sources */,
 				4DEEEF0E280EA07700AF5169 /* HomeDetailViewController.swift in Sources */,
 				4D9A4DDD280FD90F007DC685 /* FeedViewModel.swift in Sources */,
 				4DC03D3E2806BDE100CEE554 /* BaseInterceptor.swift in Sources */,
+				4D26A0C428190F6B00D0C75F /* NFTCollectionCell.swift in Sources */,
 				4D77B5582805D26A00C2E90D /* SplashViewModel.swift in Sources */,
+				4D26A0D12819259200D0C75F /* TabBarViewController.swift in Sources */,
 				4DC03D372806BAE500CEE554 /* ReadPList.swift in Sources */,
 				4D6D35582801CEA30001B18F /* HomeViewModel.swift in Sources */,
+				4D26A0B7281905A700D0C75F /* AllWorkViewController.swift in Sources */,
 				4D8C47EA2807312400E667B1 /* UIApplication + Extension.swift in Sources */,
 				4DC03D312806B4B100CEE554 /* GlobalAlert.swift in Sources */,
 				4D9A4DE3280FD9DE007DC685 /* FeedDetailViewModel.swift in Sources */,
+				4D26A0B42819058100D0C75F /* ProfileViewModel.swift in Sources */,
 				4D26A0B02818FDB500D0C75F /* ChattingViewModel.swift in Sources */,
 				4D8C47E5280709ED00E667B1 /* UIViewController + Extension.swift in Sources */,
 				4DC03D2C2806B3F100CEE554 /* ObservableType + Extension.swift in Sources */,
 				4D8C47E12806F3A400E667B1 /* DBInfo.swift in Sources */,
 				4DEEEF10280EA2DF00AF5169 /* HomeDetailViewModel.swift in Sources */,
 				4DBF570E2816A0A90056967C /* Chat.swift in Sources */,
+				4D26A0CE281914C000D0C75F /* UIColor + Extension.swift in Sources */,
 				4D6D35562801CD080001B18F /* Feed.swift in Sources */,
+				4D26A0B9281905B100D0C75F /* AllWorkViewModel.swift in Sources */,
 				4DC03D262806AD0100CEE554 /* APIRequestService.swift in Sources */,
+				4D26A0CC2819147B00D0C75F /* MenuCell.swift in Sources */,
 				4D33601827E8C8E9007640F7 /* SceneDelegate.swift in Sources */,
 				4D8C47E32806F57500E667B1 /* Test.swift in Sources */,
 				4DCCD11A28007C330035002A /* SplashViewController.swift in Sources */,
@@ -760,10 +834,12 @@
 				4DC03D3C2806BBCE00CEE554 /* DIContainer.swift in Sources */,
 				4D26A0AE2818FDA700D0C75F /* ChattingViewController.swift in Sources */,
 				4D54C7C6280E846400F2AC0D /* UIScrollView + Extension.swift in Sources */,
+				4D26A0C228190F5A00D0C75F /* AllWorkCollectionCell.swift in Sources */,
 				4DC03D392806BB0500CEE554 /* FeedService.swift in Sources */,
 				4DC03D422806C82600CEE554 /* User.swift in Sources */,
 				4DBF570C28159A170056967C /* ChatTableCell.swift in Sources */,
 				4DBF57142816A4840056967C /* ChatListLocalDB.swift in Sources */,
+				4D26A0B22819057A00D0C75F /* ProfileViewController.swift in Sources */,
 				4DFA7528281446F000468763 /* ChatViewModel.swift in Sources */,
 				4D9A4DDF280FD9A0007DC685 /* FeedDetailViewController.swift in Sources */,
 			);
@@ -802,12 +878,28 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		4DCCD12C28007EBA0035002A /* Create.storyboard */ = {
+		4D26A0C52819143A00D0C75F /* MenuCell.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4D26A0C62819143A00D0C75F /* Base */,
+			);
+			name = MenuCell.xib;
+			sourceTree = "<group>";
+		};
+		4D26A0C82819144100D0C75F /* FocusView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4D26A0C92819144100D0C75F /* Base */,
+			);
+			name = FocusView.xib;
+			sourceTree = "<group>";
+		};
+		4DCCD12C28007EBA0035002A /* Upload.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				4DCCD12D28007EBA0035002A /* Base */,
 			);
-			name = Create.storyboard;
+			name = Upload.storyboard;
 			sourceTree = "<group>";
 		};
 		4DCCD138280080F40035002A /* Main.storyboard */ = {
