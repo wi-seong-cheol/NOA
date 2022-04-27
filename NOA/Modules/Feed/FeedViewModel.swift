@@ -13,7 +13,6 @@ protocol FeedViewModelType {
     // MARK: INPUT
     var fetchList: AnyObserver<Void> { get }
     var moreFetchList: AnyObserver<Void> { get }
-    var likeTap: AnyObserver<Void> { get }
     
     // MARK: OUTPUT
     var items: Observable<[Lecture]> { get }
@@ -28,7 +27,6 @@ class FeedViewModel: FeedViewModelType {
     // MARK: INPUT
     let fetchList: AnyObserver<Void>
     let moreFetchList: AnyObserver<Void>
-    let likeTap: AnyObserver<Void>
     
     // MARK: OUTPUT
     let items: Observable<[Lecture]>
@@ -38,7 +36,6 @@ class FeedViewModel: FeedViewModelType {
     init(service: FeedFetchable = FeedService()) {
         let fetching = PublishSubject<Void>()
         let moreFetching = PublishSubject<Void>()
-        let liking = PublishSubject<Void>()
         
         let itemsList = BehaviorRelay<[Lecture]>(value: [])
         let nextPage = BehaviorRelay<String>(value: "")
@@ -75,13 +72,6 @@ class FeedViewModel: FeedViewModelType {
                 nextPage.accept(response.next)
             })
             .disposed(by: disposeBag)
-                
-        likeTap = liking.asObserver()
-                
-//        liking.withLatestFrom(list)
-//                .map{ $0.lectures.map { $0.teachers("123") } }
-//            .subscribe(onNext: list.onNext)
-//                .disposed(by: disposeBag)
                 
         // MARK: OUTPUT
         items = itemsList.asObservable()
