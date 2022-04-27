@@ -60,10 +60,10 @@
             </objects>
             <point key="canvasLocation" x="2311.594202898551" y="582.58928571428567"/>
         </scene>
-        <!--Create-->
+        <!--Upload-->
         <scene sceneID="jrV-JO-DKz">
             <objects>
-                <viewControllerPlaceholder storyboardName="Create" id="oPB-cu-The" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="Upload" id="oPB-cu-The" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="yBv-nJ-txD"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JfE-4C-zb4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -90,10 +90,10 @@
             </objects>
             <point key="canvasLocation" x="2311.594202898551" y="839.73214285714278"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Tab Bar View Controller-->
         <scene sceneID="B4O-zl-jGx">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="WWM-gV-zpi" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="WWM-gV-zpi" customClass="TabBarViewController" customModule="NOA" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="6b6-vu-vB5"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="30h-Tr-bOc">
