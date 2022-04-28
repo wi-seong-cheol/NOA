@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="620" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Fyt-TC-1tk">
-                                <rect key="frame" x="0.0" y="96" width="390" height="714"/>
+                                <rect key="frame" x="0.0" y="96" width="390" height="665"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="HomeTableCell" id="Tt2-Fr-WFU" customClass="HomeTableCell" customModule="NOA" customModuleProvider="target">
@@ -188,7 +188,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="d55-bQ-CHB"/>
                     <nil key="simulatedTopBarMetrics"/>
-                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="Fyt-TC-1tk" id="1xd-Mc-v81"/>
                         <segue destination="89d-RW-6fk" kind="show" identifier="HomeDetailSegue" id="8Hw-wt-brY"/>
