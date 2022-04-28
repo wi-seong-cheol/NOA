@@ -13,6 +13,8 @@ import UIKit
 protocol FeedDetailViewModelType {
     // MARK: OUTPUT
     var work: Observable<UIImage> { get }
+    var profile: Observable<UIImage> { get }
+    var errorMessage: Observable<NSError> { get }
 }
 
 class FeedDetailViewModel: FeedDetailViewModelType {
@@ -20,11 +22,13 @@ class FeedDetailViewModel: FeedDetailViewModelType {
     
     // MARK: OUTPUT
     let work: Observable<UIImage>
+    let profile: Observable<UIImage>
     let errorMessage: Observable<NSError>
     
     init(_ selectedFeed: Lecture = Lecture.EMPTY) {
         let feed = Observable.just(selectedFeed)
         let workImage = BehaviorRelay<UIImage>(value: UIImage())
+        let profileImage = BehaviorRelay<UIImage>(value: UIImage())
         let error = PublishSubject<Error>()
         
         // MARK: INPUT
@@ -34,11 +38,23 @@ class FeedDetailViewModel: FeedDetailViewModelType {
             .flatMap{ ImageLoader.loadImage(from: $0)}
             .do(onError: { err in error.onNext(err) })
             .subscribe(onNext: {(image) in
-                workImage.accept(image ?? UIImage())})
+                workImage.accept(image ?? UIImage())
+            })
+            .disposed(by: disposeBag)
+                
+        feed
+            .map{ $0.courseImage }
+            .filter{ $0 != "" }
+            .flatMap{ ImageLoader.loadImage(from: $0)}
+            .do(onError: { err in error.onNext(err) })
+            .subscribe(onNext: {(image) in
+                profileImage.accept(image ?? UIImage())
+            })
             .disposed(by: disposeBag)
                 
         // MARK: OUTPUT
         work = workImage.asObservable()
+        profile = profileImage.asObservable()
                 
         errorMessage = error.map { $0 as NSError }
     }
