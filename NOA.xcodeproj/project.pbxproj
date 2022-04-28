@@ -36,6 +36,7 @@
 		4D6D35532801CC6D0001B18F /* HomeTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6D35522801CC6D0001B18F /* HomeTableCell.swift */; };
 		4D6D35562801CD080001B18F /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6D35552801CD080001B18F /* Feed.swift */; };
 		4D6D35582801CEA30001B18F /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6D35572801CEA30001B18F /* HomeViewModel.swift */; };
+		4D707B2D281ADC5F00BFF792 /* ExhibitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D707B2C281ADC5F00BFF792 /* ExhibitionViewController.swift */; };
 		4D77B5582805D26A00C2E90D /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D77B5572805D26A00C2E90D /* SplashViewModel.swift */; };
 		4D77B55A2805D75900C2E90D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4D77B5592805D75900C2E90D /* GoogleService-Info.plist */; };
 		4D8A2DE528094442007F3EF2 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8A2DE428094442007F3EF2 /* ImageLoader.swift */; };
@@ -138,6 +139,7 @@
 		4D6D35522801CC6D0001B18F /* HomeTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableCell.swift; sourceTree = "<group>"; };
 		4D6D35552801CD080001B18F /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
 		4D6D35572801CEA30001B18F /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		4D707B2C281ADC5F00BFF792 /* ExhibitionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExhibitionViewController.swift; sourceTree = "<group>"; };
 		4D77B5572805D26A00C2E90D /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
 		4D77B5592805D75900C2E90D /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		4D8A2DE428094442007F3EF2 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
@@ -310,6 +312,14 @@
 				4D33603B27E8C8EB007640F7 /* NOAUITestsLaunchTests.swift */,
 			);
 			path = NOAUITests;
+			sourceTree = "<group>";
+		};
+		4D707B2B281ADC4700BFF792 /* Exhibition */ = {
+			isa = PBXGroup;
+			children = (
+				4D707B2C281ADC5F00BFF792 /* ExhibitionViewController.swift */,
+			);
+			path = Exhibition;
 			sourceTree = "<group>";
 		};
 		4D8C47DF2806F37C00E667B1 /* Repositories */ = {
@@ -523,6 +533,7 @@
 				4D9A4DE0280FD9AF007DC685 /* FeedCollectionCell.swift */,
 				4D9A4DE2280FD9DE007DC685 /* FeedDetailViewModel.swift */,
 				4D9A4DDE280FD9A0007DC685 /* FeedDetailViewController.swift */,
+				4D707B2B281ADC4700BFF792 /* Exhibition */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -838,6 +849,7 @@
 				4D8C47E12806F3A400E667B1 /* DBInfo.swift in Sources */,
 				4DBF570E2816A0A90056967C /* Chat.swift in Sources */,
 				4D26A0CE281914C000D0C75F /* UIColor + Extension.swift in Sources */,
+				4D707B2D281ADC5F00BFF792 /* ExhibitionViewController.swift in Sources */,
 				4D26A0D328193B5400D0C75F /* UploadViewController.swift in Sources */,
 				4D6D35562801CD080001B18F /* Feed.swift in Sources */,
 				4DC03D262806AD0100CEE554 /* APIRequestService.swift in Sources */,
