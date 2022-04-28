@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		08B6A19C8BCD75727DAD8188 /* Pods_NOATests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7D77AF13124344D25470DC3 /* Pods_NOATests.framework */; };
+		4D1BEC4F28199B6D006D12D6 /* UIFont + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1BEC4E28199B6D006D12D6 /* UIFont + Extension.swift */; };
+		4D1BEC5228199F75006D12D6 /* UILabel + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1BEC5128199F75006D12D6 /* UILabel + Extension.swift */; };
 		4D26A0AE2818FDA700D0C75F /* ChattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D26A0AD2818FDA700D0C75F /* ChattingViewController.swift */; };
 		4D26A0B02818FDB500D0C75F /* ChattingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D26A0AF2818FDB500D0C75F /* ChattingViewModel.swift */; };
 		4D26A0B22819057A00D0C75F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D26A0B12819057A00D0C75F /* ProfileViewController.swift */; };
@@ -107,6 +109,8 @@
 		3DC7554BA6DD1A2D53679242 /* Pods-NOA-NOAUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NOA-NOAUITests.release.xcconfig"; path = "Target Support Files/Pods-NOA-NOAUITests/Pods-NOA-NOAUITests.release.xcconfig"; sourceTree = "<group>"; };
 		3EEFA3EE9D77FAB2EE80F4B7 /* Pods_NOA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NOA.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		463155DA60952C99D9637A1C /* Pods-NOA.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NOA.release.xcconfig"; path = "Target Support Files/Pods-NOA/Pods-NOA.release.xcconfig"; sourceTree = "<group>"; };
+		4D1BEC4E28199B6D006D12D6 /* UIFont + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont + Extension.swift"; sourceTree = "<group>"; };
+		4D1BEC5128199F75006D12D6 /* UILabel + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel + Extension.swift"; sourceTree = "<group>"; };
 		4D26A0AD2818FDA700D0C75F /* ChattingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingViewController.swift; sourceTree = "<group>"; };
 		4D26A0AF2818FDB500D0C75F /* ChattingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingViewModel.swift; sourceTree = "<group>"; };
 		4D26A0B12819057A00D0C75F /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -379,6 +383,8 @@
 				4D8C47E4280709ED00E667B1 /* UIViewController + Extension.swift */,
 				4D8C47E92807312400E667B1 /* UIApplication + Extension.swift */,
 				4D26A0CD281914C000D0C75F /* UIColor + Extension.swift */,
+				4D1BEC4E28199B6D006D12D6 /* UIFont + Extension.swift */,
+				4D1BEC5128199F75006D12D6 /* UILabel + Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -835,10 +841,12 @@
 				4D8C47E32806F57500E667B1 /* Test.swift in Sources */,
 				4DCCD11A28007C330035002A /* SplashViewController.swift in Sources */,
 				4D9A4DDA280FD663007DC685 /* FeedViewController.swift in Sources */,
+				4D1BEC4F28199B6D006D12D6 /* UIFont + Extension.swift in Sources */,
 				4D6D35532801CC6D0001B18F /* HomeTableCell.swift in Sources */,
 				4DC03D402806C78600CEE554 /* UserService.swift in Sources */,
 				4DC03D352806BA6C00CEE554 /* HeaderCommon.swift in Sources */,
 				4D26A0D528193B8100D0C75F /* UploadViewModel.swift in Sources */,
+				4D1BEC5228199F75006D12D6 /* UILabel + Extension.swift in Sources */,
 				4DC03D3C2806BBCE00CEE554 /* DIContainer.swift in Sources */,
 				4D26A0AE2818FDA700D0C75F /* ChattingViewController.swift in Sources */,
 				4D54C7C6280E846400F2AC0D /* UIScrollView + Extension.swift in Sources */,
