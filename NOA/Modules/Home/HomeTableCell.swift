@@ -8,6 +8,13 @@
 import UIKit
 import RxSwift
 
+protocol HomeTableDelegate: AnyObject {
+    
+    func didSelectedProfile(_ homeTableCell: HomeTableCell, detailButtonTappedFor userId: String)
+    func didSelectedMore(_ homeTableCell: HomeTableCell, detailButtonTappedFor workId: String)
+    func didSelectedLike(_ homeTableCell: HomeTableCell, detailButtonTappedFor workId: String)
+}
+
 class HomeTableCell: UITableViewCell {
     static let identifier = "HomeTableCell"
    
@@ -18,6 +25,8 @@ class HomeTableCell: UITableViewCell {
     @IBOutlet weak var desc: UILabel!
     @IBOutlet weak var likeCount: UILabel!
     @IBOutlet weak var like: UIButton!
+    
+    var delegate: HomeTableDelegate?
     
     private let onCountChanged: (Int) -> Void
     private let cellDisposeBag = DisposeBag()
@@ -35,6 +44,7 @@ class HomeTableCell: UITableViewCell {
         onChanged = changing
 
         super.init(coder: aDecoder)
+        
         
         
         // MARK: - UI Binding
@@ -60,10 +70,25 @@ class HomeTableCell: UITableViewCell {
         title.font = UIFont.NotoSansCJKkr(type: .medium, size: 14)
         desc.font = UIFont.NotoSansCJKkr(type: .regular, size: 14)
         desc.setTextWithLineHeight(text: desc.text, lineHeight: 16)
+        
+        self.profile.isUserInteractionEnabled = true
+        self.profile.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.didSelectedProfile(_:))))
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
         disposeBag = DisposeBag()
+    }
+    
+    @objc func didSelectedMore(_ sender: UIButton) {
+        delegate?.didSelectedMore(self, detailButtonTappedFor: "")
+    }
+    
+    @objc func didSelectedProfile(_ sender: UIButton) {
+        delegate?.didSelectedProfile(self, detailButtonTappedFor: "")
+    }
+    
+    @objc func didSelectedLike(_ sender: UIButton) {
+        delegate?.didSelectedLike(self, detailButtonTappedFor: "")
     }
 }
