@@ -15,11 +15,8 @@
 		4D26A0B22819057A00D0C75F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D26A0B12819057A00D0C75F /* ProfileViewController.swift */; };
 		4D26A0B42819058100D0C75F /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D26A0B32819058100D0C75F /* ProfileViewModel.swift */; };
 		4D26A0B7281905A700D0C75F /* AllWorkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D26A0B6281905A700D0C75F /* AllWorkViewController.swift */; };
-		4D26A0B9281905B100D0C75F /* AllWorkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D26A0B8281905B100D0C75F /* AllWorkViewModel.swift */; };
 		4D26A0BE28190EEB00D0C75F /* NFTWorkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D26A0BD28190EEB00D0C75F /* NFTWorkViewController.swift */; };
-		4D26A0C028190EF800D0C75F /* NFTWorkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D26A0BF28190EF800D0C75F /* NFTWorkViewModel.swift */; };
-		4D26A0C228190F5A00D0C75F /* AllWorkCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D26A0C128190F5A00D0C75F /* AllWorkCollectionCell.swift */; };
-		4D26A0C428190F6B00D0C75F /* NFTWorkCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D26A0C328190F6B00D0C75F /* NFTWorkCollectionCell.swift */; };
+		4D26A0C028190EF800D0C75F /* WorkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D26A0BF28190EF800D0C75F /* WorkViewModel.swift */; };
 		4D26A0C72819143A00D0C75F /* MenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D26A0C52819143A00D0C75F /* MenuCell.xib */; };
 		4D26A0CA2819144100D0C75F /* FocusView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D26A0C82819144100D0C75F /* FocusView.xib */; };
 		4D26A0CC2819147B00D0C75F /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D26A0CB2819147B00D0C75F /* MenuCell.swift */; };
@@ -47,7 +44,6 @@
 		4D8C47E5280709ED00E667B1 /* UIViewController + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8C47E4280709ED00E667B1 /* UIViewController + Extension.swift */; };
 		4D8C47EA2807312400E667B1 /* UIApplication + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8C47E92807312400E667B1 /* UIApplication + Extension.swift */; };
 		4D9A4DDA280FD663007DC685 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9A4DD9280FD663007DC685 /* FeedViewController.swift */; };
-		4D9A4DDD280FD90F007DC685 /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9A4DDC280FD90F007DC685 /* FeedViewModel.swift */; };
 		4D9A4DDF280FD9A0007DC685 /* FeedDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9A4DDE280FD9A0007DC685 /* FeedDetailViewController.swift */; };
 		4D9A4DE1280FD9AF007DC685 /* FeedCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9A4DE0280FD9AF007DC685 /* FeedCollectionCell.swift */; };
 		4D9A4DE3280FD9DE007DC685 /* FeedDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9A4DE2280FD9DE007DC685 /* FeedDetailViewModel.swift */; };
@@ -117,11 +113,8 @@
 		4D26A0B12819057A00D0C75F /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		4D26A0B32819058100D0C75F /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		4D26A0B6281905A700D0C75F /* AllWorkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllWorkViewController.swift; sourceTree = "<group>"; };
-		4D26A0B8281905B100D0C75F /* AllWorkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllWorkViewModel.swift; sourceTree = "<group>"; };
 		4D26A0BD28190EEB00D0C75F /* NFTWorkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTWorkViewController.swift; sourceTree = "<group>"; };
-		4D26A0BF28190EF800D0C75F /* NFTWorkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTWorkViewModel.swift; sourceTree = "<group>"; };
-		4D26A0C128190F5A00D0C75F /* AllWorkCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllWorkCollectionCell.swift; sourceTree = "<group>"; };
-		4D26A0C328190F6B00D0C75F /* NFTWorkCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTWorkCollectionCell.swift; sourceTree = "<group>"; };
+		4D26A0BF28190EF800D0C75F /* WorkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkViewModel.swift; sourceTree = "<group>"; };
 		4D26A0C62819143A00D0C75F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = MenuCell.xib; sourceTree = "<group>"; };
 		4D26A0C92819144100D0C75F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = FocusView.xib; sourceTree = "<group>"; };
 		4D26A0CB2819147B00D0C75F /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
@@ -153,7 +146,6 @@
 		4D8C47E4280709ED00E667B1 /* UIViewController + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extension.swift"; sourceTree = "<group>"; };
 		4D8C47E92807312400E667B1 /* UIApplication + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication + Extension.swift"; sourceTree = "<group>"; };
 		4D9A4DD9280FD663007DC685 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
-		4D9A4DDC280FD90F007DC685 /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
 		4D9A4DDE280FD9A0007DC685 /* FeedDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedDetailViewController.swift; sourceTree = "<group>"; };
 		4D9A4DE0280FD9AF007DC685 /* FeedCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCollectionCell.swift; sourceTree = "<group>"; };
 		4D9A4DE2280FD9DE007DC685 /* FeedDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedDetailViewModel.swift; sourceTree = "<group>"; };
@@ -240,24 +232,14 @@
 			path = Chatting;
 			sourceTree = "<group>";
 		};
-		4D26A0B52819059B00D0C75F /* AllWork */ = {
+		4D26A0BC28190ECD00D0C75F /* Works */ = {
 			isa = PBXGroup;
 			children = (
-				4D26A0B8281905B100D0C75F /* AllWorkViewModel.swift */,
+				4D26A0BF28190EF800D0C75F /* WorkViewModel.swift */,
 				4D26A0B6281905A700D0C75F /* AllWorkViewController.swift */,
-				4D26A0C128190F5A00D0C75F /* AllWorkCollectionCell.swift */,
-			);
-			path = AllWork;
-			sourceTree = "<group>";
-		};
-		4D26A0BC28190ECD00D0C75F /* NFTWork */ = {
-			isa = PBXGroup;
-			children = (
-				4D26A0BF28190EF800D0C75F /* NFTWorkViewModel.swift */,
 				4D26A0BD28190EEB00D0C75F /* NFTWorkViewController.swift */,
-				4D26A0C328190F6B00D0C75F /* NFTWorkCollectionCell.swift */,
 			);
-			path = NFTWork;
+			path = Works;
 			sourceTree = "<group>";
 		};
 		4D26A0CF2819258400D0C75F /* TabBar */ = {
@@ -511,8 +493,7 @@
 				4D26A0CB2819147B00D0C75F /* MenuCell.swift */,
 				4D9D5BEA281A8E1500343332 /* OtherProfile */,
 				4D9D5BE9281A8E0E00343332 /* MyProfile */,
-				4D26A0BC28190ECD00D0C75F /* NFTWork */,
-				4D26A0B52819059B00D0C75F /* AllWork */,
+				4D26A0BC28190ECD00D0C75F /* Works */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -538,9 +519,8 @@
 		4DCCD148280084C80035002A /* Feed */ = {
 			isa = PBXGroup;
 			children = (
-				4D9A4DE0280FD9AF007DC685 /* FeedCollectionCell.swift */,
-				4D9A4DDC280FD90F007DC685 /* FeedViewModel.swift */,
 				4D9A4DD9280FD663007DC685 /* FeedViewController.swift */,
+				4D9A4DE0280FD9AF007DC685 /* FeedCollectionCell.swift */,
 				4D9A4DE2280FD9DE007DC685 /* FeedDetailViewModel.swift */,
 				4D9A4DDE280FD9A0007DC685 /* FeedDetailViewController.swift */,
 			);
@@ -838,12 +818,10 @@
 				4DC03D332806B58C00CEE554 /* APIUrlService.swift in Sources */,
 				4D33601627E8C8E9007640F7 /* AppDelegate.swift in Sources */,
 				4D9D5BEC281A8E8F00343332 /* OtherProfileViewController.swift in Sources */,
-				4D26A0C028190EF800D0C75F /* NFTWorkViewModel.swift in Sources */,
+				4D26A0C028190EF800D0C75F /* WorkViewModel.swift in Sources */,
 				4D33602027E8C8E9007640F7 /* NOA.xcdatamodeld in Sources */,
 				4DC03D2F2806B44C00CEE554 /* Inject.swift in Sources */,
-				4D9A4DDD280FD90F007DC685 /* FeedViewModel.swift in Sources */,
 				4DC03D3E2806BDE100CEE554 /* BaseInterceptor.swift in Sources */,
-				4D26A0C428190F6B00D0C75F /* NFTWorkCollectionCell.swift in Sources */,
 				4D77B5582805D26A00C2E90D /* SplashViewModel.swift in Sources */,
 				4D26A0D12819259200D0C75F /* TabBarViewController.swift in Sources */,
 				4DC03D372806BAE500CEE554 /* ReadPList.swift in Sources */,
@@ -862,7 +840,6 @@
 				4D26A0CE281914C000D0C75F /* UIColor + Extension.swift in Sources */,
 				4D26A0D328193B5400D0C75F /* UploadViewController.swift in Sources */,
 				4D6D35562801CD080001B18F /* Feed.swift in Sources */,
-				4D26A0B9281905B100D0C75F /* AllWorkViewModel.swift in Sources */,
 				4DC03D262806AD0100CEE554 /* APIRequestService.swift in Sources */,
 				4D26A0CC2819147B00D0C75F /* MenuCell.swift in Sources */,
 				4D33601827E8C8E9007640F7 /* SceneDelegate.swift in Sources */,
@@ -878,7 +855,6 @@
 				4DC03D3C2806BBCE00CEE554 /* DIContainer.swift in Sources */,
 				4D26A0AE2818FDA700D0C75F /* ChattingViewController.swift in Sources */,
 				4D54C7C6280E846400F2AC0D /* UIScrollView + Extension.swift in Sources */,
-				4D26A0C228190F5A00D0C75F /* AllWorkCollectionCell.swift in Sources */,
 				4DC03D392806BB0500CEE554 /* FeedService.swift in Sources */,
 				4DC03D422806C82600CEE554 /* User.swift in Sources */,
 				4DBF570C28159A170056967C /* ChatTableCell.swift in Sources */,

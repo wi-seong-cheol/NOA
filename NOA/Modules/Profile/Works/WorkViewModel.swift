@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 import RxRelay
 
-protocol AllWorkViewModelType {
+protocol WorkViewModelType {
     // MARK: INPUT
     var fetchList: AnyObserver<Void> { get }
     var moreFetchList: AnyObserver<Void> { get }
@@ -20,7 +20,7 @@ protocol AllWorkViewModelType {
     var errorMessage: Observable<NSError> { get }
 }
 
-class AllWorkViewModel: AllWorkViewModelType {
+class WorkViewModel: WorkViewModelType {
     
     let disposeBag = DisposeBag()
     
