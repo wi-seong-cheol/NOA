@@ -14,6 +14,14 @@ import PagingKit
 
 class ProfileViewController: UIViewController {
     
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var setting: UIButton!
+    @IBOutlet weak var profile: UIImageView!
+    @IBOutlet weak var nickname: UILabel!
+    @IBOutlet weak var editProfile: UIButton!
+    @IBOutlet weak var followList: UIButton!
+    @IBOutlet weak var statusMessage: UILabel!
+    
     lazy var indicator: NVActivityIndicatorView = {
         let indicator = NVActivityIndicatorView(
             frame: CGRect(
@@ -84,18 +92,17 @@ class ProfileViewController: UIViewController {
         super.viewDidLayoutSubviews()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configure()
         setupBindings()
-    }
-    
-    func configure() {
-        // Set Paging Kit
-        menuViewController.register(nib: UINib(nibName: "MenuCell", bundle: nil), forCellWithReuseIdentifier: "MenuCell")
-        menuViewController.registerFocusView(nib: UINib(nibName: "FocusView", bundle: nil))
-        contentViewController.scrollView.isScrollEnabled = true
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -123,7 +130,11 @@ extension ProfileViewController: PagingMenuViewControllerDataSource {
     
     func menuViewController(viewController: PagingMenuViewController, cellForItemAt index: Int) -> PagingMenuViewCell {
         let cell = viewController.dequeueReusableCell(withReuseIdentifier: "MenuCell", for: index) as! MenuCell
-        cell.titleLabel.text = dataSource[index].menu
+        if dataSource[index].menu == "ALL" {
+            cell.category.image = UIImage(named: "all_asset")
+        } else {
+            cell.category.image = UIImage(named: "nft_asset")
+        }
         return cell
     }
 }
@@ -154,6 +165,34 @@ extension ProfileViewController: PagingContentViewControllerDelegate {
 }
 
 extension ProfileViewController {
+    // MARK: - UI Setting
+    func configure() {
+        // Set Paging Kit
+        menuViewController.register(nib: UINib(nibName: "MenuCell", bundle: nil), forCellWithReuseIdentifier: "MenuCell")
+        menuViewController.registerFocusView(nib: UINib(nibName: "FocusView", bundle: nil))
+        contentViewController.scrollView.isScrollEnabled = true
+        /*
+         titleLabel: UILabel!
+         @IBOutlet weak var setting: UIButton!
+         @IBOutlet weak var profile: UIImageView!
+         @IBOutlet weak var nickname: UILabel!
+         @IBOutlet weak var editProfile: UIButton!
+         @IBOutlet weak var followList: UIButton!
+         @IBOutlet weak var statusMessage: UILabel!
+         */
+        
+        titleLabel.font = UIFont.NotoSansCJKkr(type: .medium, size: 22)
+        profile.layer.cornerRadius = profile.frame.width / 2
+        nickname.font = UIFont.NotoSansCJKkr(type: .medium, size: 14)
+        statusMessage.font = UIFont.NotoSansCJKkr(type: .medium, size: 14)
+        editProfile.titleLabel?.font = UIFont.NotoSansCJKkr(type: .medium, size: 12)
+        followList.titleLabel?.font = UIFont.NotoSansCJKkr(type: .medium, size: 12)
+        editProfile.layer.borderWidth = 1
+        editProfile.layer.cornerRadius = 3
+        followList.layer.borderWidth = 1
+        followList.layer.cornerRadius = 3
+    }
+    
     // MARK: - UI Binding
     func setupBindings() {
         // ------------------------------
