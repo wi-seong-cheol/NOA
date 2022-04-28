@@ -17,19 +17,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="600" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Fyt-TC-1tk">
-                                <rect key="frame" x="0.0" y="88" width="390" height="722"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="620" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Fyt-TC-1tk">
+                                <rect key="frame" x="0.0" y="96" width="390" height="714"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="HomeTableCell" id="Tt2-Fr-WFU" customClass="HomeTableCell" customModule="NOA" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="44.666666030883789" width="390" height="600"/>
+                                        <rect key="frame" x="0.0" y="44.666666030883789" width="390" height="620"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Tt2-Fr-WFU" id="4ZA-Xo-962">
-                                            <rect key="frame" x="0.0" y="0.0" width="390" height="600"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="620"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vTK-iE-iiQ">
-                                                    <rect key="frame" x="0.0" y="0.0" width="390" height="600"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="390" height="620"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Blw-4J-QsT">
                                                             <rect key="frame" x="10" y="0.0" width="32" height="32"/>
@@ -46,9 +46,9 @@
                                                                 <constraint firstAttribute="width" secondItem="N5K-HX-nN8" secondAttribute="height" multiplier="1:1" id="N4Q-HG-mfS"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xZr-g9-ndk">
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nft_asset" translatesAutoresizingMaskIntoConstraints="NO" id="xZr-g9-ndk">
                                                             <rect key="frame" x="356" y="440" width="24" height="24"/>
-                                                            <color key="backgroundColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="24" id="8YN-eU-fdu"/>
                                                                 <constraint firstAttribute="height" constant="24" id="OtY-eQ-JNn"/>
@@ -77,8 +77,9 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x0S-qZ-tTs">
-                                                            <rect key="frame" x="10" y="499" width="41.333333333333336" height="91"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x0S-qZ-tTs">
+                                                            <rect key="frame" x="10" y="498.99999999999994" width="367.66666666666669" height="81.333333333333314"/>
+                                                            <string key="text">ㅇㅇㄴㅁㄹㅇㅇㄴㅁㄹㅇㅇㄴㅁㄹㅇㅇㄴㅁㄹㅇㅇㄴㅁㄹㅇㅇㄴㅁㄹㅇㅇㄴㅁㄹㅇㅇㄴㅁㄹㅇㅇㄴㅁㄹㅇㅇㄴㅁㄹㅇㅇㄴㅁㄹㅇㅇㄴㅁㄹㅇㅇㄴㅁㄹㅇㅇㄴㅁㄹㅇㅇㄴㅁㄹㅇㅇㄴㅁㄹㅇㅇㄴㅁㄹㅇㅇㄴㅁㄹㅇㅇㄴㅁㄹㅇㅇㄴㅁㄹㅇㅇㄴㅁㄹㅇㅇㄴㅁㄹㅇㅇㄴㅁㄹㅇㅇㄴㅁㄹㅇㅇㄴㅁㄹㅇㅇㄴㅁㄹㅇㅇㄴㅁㄹㅇㅇㄴㅁㄹㅇㅇㄴㅁㄹㅇㅇㄴㅁㄹㅇㅇㄴㅁㄹㅇㅇㄴㅁㄹㅇㅇㄴㅁㄹㅇㅇㄴㅁㄹㅇㅇㄴㅁㄹㅇㅇㄴㅁㄹㅇㅇㄴㅁㄹㅇㅇㄴㅁㄹㅇㅇㄴㅁㄹㅇㅇㄴㅁㄹㅇㅇㄴㅁㄹㅇㅇㄴㅁㄹㅇㅇㄴㅁㄹㅇㅇㄴㅁㄹ</string>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -90,7 +91,7 @@
                                                                 <constraint firstAttribute="height" constant="24" id="BHq-hK-fTJ"/>
                                                             </constraints>
                                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                            <state key="normal" image="square" catalog="system">
+                                                            <state key="normal" image="menu_hori_asset">
                                                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </state>
                                                         </button>
@@ -101,7 +102,7 @@
                                                                 <constraint firstAttribute="width" constant="24" id="jNv-AO-ODq"/>
                                                             </constraints>
                                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                            <state key="normal" image="square" catalog="system">
+                                                            <state key="normal" image="heart_blank_asset">
                                                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </state>
                                                         </button>
@@ -127,7 +128,7 @@
                                                         <constraint firstItem="j1z-y7-LFI" firstAttribute="centerY" secondItem="frv-GD-fQv" secondAttribute="centerY" id="aOf-h6-o1n"/>
                                                         <constraint firstItem="gDy-GD-Uhw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="FSd-z5-4lI" secondAttribute="trailing" constant="10" id="bLl-0E-Sh9"/>
                                                         <constraint firstItem="FSd-z5-4lI" firstAttribute="centerY" secondItem="Blw-4J-QsT" secondAttribute="centerY" id="dUI-WN-VXy"/>
-                                                        <constraint firstAttribute="bottom" secondItem="x0S-qZ-tTs" secondAttribute="bottom" constant="10" id="nLG-NJ-2J7"/>
+                                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="x0S-qZ-tTs" secondAttribute="bottom" constant="30" id="nLG-NJ-2J7"/>
                                                         <constraint firstItem="frv-GD-fQv" firstAttribute="top" secondItem="N5K-HX-nN8" secondAttribute="bottom" constant="10" id="nUF-iD-VXa"/>
                                                         <constraint firstItem="aNO-Pl-KEY" firstAttribute="top" secondItem="frv-GD-fQv" secondAttribute="bottom" constant="10" id="qrB-y4-zvI"/>
                                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="aNO-Pl-KEY" secondAttribute="trailing" constant="10" id="uCy-xW-UDZ"/>
@@ -143,25 +144,50 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="desc" destination="x0S-qZ-tTs" id="SGS-xM-mfT"/>
                                             <outlet property="like" destination="frv-GD-fQv" id="HBr-PC-czZ"/>
-                                            <outlet property="name" destination="FSd-z5-4lI" id="V2C-91-umB"/>
-                                            <outlet property="orgName" destination="aNO-Pl-KEY" id="UCd-3P-04j"/>
+                                            <outlet property="likeCount" destination="j1z-y7-LFI" id="QFP-wW-Irn"/>
+                                            <outlet property="nickname" destination="FSd-z5-4lI" id="WMX-GA-K5V"/>
+                                            <outlet property="profile" destination="Blw-4J-QsT" id="3PX-Je-KEj"/>
                                             <outlet property="thumbnail" destination="N5K-HX-nN8" id="oBF-DS-own"/>
+                                            <outlet property="title" destination="aNO-Pl-KEY" id="5yt-kT-CEX"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ctz-dN-twa">
+                                <rect key="frame" x="0.0" y="44" width="390" height="52"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_asset" translatesAutoresizingMaskIntoConstraints="NO" id="Wmf-ce-CZJ">
+                                        <rect key="frame" x="10" y="14" width="70" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="70" id="29v-CB-pAZ"/>
+                                            <constraint firstAttribute="height" constant="24" id="RzF-Tg-o28"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="Wmf-ce-CZJ" firstAttribute="centerY" secondItem="ctz-dN-twa" secondAttribute="centerY" id="2XC-VN-JS3"/>
+                                    <constraint firstItem="Wmf-ce-CZJ" firstAttribute="leading" secondItem="ctz-dN-twa" secondAttribute="leading" constant="10" id="erE-7J-Yoc"/>
+                                    <constraint firstAttribute="height" constant="52" id="hq4-xt-dfF"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Fyt-TC-1tk" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Vaa-It-LV4"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Fyt-TC-1tk" secondAttribute="trailing" id="fZ3-NO-weD"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="ctz-dN-twa" secondAttribute="trailing" id="llL-Cy-CK5"/>
+                            <constraint firstItem="ctz-dN-twa" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="lxi-xa-GDq"/>
+                            <constraint firstItem="ctz-dN-twa" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="nMw-LF-yoq"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="Fyt-TC-1tk" secondAttribute="bottom" id="p9H-qM-UjL"/>
-                            <constraint firstItem="Fyt-TC-1tk" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="v5K-WW-c2r"/>
+                            <constraint firstItem="Fyt-TC-1tk" firstAttribute="top" secondItem="ctz-dN-twa" secondAttribute="bottom" id="rnB-HB-ZzS"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="d55-bQ-CHB"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="Fyt-TC-1tk" id="1xd-Mc-v81"/>
@@ -170,7 +196,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1042.0289855072465" y="115.84821428571428"/>
+            <point key="canvasLocation" x="1041.5384615384614" y="115.16587677725119"/>
         </scene>
         <!--Home Detail View Controller-->
         <scene sceneID="bft-Y6-kvV">
@@ -228,8 +254,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="heart_blank_asset" width="24" height="24"/>
         <image name="home_asset" width="24" height="24"/>
-        <image name="square" catalog="system" width="128" height="114"/>
+        <image name="logo_asset" width="70" height="24"/>
+        <image name="menu_hori_asset" width="24" height="24"/>
+        <image name="nft_asset" width="24" height="24"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
