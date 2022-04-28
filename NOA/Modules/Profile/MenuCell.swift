@@ -9,15 +9,15 @@ import Foundation
 import PagingKit
 
 class MenuCell: PagingMenuViewCell {
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var category: UIImageView!
     
     
     override public var isSelected: Bool {
         didSet {
             if isSelected {
-                titleLabel.textColor = UIColor(red: 229, green:  102, blue: 90)
+                category.tintColor = .black
             } else {
-                titleLabel.textColor = UIColor(red: 203, green: 203, blue: 203)
+                category.tintColor = UIColor(red: 203, green: 203, blue: 203)
             }
         }
     }
