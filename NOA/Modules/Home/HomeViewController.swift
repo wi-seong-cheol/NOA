@@ -50,10 +50,16 @@ class HomeViewController: UIViewController {
         super.init(coder: aDecoder)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.refreshControl = UIRefreshControl()
+        configure()
         setupBindings()
     }
     
@@ -70,6 +76,12 @@ class HomeViewController: UIViewController {
 }
 
 extension HomeViewController {
+    // MARK: - UI Setting
+    func configure() {
+        tableView.refreshControl = UIRefreshControl()
+        tableView.rowHeight = UITableView.automaticDimension
+    }
+    
     // MARK: - UI Binding
     func setupBindings() {
         // ------------------------------
