@@ -204,7 +204,27 @@ extension ProfileViewController {
         // ------------------------------
 
         // 페이지 이동
-
+        // MARK: - Setting Page
+        setting.rx.tap
+            .bind{ [weak self] in
+                self?.performSegue(withIdentifier: "settingSegue", sender: nil)
+            }
+            .disposed(by: disposeBag)
+        
+        // MARK: - Edit Profile Page
+        editProfile.rx.tap
+            .bind{ [weak self] in
+                self?.performSegue(withIdentifier: "editProfileSegue", sender: nil)
+            }
+            .disposed(by: disposeBag)
+        
+        // MARK: - followList Page
+        followList.rx.tap
+            .bind{ [weak self] in
+                self?.performSegue(withIdentifier: "followListSegue", sender: nil)
+            }
+            .disposed(by: disposeBag)
+        
         // ------------------------------
         //     OUTPUT
         // ------------------------------
