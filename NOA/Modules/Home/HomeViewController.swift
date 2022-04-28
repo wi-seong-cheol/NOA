@@ -64,14 +64,14 @@ class HomeViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let identifier = segue.identifier ?? ""
-        
-        if identifier == "HomeDetailSegue",
-           let selectedFeed = sender as? Lecture,
-           let feedVC = segue.destination as? HomeDetailViewController {
-            let feedViewModel = HomeDetailViewModel(selectedFeed)
-            feedVC.viewModel = feedViewModel
-        }
+//        let identifier = segue.identifier ?? ""
+//
+//        if identifier == "HomeDetailSegue",
+//           let selectedFeed = sender as? Lecture,
+//           let feedVC = segue.destination as? HomeDetailViewController {
+//            let feedViewModel = HomeDetailViewModel(selectedFeed)
+//            feedVC.viewModel = feedViewModel
+//        }
     }
 }
 
@@ -112,8 +112,10 @@ extension HomeViewController {
 
         // 페이지 이동
         Observable.zip(tableView.rx.modelSelected(Lecture.self), tableView.rx.itemSelected) .bind { [weak self] item, indexPath in
-            self?.performSegue(withIdentifier: "HomeDetailSegue", sender: item)
-            
+            let storyboard = UIStoryboard(name:"Feed", bundle: nil)
+            let pushVC = storyboard.instantiateViewController(withIdentifier: "FeedDetailViewController") as! FeedDetailViewController
+            pushVC.viewModel = FeedDetailViewModel(item)
+            self?.navigationController?.pushViewController(pushVC, animated: true)
         } .disposed(by: disposeBag)
 
         // ------------------------------
@@ -144,7 +146,24 @@ extension HomeViewController {
             .bind(to: tableView.rx.items(cellIdentifier: HomeTableCell.identifier, cellType: HomeTableCell.self)) {
                 _, item, cell in
                 cell.onData.onNext(item)
+                cell.delegate = self
             }
             .disposed(by: disposeBag)
+    }
+}
+
+extension HomeViewController: HomeTableDelegate {
+    func didSelectedProfile(_ homeTableCell: HomeTableCell, detailButtonTappedFor userId: String) {
+        
+        let storyboard = UIStoryboard(name:"Profile", bundle: nil)
+        let pushVC = storyboard.instantiateViewController(withIdentifier: "OtherProfileViewController")
+        self.navigationController?.pushViewController(pushVC, animated: true)
+    }
+    
+    func didSelectedMore(_ homeTableCell: HomeTableCell, detailButtonTappedFor workId: String) {
+        
+    }
+    
+    func didSelectedLike(_ homeTableCell: HomeTableCell, detailButtonTappedFor workId: String) {
     }
 }
