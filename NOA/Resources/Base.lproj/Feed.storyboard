@@ -148,17 +148,36 @@
             </objects>
             <point key="canvasLocation" x="1042" y="830"/>
         </scene>
-        <!--View Controller-->
+        <!--Exhibition View Controller-->
         <scene sceneID="N2P-cj-JDn">
             <objects>
-                <viewController id="0Ea-jS-tm4" sceneMemberID="viewController">
+                <viewController id="0Ea-jS-tm4" customClass="ExhibitionViewController" customModule="NOA" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="P8e-R3-V8b">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="goL-u4-mje">
+                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="AmA-3a-yjR"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="AmA-3a-yjR" firstAttribute="bottom" secondItem="goL-u4-mje" secondAttribute="bottom" id="Wql-me-Q6K"/>
+                            <constraint firstItem="goL-u4-mje" firstAttribute="top" secondItem="AmA-3a-yjR" secondAttribute="top" id="ZNH-JJ-k9b"/>
+                            <constraint firstItem="goL-u4-mje" firstAttribute="leading" secondItem="AmA-3a-yjR" secondAttribute="leading" id="jNR-mb-vqg"/>
+                            <constraint firstItem="AmA-3a-yjR" firstAttribute="trailing" secondItem="goL-u4-mje" secondAttribute="trailing" id="oqy-Uf-NuF"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="znF-rH-Pu7"/>
+                    <connections>
+                        <outlet property="webView" destination="goL-u4-mje" id="Nke-cv-POL"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wh2-Qp-E94" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
