@@ -14,6 +14,8 @@ import UIKit
 class FeedViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var search: UIButton!
+    @IBOutlet weak var exhibition: UIButton!
     
     lazy var indicator: NVActivityIndicatorView = {
         let indicator = NVActivityIndicatorView(
@@ -50,10 +52,16 @@ class FeedViewController: UIViewController {
         super.init(coder: aDecoder)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.refreshControl = UIRefreshControl()
+        configure()
         setupBindings()
     }
     
@@ -70,6 +78,12 @@ class FeedViewController: UIViewController {
 }
 
 extension FeedViewController {
+    // MARK: - UI Setting
+    func configure() {
+        collectionView.refreshControl = UIRefreshControl()
+        search.titleLabel?.font = UIFont.NotoSansCJKkr(type: .medium, size: 14)
+    }
+    
     // MARK: - UI Binding
     func setupBindings() {
         // ------------------------------
@@ -103,6 +117,18 @@ extension FeedViewController {
             self?.performSegue(withIdentifier: "FeedDetailSegue", sender: item)
             
         } .disposed(by: disposeBag)
+        
+        search.rx.tap
+            .bind { [weak self] in
+                self?.performSegue(withIdentifier: "searchSegue", sender: nil)
+            }
+            .disposed(by: disposeBag)
+        
+        exhibition.rx.tap
+            .bind{ [weak self] in
+                self?.performSegue(withIdentifier: "exhibitionSegue", sender: nil)
+            }
+            .disposed(by: disposeBag)
 
         // ------------------------------
         //     OUTPUT
