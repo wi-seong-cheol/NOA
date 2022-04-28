@@ -18,8 +18,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Aa1-1j-hDJ">
-                                <rect key="frame" x="0.0" y="139" width="414" height="757"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Aa1-1j-hDJ">
+                                <rect key="frame" x="0.0" y="90" width="414" height="806"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="1" id="gLM-lW-Dki">
                                     <size key="itemSize" width="128" height="128"/>
@@ -29,57 +29,140 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FeedCollectionCell" id="Cnk-0F-D3G" customClass="FeedCollectionCell" customModule="NOA" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="140" height="140"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="wb9-ix-1LP">
-                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="wb9-ix-1LP">
+                                            <rect key="frame" x="0.0" y="0.0" width="140" height="140"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="juK-ex-ngu">
-                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="juK-ex-ngu">
+                                                    <rect key="frame" x="0.0" y="0.0" width="140" height="140"/>
+                                                </imageView>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nft_asset" translatesAutoresizingMaskIntoConstraints="NO" id="Dc9-2T-wpJ">
+                                                    <rect key="frame" x="111" y="5" width="24" height="24"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="24" id="7E4-Si-LTk"/>
+                                                        <constraint firstAttribute="width" constant="24" id="fGO-Xh-aa8"/>
+                                                    </constraints>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="juK-ex-ngu" firstAttribute="leading" secondItem="wb9-ix-1LP" secondAttribute="leading" id="5YX-8e-Rnv"/>
-                                                <constraint firstAttribute="trailing" secondItem="juK-ex-ngu" secondAttribute="trailing" id="8TI-YB-ODC"/>
-                                                <constraint firstItem="juK-ex-ngu" firstAttribute="top" secondItem="wb9-ix-1LP" secondAttribute="top" id="QsT-av-lZ9"/>
-                                                <constraint firstAttribute="bottom" secondItem="juK-ex-ngu" secondAttribute="bottom" id="l9s-gN-D86"/>
+                                                <constraint firstItem="juK-ex-ngu" firstAttribute="top" secondItem="wb9-ix-1LP" secondAttribute="top" id="2VN-8a-8fw"/>
+                                                <constraint firstItem="juK-ex-ngu" firstAttribute="leading" secondItem="wb9-ix-1LP" secondAttribute="leading" id="Jer-fX-QyV"/>
+                                                <constraint firstItem="Dc9-2T-wpJ" firstAttribute="top" secondItem="wb9-ix-1LP" secondAttribute="top" constant="5" id="Lkp-UO-U1d"/>
+                                                <constraint firstAttribute="trailing" secondItem="juK-ex-ngu" secondAttribute="trailing" id="Mrg-vg-1MN"/>
+                                                <constraint firstAttribute="trailing" secondItem="Dc9-2T-wpJ" secondAttribute="trailing" constant="5" id="u9b-bv-4fP"/>
+                                                <constraint firstAttribute="bottom" secondItem="juK-ex-ngu" secondAttribute="bottom" id="ut6-ll-8kq"/>
                                             </constraints>
                                         </collectionViewCellContentView>
-                                        <size key="customSize" width="128" height="128"/>
+                                        <size key="customSize" width="140" height="140"/>
                                         <connections>
                                             <outlet property="thumbnail" destination="juK-ex-ngu" id="XNz-8v-g47"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="7KW-hv-T1H">
-                                <rect key="frame" x="0.0" y="88" width="414" height="51"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AAy-CH-O9y">
+                                <rect key="frame" x="0.0" y="44" width="414" height="46"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Wv-jq-VjI">
+                                        <rect key="frame" x="10" y="11" width="24" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="LnH-sA-a0s"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="24" id="YcN-rc-UgR"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="search_asset"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wPU-iN-p90">
+                                        <rect key="frame" x="280" y="13" width="124" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="124" id="2Y0-KM-ByB"/>
+                                            <constraint firstAttribute="height" constant="20" id="Avu-h8-WMf"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="NFT 전시회 보러가기">
+                                            <color key="titleColor" red="0.30588235294117649" green="0.59607843137254901" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="46" id="34l-SZ-Xhv"/>
+                                    <constraint firstItem="7Wv-jq-VjI" firstAttribute="centerY" secondItem="AAy-CH-O9y" secondAttribute="centerY" id="7nx-z1-3Xg"/>
+                                    <constraint firstItem="7Wv-jq-VjI" firstAttribute="leading" secondItem="AAy-CH-O9y" secondAttribute="leading" constant="10" id="Ffk-OG-ZhT"/>
+                                    <constraint firstAttribute="trailing" secondItem="wPU-iN-p90" secondAttribute="trailing" constant="10" id="iCQ-Vf-hNG"/>
+                                    <constraint firstItem="wPU-iN-p90" firstAttribute="leading" secondItem="7Wv-jq-VjI" secondAttribute="trailing" priority="750" constant="246" id="tif-Jy-wBP"/>
+                                    <constraint firstItem="wPU-iN-p90" firstAttribute="centerY" secondItem="AAy-CH-O9y" secondAttribute="centerY" id="wlx-Lw-wev"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="7KW-hv-T1H" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="8Nv-ui-ELT"/>
                             <constraint firstItem="Aa1-1j-hDJ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="8ao-SP-Chk"/>
+                            <constraint firstItem="AAy-CH-O9y" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="Cig-79-pHX"/>
                             <constraint firstItem="Aa1-1j-hDJ" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="Eic-uH-PGR"/>
-                            <constraint firstItem="7KW-hv-T1H" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="OyG-zn-FKZ"/>
-                            <constraint firstItem="7KW-hv-T1H" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="oYO-aM-C1A"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="AAy-CH-O9y" secondAttribute="trailing" id="UDG-bk-XYQ"/>
+                            <constraint firstItem="AAy-CH-O9y" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="e9w-pv-uZm"/>
+                            <constraint firstItem="Aa1-1j-hDJ" firstAttribute="top" secondItem="AAy-CH-O9y" secondAttribute="bottom" id="n0j-lG-wfd"/>
                             <constraint firstAttribute="bottom" secondItem="Aa1-1j-hDJ" secondAttribute="bottom" id="ybq-Zt-41T"/>
-                            <constraint firstItem="Aa1-1j-hDJ" firstAttribute="top" secondItem="7KW-hv-T1H" secondAttribute="bottom" id="ymP-D5-iY4"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="2Hp-Hl-qkF"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="collectionView" destination="Aa1-1j-hDJ" id="X3c-hp-6dF"/>
+                        <outlet property="exhibition" destination="wPU-iN-p90" id="ITy-vr-SGi"/>
+                        <outlet property="search" destination="7Wv-jq-VjI" id="soK-hV-N45"/>
                         <segue destination="tsq-XN-KR2" kind="show" identifier="FeedDetailSegue" id="2qT-7v-s8I"/>
+                        <segue destination="v3b-i2-3BM" kind="show" identifier="searchSegue" id="umB-9Z-eaO"/>
+                        <segue destination="0Ea-jS-tm4" kind="show" identifier="exhibitionSegue" id="VMh-Lm-QXF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1042.0289855072465" y="115.84821428571428"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="JKl-bx-HQ0">
+            <objects>
+                <viewController id="v3b-i2-3BM" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="HOd-9e-STo">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c9r-Xy-oVa">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="jgv-6v-ovv"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="D6H-jA-6BR"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Lhk-UP-nLl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1042" y="830"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="N2P-cj-JDn">
+            <objects>
+                <viewController id="0Ea-jS-tm4" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="P8e-R3-V8b">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="AmA-3a-yjR"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="znF-rH-Pu7"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wh2-Qp-E94" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1816" y="830"/>
         </scene>
         <!--Feed Detail View Controller-->
         <scene sceneID="xMR-7O-mOq">
@@ -135,6 +218,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="nft_asset" width="24" height="24"/>
         <image name="search_asset" width="24" height="24"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
