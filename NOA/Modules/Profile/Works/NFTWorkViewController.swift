@@ -35,18 +35,18 @@ class NFTWorkViewController: UIViewController {
         return indicator
     }()
     
-    let viewModel: NFTWorkViewModelType
+    let viewModel: WorkViewModelType
     var disposeBag = DisposeBag()
 
     // MARK: - Life Cycle
 
-    init(viewModel: NFTWorkViewModelType = NFTWorkViewModel()) {
+    init(viewModel: WorkViewModelType = WorkViewModel()) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
 
     required init?(coder aDecoder: NSCoder) {
-        viewModel = NFTWorkViewModel()
+        viewModel = WorkViewModel()
         super.init(coder: aDecoder)
     }
     
@@ -100,8 +100,10 @@ extension NFTWorkViewController {
 
         // 페이지 이동
         Observable.zip(collectionView.rx.modelSelected(Lecture.self), collectionView.rx.itemSelected) .bind { [weak self] item, indexPath in
-            self?.performSegue(withIdentifier: "FeedDetailSegue", sender: item)
-            
+            let storyboard = UIStoryboard(name:"Feed", bundle: nil)
+            let pushVC = storyboard.instantiateViewController(withIdentifier: "FeedDetailViewController") as! FeedDetailViewController
+            pushVC.viewModel = FeedDetailViewModel(item)
+            self?.navigationController?.pushViewController(pushVC, animated: true)
         } .disposed(by: disposeBag)
 
         // ------------------------------
