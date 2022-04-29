@@ -57,6 +57,10 @@ class AllWorkViewController: UIViewController {
         setupBindings()
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 //        let identifier = segue.identifier ?? ""
 //

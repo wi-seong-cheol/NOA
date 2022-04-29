@@ -66,6 +66,10 @@ class FeedDetailViewController: UIViewController {
         setupBindings()
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -81,6 +85,8 @@ extension FeedDetailViewController {
         likeCount.font = UIFont.NotoSansCJKkr(type: .medium, size: 14)
         titleLabel.font = UIFont.NotoSansCJKkr(type: .medium, size: 14)
         desc.font = UIFont.NotoSansCJKkr(type: .regular, size: 14)
+        profile.isUserInteractionEnabled = true
+        profile.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.didSelectedProfile(_:))))
     }
     
     // MARK: - UI Binding
@@ -112,5 +118,11 @@ extension FeedDetailViewController {
             .subscribe(onNext: { [weak self] message in
                 self?.OKDialog("Order Fail")
             }).disposed(by: disposeBag)
+    }
+    
+    @objc func didSelectedProfile(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name:"Profile", bundle: nil)
+        let pushVC = storyboard.instantiateViewController(withIdentifier: "OtherProfileViewController")
+        self.navigationController?.pushViewController(pushVC, animated: true)
     }
 }

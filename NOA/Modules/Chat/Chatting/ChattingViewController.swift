@@ -56,6 +56,10 @@ class ChattingViewController: UIViewController {
         
         setupBindings()
     }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
 }
 
 extension ChattingViewController {

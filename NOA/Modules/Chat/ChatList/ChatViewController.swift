@@ -14,6 +14,7 @@ import UIKit
 class ChatViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var titleLabel: UILabel!
     
     lazy var indicator: NVActivityIndicatorView = {
         let indicator = NVActivityIndicatorView(
@@ -50,11 +51,21 @@ class ChatViewController: UIViewController {
         super.init(coder: aDecoder)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.refreshControl = UIRefreshControl()
+        configure()
         setupBindings()
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -70,6 +81,13 @@ class ChatViewController: UIViewController {
 }
 
 extension ChatViewController {
+    // MARK: - UI Binding
+    func configure() {
+        tableView.refreshControl = UIRefreshControl()
+        tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+        titleLabel.font = UIFont.NotoSansCJKkr(type: .medium, size: 22)
+    }
+    
     // MARK: - UI Binding
     func setupBindings() {
         // ------------------------------

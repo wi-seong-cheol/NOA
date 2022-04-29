@@ -37,18 +37,18 @@ class FeedViewController: UIViewController {
         return indicator
     }()
     
-    let viewModel: FeedViewModelType
+    let viewModel: WorkViewModelType
     var disposeBag = DisposeBag()
 
     // MARK: - Life Cycle
 
-    init(viewModel: FeedViewModelType = FeedViewModel()) {
+    init(viewModel: WorkViewModelType = WorkViewModel()) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
 
     required init?(coder aDecoder: NSCoder) {
-        viewModel = FeedViewModel()
+        viewModel = WorkViewModel()
         super.init(coder: aDecoder)
     }
     
@@ -63,6 +63,10 @@ class FeedViewController: UIViewController {
         
         configure()
         setupBindings()
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
