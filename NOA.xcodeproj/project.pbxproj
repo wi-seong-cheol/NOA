@@ -24,6 +24,8 @@
 		4D26A0D12819259200D0C75F /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D26A0D02819259200D0C75F /* TabBarViewController.swift */; };
 		4D26A0D328193B5400D0C75F /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D26A0D228193B5400D0C75F /* UploadViewController.swift */; };
 		4D26A0D528193B8100D0C75F /* UploadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D26A0D428193B8100D0C75F /* UploadViewModel.swift */; };
+		4D30C294281BA6B400063E64 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D30C293281BA6B400063E64 /* SearchViewController.swift */; };
+		4D30C296281BA7A000063E64 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D30C295281BA7A000063E64 /* SearchViewModel.swift */; };
 		4D33601627E8C8E9007640F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D33601527E8C8E9007640F7 /* AppDelegate.swift */; };
 		4D33601827E8C8E9007640F7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D33601727E8C8E9007640F7 /* SceneDelegate.swift */; };
 		4D33601A27E8C8E9007640F7 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D33601927E8C8E9007640F7 /* HomeViewController.swift */; };
@@ -123,6 +125,8 @@
 		4D26A0D02819259200D0C75F /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		4D26A0D228193B5400D0C75F /* UploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
 		4D26A0D428193B8100D0C75F /* UploadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewModel.swift; sourceTree = "<group>"; };
+		4D30C293281BA6B400063E64 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		4D30C295281BA7A000063E64 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		4D33601227E8C8E9007640F7 /* NOA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NOA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D33601527E8C8E9007640F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4D33601727E8C8E9007640F7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -252,6 +256,15 @@
 			path = TabBar;
 			sourceTree = "<group>";
 		};
+		4D30C292281BA6A100063E64 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				4D30C295281BA7A000063E64 /* SearchViewModel.swift */,
+				4D30C293281BA6B400063E64 /* SearchViewController.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
 		4D33600927E8C8E9007640F7 = {
 			isa = PBXGroup;
 			children = (
@@ -341,6 +354,7 @@
 				4DCCD146280084BB0035002A /* Chat */,
 				4DCCD145280084B20035002A /* Profile */,
 				4D9D5BE5281A8C4D00343332 /* Setting */,
+				4D30C292281BA6A100063E64 /* Search */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -865,10 +879,12 @@
 				4D26A0D528193B8100D0C75F /* UploadViewModel.swift in Sources */,
 				4D1BEC5228199F75006D12D6 /* UILabel + Extension.swift in Sources */,
 				4DC03D3C2806BBCE00CEE554 /* DIContainer.swift in Sources */,
+				4D30C294281BA6B400063E64 /* SearchViewController.swift in Sources */,
 				4D26A0AE2818FDA700D0C75F /* ChattingViewController.swift in Sources */,
 				4D54C7C6280E846400F2AC0D /* UIScrollView + Extension.swift in Sources */,
 				4DC03D392806BB0500CEE554 /* FeedService.swift in Sources */,
 				4DC03D422806C82600CEE554 /* User.swift in Sources */,
+				4D30C296281BA7A000063E64 /* SearchViewModel.swift in Sources */,
 				4DBF570C28159A170056967C /* ChatTableCell.swift in Sources */,
 				4DBF57142816A4840056967C /* ChatListLocalDB.swift in Sources */,
 				4D26A0B22819057A00D0C75F /* ProfileViewController.swift in Sources */,

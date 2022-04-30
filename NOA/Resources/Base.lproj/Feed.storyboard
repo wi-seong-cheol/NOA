@@ -133,20 +133,55 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c9r-Xy-oVa">
-                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="c9r-Xy-oVa">
+                                <rect key="frame" x="0.0" y="44" width="345" height="51"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qb6-DL-gyU">
+                                <rect key="frame" x="355" y="54" width="49" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="취소"/>
+                            </button>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="qfc-Z9-4lw">
+                                <rect key="frame" x="0.0" y="95" width="414" height="718"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="1" minimumInteritemSpacing="1" id="6n9-aD-i2c">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="DVI-A3-kZj">
+                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="E88-Hh-VEQ">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="jgv-6v-ovv"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="jgv-6v-ovv" firstAttribute="bottom" secondItem="qfc-Z9-4lw" secondAttribute="bottom" id="7XZ-OS-Dei"/>
+                            <constraint firstItem="Qb6-DL-gyU" firstAttribute="centerY" secondItem="c9r-Xy-oVa" secondAttribute="centerY" id="DTQ-Fk-gfS"/>
+                            <constraint firstItem="Qb6-DL-gyU" firstAttribute="leading" secondItem="c9r-Xy-oVa" secondAttribute="trailing" constant="10" id="L3Q-wC-9OK"/>
+                            <constraint firstItem="qfc-Z9-4lw" firstAttribute="top" secondItem="c9r-Xy-oVa" secondAttribute="bottom" id="QR9-F3-hMb"/>
+                            <constraint firstItem="c9r-Xy-oVa" firstAttribute="top" secondItem="jgv-6v-ovv" secondAttribute="top" id="V9O-fb-njJ"/>
+                            <constraint firstItem="jgv-6v-ovv" firstAttribute="trailing" secondItem="Qb6-DL-gyU" secondAttribute="trailing" constant="10" id="ZZF-cI-VJu"/>
+                            <constraint firstItem="qfc-Z9-4lw" firstAttribute="leading" secondItem="jgv-6v-ovv" secondAttribute="leading" id="lEZ-Bx-UuL"/>
+                            <constraint firstItem="c9r-Xy-oVa" firstAttribute="leading" secondItem="jgv-6v-ovv" secondAttribute="leading" id="tXC-cc-3Bm"/>
+                            <constraint firstItem="jgv-6v-ovv" firstAttribute="trailing" secondItem="qfc-Z9-4lw" secondAttribute="trailing" id="wEd-vx-CBy"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="D6H-jA-6BR"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lhk-UP-nLl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1042" y="830"/>
+            <point key="canvasLocation" x="1039.1304347826087" y="829.6875"/>
         </scene>
         <!--Exhibition View Controller-->
         <scene sceneID="N2P-cj-JDn">
@@ -195,7 +230,7 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cAD-d0-jUI">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="583.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="867.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IMh-4a-g8J">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="40"/>
@@ -270,8 +305,9 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oZB-nH-z8K">
-                                                <rect key="frame" x="10" y="523" width="41.5" height="20.5"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oZB-nH-z8K">
+                                                <rect key="frame" x="10" y="523" width="394" height="304.5"/>
+                                                <string key="text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer t…Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer t…Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer t…Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer t…</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
