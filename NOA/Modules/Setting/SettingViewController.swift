@@ -45,7 +45,7 @@ class SettingViewController: UIViewController {
     }
 
     required init?(coder aDecoder: NSCoder) {
-        viewModel = HomeViewModel()
+        viewModel = SettingViewModel()
         super.init(coder: aDecoder)
     }
     
