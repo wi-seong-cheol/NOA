@@ -7,6 +7,7 @@
 
 import UIKit
 import RxSwift
+import RxRelay
 
 protocol HomeTableDelegate: AnyObject {
     
@@ -24,7 +25,6 @@ class HomeTableCell: UITableViewCell {
     @IBOutlet var title: UILabel!
     @IBOutlet weak var desc: UILabel!
     @IBOutlet weak var likeCount: UILabel!
-    @IBOutlet weak var like: UIButton!
     
     var delegate: HomeTableDelegate?
     
@@ -34,6 +34,8 @@ class HomeTableCell: UITableViewCell {
     var disposeBag = DisposeBag()
     let onData: AnyObserver<Lecture>
     let onChanged: Observable<Int>
+    let profileId = BehaviorRelay<String>(value: "")
+    let workId = BehaviorRelay<String>(value: "")
     
     required init?(coder aDecoder: NSCoder) {
         let data = PublishSubject<Lecture>()
@@ -45,11 +47,11 @@ class HomeTableCell: UITableViewCell {
 
         super.init(coder: aDecoder)
         
-        
-        
         // MARK: - UI Binding
         data.observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] lecture in
+                self?.profileId.accept(lecture.name)
+                self?.workId.accept(lecture.id)
                 self?.thumbnail.image = UIImage()
                 self?.nickname.text = lecture.number
                 self?.title.text = lecture.id
@@ -80,15 +82,15 @@ class HomeTableCell: UITableViewCell {
         disposeBag = DisposeBag()
     }
     
-    @objc func didSelectedMore(_ sender: UIButton) {
-        delegate?.didSelectedMore(self, detailButtonTappedFor: "")
-    }
-    
     @objc func didSelectedProfile(_ sender: UIButton) {
-        delegate?.didSelectedProfile(self, detailButtonTappedFor: "")
+        delegate?.didSelectedProfile(self, detailButtonTappedFor: profileId.value)
     }
     
-    @objc func didSelectedLike(_ sender: UIButton) {
-        delegate?.didSelectedLike(self, detailButtonTappedFor: "")
+    @IBAction func didSelectedMore(_ sender: Any) {
+        delegate?.didSelectedMore(self, detailButtonTappedFor: workId.value)
+    }
+    
+    @IBAction func didSelectedLike(_ sender: Any) {
+        delegate?.didSelectedLike(self, detailButtonTappedFor: workId.value)
     }
 }
