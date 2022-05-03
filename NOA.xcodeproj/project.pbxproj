@@ -39,6 +39,8 @@
 		4D6D35562801CD080001B18F /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6D35552801CD080001B18F /* Feed.swift */; };
 		4D6D35582801CEA30001B18F /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6D35572801CEA30001B18F /* HomeViewModel.swift */; };
 		4D707B2D281ADC5F00BFF792 /* ExhibitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D707B2C281ADC5F00BFF792 /* ExhibitionViewController.swift */; };
+		4D776D9B2820D76800112A96 /* SearchWrokViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D776D9A2820D76800112A96 /* SearchWrokViewController.swift */; };
+		4D776D9D2820DA3D00112A96 /* SearchWorkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D776D9C2820DA3D00112A96 /* SearchWorkViewModel.swift */; };
 		4D77B5582805D26A00C2E90D /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D77B5572805D26A00C2E90D /* SplashViewModel.swift */; };
 		4D77B55A2805D75900C2E90D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4D77B5592805D75900C2E90D /* GoogleService-Info.plist */; };
 		4D8A2DE528094442007F3EF2 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8A2DE428094442007F3EF2 /* ImageLoader.swift */; };
@@ -149,6 +151,8 @@
 		4D6D35552801CD080001B18F /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
 		4D6D35572801CEA30001B18F /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		4D707B2C281ADC5F00BFF792 /* ExhibitionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExhibitionViewController.swift; sourceTree = "<group>"; };
+		4D776D9A2820D76800112A96 /* SearchWrokViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchWrokViewController.swift; sourceTree = "<group>"; };
+		4D776D9C2820DA3D00112A96 /* SearchWorkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchWorkViewModel.swift; sourceTree = "<group>"; };
 		4D77B5572805D26A00C2E90D /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
 		4D77B5592805D75900C2E90D /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		4D8A2DE428094442007F3EF2 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
@@ -271,6 +275,8 @@
 			children = (
 				4D30C295281BA7A000063E64 /* SearchViewModel.swift */,
 				4D30C293281BA6B400063E64 /* SearchViewController.swift */,
+				4D776D9A2820D76800112A96 /* SearchWrokViewController.swift */,
+				4D776D9C2820DA3D00112A96 /* SearchWorkViewModel.swift */,
 				4DD91C76281FC52100678943 /* SearchTableCell.swift */,
 			);
 			path = Search;
@@ -860,6 +866,8 @@
 				4D9D5BEC281A8E8F00343332 /* OtherProfileViewController.swift in Sources */,
 				4D26A0C028190EF800D0C75F /* WorkViewModel.swift in Sources */,
 				4D33602027E8C8E9007640F7 /* NOA.xcdatamodeld in Sources */,
+				4D776D9B2820D76800112A96 /* SearchWrokViewController.swift in Sources */,
+				4D776D9D2820DA3D00112A96 /* SearchWorkViewModel.swift in Sources */,
 				4DC03D2F2806B44C00CEE554 /* Inject.swift in Sources */,
 				4DC03D3E2806BDE100CEE554 /* BaseInterceptor.swift in Sources */,
 				4D77B5582805D26A00C2E90D /* SplashViewModel.swift in Sources */,

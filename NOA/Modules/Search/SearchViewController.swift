@@ -68,14 +68,14 @@ class SearchViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //        let identifier = segue.identifier ?? ""
-        //
-        //        if identifier == "HomeDetailSegue",
-        //           let selectedFeed = sender as? Lecture,
-        //           let feedVC = segue.destination as? HomeDetailViewController {
-        //            let feedViewModel = HomeDetailViewModel(selectedFeed)
-        //            feedVC.viewModel = feedViewModel
-        //        }
+//        let identifier = segue.identifier ?? ""
+//        
+//        if identifier == "SearchSegue",
+//           let selectedFeed = sender as? Lecture,
+//           let feedVC = segue.destination as? SearchWorkViewController {
+//            let feedViewModel = SearchWorkViewModel(selectedFeed)
+//            feedVC.viewModel = feedViewModel
+//        }
     }
 }
 
@@ -89,11 +89,6 @@ extension SearchViewController {
         // ------------------------------
         //     INPUT
         // ------------------------------
-//        viewModel.items
-//            .bind(tableView.rx.items(cellIdentifier: SearchTableCell.identifier, cellType: SearchTableCell.self)) { _, item, cell in
-//                cell.onData.onNext(item)
-//            }
-//            .disposed(by: disposeBag)
         
         viewModel.items
             .drive(tableView.rx.items(cellIdentifier: SearchTableCell.identifier, cellType: SearchTableCell.self)) {
@@ -116,13 +111,15 @@ extension SearchViewController {
             .bind(to: viewModel.searchText)
             .disposed(by: disposeBag)
         
-        // 무한 스크롤
-        
         // ------------------------------
         //     Page Move
         // ------------------------------
         
         // 페이지 이동
+        Observable.zip(tableView.rx.modelSelected(Search.self), tableView.rx.itemSelected) .bind { [weak self] item, indexPath in
+            self?.performSegue(withIdentifier: "SearchSegue", sender: item)
+            
+        } .disposed(by: disposeBag)
         
         // ------------------------------
         //     OUTPUT
@@ -136,22 +133,3 @@ extension SearchViewController {
             }).disposed(by: disposeBag)
     }
 }
-//extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return items.count
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        guard let cell: searchTableCell = tableView.dequeueReusableCell(withIdentifier: "item", for: indexPath) as? searchTableViewCell else {
-//            fatalError()
-//        }
-//        cell.blueText.text = self.items[indexPath.row] return cell
-//    }
-//
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        guard let cell: searchTableViewCell = tableView.cellForRow(at: indexPath) as? searchTableViewCell else {
-//            return
-//        }
-//        self.selectLabel.text = cell.blueText.text
-//    }
-//}
