@@ -50,17 +50,6 @@ class SearchViewModel: SearchViewModelType {
         activated = activating.distinctUntilChanged()
         
         // MARK: INPUT
-        
-        searching
-            .do(onNext: { _ in activating.onNext(true) })
-            .flatMapLatest{ [weak self] _ in service.search((self?.searchText.value)!)}
-            .do(onNext: { _ in activating.onNext(false) })
-            .do(onError: { err in error.onNext(err) })
-                .subscribe(onNext: { response in
-                    itemsList.accept(response)
-                })
-            .disposed(by: disposeBag)
-                
                 
         searchText
             .skip(1)
