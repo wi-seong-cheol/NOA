@@ -166,10 +166,6 @@ extension HomeViewController: HomeTableDelegate {
     
     func didSelectedMore(_ homeTableCell: HomeTableCell, detailButtonTappedFor workId: String) {
         print(workId)
-    }
-    
-    func didSelectedLike(_ homeTableCell: HomeTableCell, detailButtonTappedFor workId: String) {
-        print(workId)
         
         let actions: [UIAlertController.AlertAction] = [
             .action(title: "no", style: .destructive),
@@ -180,8 +176,13 @@ extension HomeViewController: HomeTableDelegate {
             .present(in: self, title: "Alert", message: "message", style: .actionSheet, actions: actions)
             .subscribe(onNext: { buttonIndex in
                 print(buttonIndex)
+                // coding
             })
             .disposed(by: disposeBag)
+    }
+    
+    func didSelectedLike(_ homeTableCell: HomeTableCell, detailButtonTappedFor workId: String) {
+        print(workId)
     }
 }
 
