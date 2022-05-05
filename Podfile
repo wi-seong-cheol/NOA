@@ -17,6 +17,7 @@ target 'NOA' do
   pod 'RxDataSources'
   pod 'RxViewController'
   pod 'RxAlamofire'
+  pod 'RxKeyboard'
   
   # pod for Firebase
   pod 'Firebase/Auth'
@@ -34,7 +35,7 @@ target 'NOA' do
   pod 'Socket.IO-Client-Swift'
   
   # pod RealmSwift
-  pod 'RealmSwift'
+  pod 'RealmSwift', '~> 10.25.0'
   
   # pod CropViewController
   pod 'CropViewController'
