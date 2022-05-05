@@ -94,6 +94,9 @@
                                                             <state key="normal" image="menu_hori_asset">
                                                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </state>
+                                                            <connections>
+                                                                <action selector="didSelectedMore:" destination="Tt2-Fr-WFU" eventType="touchUpInside" id="Bug-pn-0sK"/>
+                                                            </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="frv-GD-fQv">
                                                             <rect key="frame" x="10" y="440" width="24" height="24"/>
@@ -105,6 +108,9 @@
                                                             <state key="normal" image="heart_blank_asset">
                                                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </state>
+                                                            <connections>
+                                                                <action selector="didSelectedLike:" destination="Tt2-Fr-WFU" eventType="touchUpInside" id="f42-Ht-AaV"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -145,7 +151,6 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="desc" destination="x0S-qZ-tTs" id="SGS-xM-mfT"/>
-                                            <outlet property="like" destination="frv-GD-fQv" id="HBr-PC-czZ"/>
                                             <outlet property="likeCount" destination="j1z-y7-LFI" id="QFP-wW-Irn"/>
                                             <outlet property="nickname" destination="FSd-z5-4lI" id="WMX-GA-K5V"/>
                                             <outlet property="profile" destination="Blw-4J-QsT" id="3PX-Je-KEj"/>
