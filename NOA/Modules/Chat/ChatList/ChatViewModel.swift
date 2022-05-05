@@ -36,7 +36,7 @@ class ChatViewModel: ChatViewModelType {
     init(service: FeedFetchable = FeedService()) {
         let fetching = PublishSubject<Void>()
         
-        let itemsList = BehaviorRelay<[Lecture]>(value: [])
+        let itemList = BehaviorRelay<[Lecture]>(value: [])
         
         let activating = BehaviorSubject<Bool>(value: false)
         let error = PublishSubject<Error>()
@@ -50,12 +50,12 @@ class ChatViewModel: ChatViewModelType {
             .do(onNext: { _ in activating.onNext(false) })
             .do(onError: { err in error.onNext(err) })
             .subscribe(onNext: { response in
-                itemsList.accept(response.lectures)
+                itemList.accept(response.lectures)
             })
             .disposed(by: disposeBag)
         
         // MARK: OUTPUT
-        items = itemsList.asObservable()
+        items = itemList.asObservable()
                     
         errorMessage = error.map { $0 as NSError }
         
