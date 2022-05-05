@@ -38,7 +38,7 @@ class SearchWorkViewModel: SearchWorkViewModelType {
         let fetching = PublishSubject<Void>()
         let moreFetching = PublishSubject<Void>()
         
-        let itemsList = BehaviorRelay<[Lecture]>(value: [])
+        let itemList = BehaviorRelay<[Lecture]>(value: [])
         let nextPage = BehaviorRelay<String>(value: "")
         let state = BehaviorRelay<Bool>(value: false)
         
@@ -55,7 +55,7 @@ class SearchWorkViewModel: SearchWorkViewModelType {
             .do(onNext: { _ in activating.onNext(false) })
             .do(onError: { err in error.onNext(err) })
             .subscribe(onNext: { response in
-                itemsList.accept(response.lectures)
+                itemList.accept(response.lectures)
                 nextPage.accept(response.next)
             })
             .disposed(by: disposeBag)
@@ -69,13 +69,13 @@ class SearchWorkViewModel: SearchWorkViewModelType {
             .do(onNext: { _ in state.accept(false)})
             .do(onError: { err in error.onNext(err) })
             .subscribe(onNext: { response in
-                itemsList.accept(itemsList.value + response.lectures)
+                itemList.accept(itemList.value + response.lectures)
                 nextPage.accept(response.next)
             })
             .disposed(by: disposeBag)
                 
         // MARK: OUTPUT
-        items = itemsList.asObservable()
+        items = itemList.asObservable()
         
         errorMessage = error.map { $0 as NSError }
         
