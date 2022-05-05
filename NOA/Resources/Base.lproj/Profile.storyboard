@@ -350,11 +350,11 @@
             </objects>
             <point key="canvasLocation" x="3625" y="116"/>
         </scene>
-        <!--Item-->
+        <!--프로필-->
         <scene sceneID="Q28-9V-Hk2">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="nbt-pl-gKH" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" image="profile_asset" selectedImage="profile_asset" id="af7-a3-xHb"/>
+                    <tabBarItem key="tabBarItem" title="프로필" image="profile_asset" selectedImage="profile_asset" id="af7-a3-xHb"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="VAv-p7-ovL">
