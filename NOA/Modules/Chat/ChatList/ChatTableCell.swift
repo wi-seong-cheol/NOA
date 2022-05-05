@@ -7,6 +7,7 @@
 
 import Foundation
 import RxSwift
+import UIKit
 
 class ChatTableCell: UITableViewCell {
     static let identifier = "ChatTableCell"
@@ -45,7 +46,17 @@ class ChatTableCell: UITableViewCell {
             })
             .disposed(by: cellDisposeBag)
     }
-
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        profile.layer.cornerRadius = profile.frame.width / 2
+        name.font = UIFont.NotoSansCJKkr(type: .medium, size: 14)
+        contents.font = UIFont.NotoSansCJKkr(type: .medium, size: 14)
+        contents.setTextWithLineHeight(text: contents.text, lineHeight: 14)
+        date.font = UIFont.NotoSansCJKkr(type: .medium, size: 10)
+        count.font = UIFont.NotoSansCJKkr(type: .medium, size: 10)
+    }
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         disposeBag = DisposeBag()
