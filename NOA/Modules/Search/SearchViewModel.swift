@@ -35,7 +35,7 @@ class SearchViewModel: SearchViewModelType {
     init(service: SearchFetchable = SearchService()) {
         let searching = PublishSubject<Void>()
         
-        let itemsList = BehaviorRelay<[Search]>(value: [])
+        let itemList = BehaviorRelay<[Search]>(value: [])
         
         let activating = BehaviorSubject<Bool>(value: false)
         let error = PublishSubject<Error>()
@@ -43,7 +43,7 @@ class SearchViewModel: SearchViewModelType {
         
         // MARK: OUTPUT
         
-        items = itemsList.asDriver(onErrorJustReturn: [])
+        items = itemList.asDriver(onErrorJustReturn: [])
         
         errorMessage = error.map { $0 as NSError }
         
@@ -57,7 +57,7 @@ class SearchViewModel: SearchViewModelType {
             .flatMapLatest{ [weak self] _ in service.search((self?.searchText.value)!) }
             .do(onError: { err in error.onNext(err) })
             .subscribe(onNext: { response in
-                itemsList.accept(response)
+                itemList.accept(response)
             })
             .disposed(by: disposeBag)
     }
