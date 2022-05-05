@@ -191,7 +191,7 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="728"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="noticeCell" id="ged-5B-Jrn" customClass="NoticeCell" customModule="NOA" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="NoticeCell" id="ged-5B-Jrn" customClass="NoticeCell" customModule="NOA" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ged-5B-Jrn" id="qSa-fp-Lqm">
@@ -214,7 +214,7 @@
                                             <outlet property="notice" destination="xfT-vN-BUz" id="GY3-3U-ATE"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="dateCell" id="Iet-LS-Z8i" customClass="DateCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="DateCell" id="Iet-LS-Z8i" customClass="DateCell">
                                         <rect key="frame" x="0.0" y="88.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Iet-LS-Z8i" id="3df-iT-sQs">
@@ -237,7 +237,7 @@
                                             <outlet property="Date" destination="JsJ-Fv-7l8" id="yJc-V8-ZLK"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="otherMessageCell" id="QYW-8X-BA1" customClass="OtherMessageCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="OtherMessageCell" id="QYW-8X-BA1" customClass="OtherMessageCell">
                                         <rect key="frame" x="0.0" y="132.5" width="414" height="77"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QYW-8X-BA1" id="dFZ-oR-eeD">
@@ -321,7 +321,7 @@
                                             <outlet property="timestamp" destination="4VP-mn-UYu" id="LbR-ED-pZK"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="myCell" id="2Wh-AI-PT3" customClass="MyMessageCell" customModule="NOA" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="MyMessageCell" id="2Wh-AI-PT3" customClass="MyMessageCell" customModule="NOA" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="209.5" width="414" height="52.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2Wh-AI-PT3" id="GcO-PZ-rye">
