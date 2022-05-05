@@ -12,7 +12,7 @@ protocol OtherMessageType {
     var nickname: String { get }
     var profile: String { get }
     var message: String { get }
-    var date: String { get }
+    var timestamp: String { get }
 }
 
 struct OtherMessage: Codable, OtherMessageType {
@@ -20,26 +20,26 @@ struct OtherMessage: Codable, OtherMessageType {
     let nickname: String
     let profile: String
     let message: String
-    let date: String
+    let timestamp: String
     
     enum CodingKeys: String, CodingKey {
         case id
         case nickname
         case profile
         case message
-        case date
+        case timestamp
     }
 
     init(id: String,
          nickname: String,
          profile: String,
          message: String,
-         date: String) {
+         timestamp: String) {
         self.id = id
         self.nickname = nickname
         self.profile = profile
         self.message = message
-        self.date = date
+        self.timestamp = timestamp
     }
 }
 
