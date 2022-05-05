@@ -10,25 +10,25 @@ import Foundation
 protocol MyMessageType {
     var id: String { get }
     var message: String { get }
-    var date: String { get }
+    var timestamp: String { get }
 }
 
 struct MyMessage: Codable, MyMessageType {
     let id: String
     let message: String
-    let date: String
+    let timestamp: String
     
     enum CodingKeys: String, CodingKey {
         case id
         case message
-        case date
+        case timestamp
     }
 
     init(id: String,
          message: String,
-         date: String) {
+         timestamp: String) {
         self.id = id
         self.message = message
-        self.date = date
+        self.timestamp = timestamp
     }
 }
