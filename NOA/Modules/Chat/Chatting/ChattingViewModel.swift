@@ -14,6 +14,8 @@ import SocketIO
 protocol ChattingViewModelType {
     // MARK: INPUT
     var message: BehaviorRelay<String> { get }
+    var exit: AnyObserver<Void> { get }
+    var disconnect: AnyObserver<Void> { get }
     var sendMessage: AnyObserver<Void> { get }
     var register: AnyObserver<Void> { get }
     
@@ -27,6 +29,8 @@ class ChattingViewModel: ChattingViewModelType {
     
     // MARK: INPUT
     let message = BehaviorRelay(value: "")
+    let exit: AnyObserver<Void>
+    let disconnect: AnyObserver<Void>
     let sendMessage: AnyObserver<Void>
     let register: AnyObserver<Void>
     
@@ -36,6 +40,8 @@ class ChattingViewModel: ChattingViewModelType {
     
     init(_ selectedFeed: Lecture = Lecture.EMPTY) {
         let sendMessaging = PublishSubject<Void>()
+        let disconnectSocket = PublishSubject<Void>()
+        let exitChatting = PublishSubject<Void>()
         let registerSocket = PublishSubject<Void>()
         
         let messageList = BehaviorRelay<[MessageSection]>(value: [])
@@ -43,11 +49,15 @@ class ChattingViewModel: ChattingViewModelType {
                 
         // MARK: OUTPUT
         messages = messageList.asObservable()
+        disconnect = disconnectSocket.asObserver()
+        exit = exitChatting.asObserver()
         register = registerSocket.asObserver()
         
         registerSocket
             .subscribe(onNext: {
                 SocketIOManager.shared.start()
+                SocketIOManager.shared.connect()
+                SocketIOManager.shared.addListeners()
                 SocketIOManager.shared.newMessage{ (message) in
                                     let msg = MessageItem.otherMessageCell(OtherMessage(id: "",
                                                                                      nickname: "Test", profile: "",
@@ -57,6 +67,13 @@ class ChattingViewModel: ChattingViewModelType {
                 }
             })
             .disposed(by: disposeBag)
+        
+        disconnectSocket
+            .subscribe(onNext: {SocketIOManager.shared.disconnect()})
+            .disposed(by: disposeBag)
+        
+//        exitChatting
+//            .subscribe(onNext: {})
         
 //        (onErrorJustReturn: [Message(id: "",
 //                                                                    nickname: "",
