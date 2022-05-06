@@ -82,6 +82,12 @@ final class SocketIOManager {
         socket.connect()
     }
     
+    func disconnect() {
+        socket.disconnect()
+        socket.emit("SIGINT", completion: nil)
+        print("Socket Session all disconnected")
+    }
+    
     func didConnect(handler: @escaping () -> Void){
         socket.on(clientEvent: .connect) { (data, ack) in
             print("App Chat: socket connected")
