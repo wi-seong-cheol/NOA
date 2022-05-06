@@ -143,9 +143,19 @@ extension ChattingViewController {
             .take(1)
             .map { _ in () }
         
+        let disappear = rx.viewDidDisappear
+            .take(1)
+            .map { _ in () }
+        
         firstLoad
+            .debug()
             .bind(to: self.viewModel.register)
             .disposed(by: disposeBag)
+        
+        disappear
+            .bind(to: self.viewModel.disconnect)
+            .disposed(by: disposeBag)
+        
         // MARK: - Message Bind
         viewModel.messages
             .do(onNext: { _ in
