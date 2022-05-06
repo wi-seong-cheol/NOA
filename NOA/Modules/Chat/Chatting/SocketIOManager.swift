@@ -21,7 +21,6 @@ final class SocketIOManager {
 
     // Call start from the singleton
     func start() {
-
         guard socketManager == nil else {
             return
         }
@@ -31,9 +30,6 @@ final class SocketIOManager {
             socketURL: URL(string: "ws://localhost:3000")!,
             config: [.log(true), .compress]
         )
-
-        addListeners()
-        connect()
     }
     
     // socket connection state
@@ -79,6 +75,7 @@ final class SocketIOManager {
     
     // socket connection state
     func connect() {
+        print("dsf")
         socket.connect()
     }
     
