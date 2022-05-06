@@ -7,7 +7,12 @@
 
 import Foundation
 import RxSwift
+import RxCocoa
 import UIKit
+
+protocol ChatTableDelegate: AnyObject {
+    func didSelectedProfile(_ chatTableCell: ChatTableCell, detailButtonTappedFor userId: String)
+}
 
 class ChatTableCell: UITableViewCell {
     static let identifier = "ChatTableCell"
@@ -19,10 +24,13 @@ class ChatTableCell: UITableViewCell {
     @IBOutlet weak var countView: UIView!
     @IBOutlet weak var count: UILabel!
     
+    var delegate: ChatTableDelegate?
+    
     private let cellDisposeBag = DisposeBag()
     
     var disposeBag = DisposeBag()
     let onData: AnyObserver<Lecture>
+    let profileId = BehaviorRelay<String>(value: "")
     
     required init?(coder aDecoder: NSCoder) {
         let data = PublishSubject<Lecture>()
@@ -55,11 +63,18 @@ class ChatTableCell: UITableViewCell {
         contents.setTextWithLineHeight(text: contents.text, lineHeight: 14)
         date.font = UIFont.NotoSansCJKkr(type: .medium, size: 10)
         count.font = UIFont.NotoSansCJKkr(type: .medium, size: 10)
+        
+        self.profile.isUserInteractionEnabled = true
+        self.profile.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.didSelectedProfile(_:))))
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
         disposeBag = DisposeBag()
+    }
+    
+    @objc func didSelectedProfile(_ sender: UIButton) {
+        delegate?.didSelectedProfile(self, detailButtonTappedFor: profileId.value)
     }
 }
 
