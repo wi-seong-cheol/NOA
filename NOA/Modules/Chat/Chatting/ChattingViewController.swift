@@ -10,8 +10,8 @@ import RxSwift
 import RxViewController
 import NVActivityIndicatorView
 import UIKit
-import SocketIO
 import RxKeyboard
+import RxDataSources
 
 class ChattingViewController: UIViewController {
     
@@ -40,6 +40,26 @@ class ChattingViewController: UIViewController {
         indicator.stopAnimating()
         return indicator
     }()
+    
+    private lazy var dataSource = RxTableViewSectionedReloadDataSource<MessageSection> {
+        [weak self] dataSource, tableview, indexPath, item in
+        switch item {
+        case let .noticeCell(cellModel):
+            let cell = tableview.dequeueReusableCell(withIdentifier: NoticeCell.identifier, for: indexPath) as! NoticeCell
+            return cell
+        case let .dateCell(cellModel):
+            let cell = tableview.dequeueReusableCell(withIdentifier: DateCell.identifier, for: indexPath) as! DateCell
+            return cell
+        case let .otherMessageCell(cellModel):
+            let cell = tableview.dequeueReusableCell(withIdentifier: OtherMessageCell.identifier, for: indexPath) as! OtherMessageCell
+            cell.onData.onNext(cellModel)
+            return cell
+        case let .myMessageCell(cellModel):
+            let cell = tableview.dequeueReusableCell(withIdentifier: MyMessageCell.identifier, for: indexPath) as! MyMessageCell
+            cell.onData.onNext(cellModel)
+            return cell
+        }
+    }
     
     var viewModel: ChattingViewModelType
     var disposeBag = DisposeBag()
@@ -92,6 +112,10 @@ extension ChattingViewController {
         // MARK: - Setting Keyboard
         RxKeyboard.instance.visibleHeight
             .skip(1)    // 초기 값 버리기
+            .distinctUntilChanged()
+            .do(onNext: { _ in
+                self.tableView.setContentOffset(CGPoint(x: 0, y : CGFloat.greatestFiniteMagnitude), animated: true)
+            })
             .drive(onNext: { keyboardVisibleHeight in
                 UIView.animate(withDuration: 0) {
                     if keyboardVisibleHeight == 0 {
@@ -111,11 +135,49 @@ extension ChattingViewController {
     
     // MARK: - UI Binding
     func setupBindings() {
-        sendButton.rx.tap
-            .bind { [weak self] in
-                print("click")
-            }
+        // ------------------------------
+        //     INPUT
+        // ------------------------------
+        
+        let firstLoad = rx.viewWillAppear
+            .take(1)
+            .map { _ in () }
+        
+        firstLoad
+            .bind(to: self.viewModel.register)
             .disposed(by: disposeBag)
+        // MARK: - Message Bind
+        viewModel.messages
+            .do(onNext: { _ in
+                self.tableView.setContentOffset(CGPoint(x: 0, y : CGFloat.greatestFiniteMagnitude), animated: true)
+            })
+            .bind(to: tableView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
+        
+        // MARK: - TextView Bind
+        messageTextView.rx.text
+            .orEmpty
+            .distinctUntilChanged()
+            .bind(to: viewModel.message)
+            .disposed(by: disposeBag)
+        
+        // MARK: - Message Send
+        sendButton.rx.tap
+            .bind(to: viewModel.sendMessage)
+            .disposed(by: disposeBag)
+        
+        // MARK: - Socket IO
+        
+        // ------------------------------
+        //     OUTPUT
+        // ------------------------------
+
+        // MARK: - 에러 처리
+        viewModel.errorMessage
+            .map { $0.domain }
+            .subscribe(onNext: { [weak self] message in
+                self?.OKDialog("Order Fail")
+            }).disposed(by: disposeBag)
     }
     
     @objc func hideKeyboard() {
