@@ -153,7 +153,6 @@ extension ChatViewController {
 
 extension ChatViewController: ChatTableDelegate {
     func didSelectedProfile(_ chatTableCell: ChatTableCell, detailButtonTappedFor userId: String) {
-        print("dsf")
         let storyboard = UIStoryboard(name:"Profile", bundle: nil)
         let pushVC = storyboard.instantiateViewController(withIdentifier: "OtherProfileViewController")
         self.navigationController?.pushViewController(pushVC, animated: true)
