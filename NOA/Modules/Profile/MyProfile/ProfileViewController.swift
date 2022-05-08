@@ -211,7 +211,9 @@ extension ProfileViewController {
         // MARK: - Setting Page
         setting.rx.tap
             .bind{ [weak self] in
-                self?.performSegue(withIdentifier: "settingSegue", sender: nil)
+                let storyboard = UIStoryboard(name:"Setting", bundle: nil)
+                let pushVC = storyboard.instantiateViewController(withIdentifier: "SettingViewController") as! SettingViewController
+                self?.navigationController?.pushViewController(pushVC, animated: true)
             }
             .disposed(by: disposeBag)
         
