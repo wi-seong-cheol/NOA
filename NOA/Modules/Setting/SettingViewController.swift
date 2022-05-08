@@ -12,7 +12,7 @@ import NVActivityIndicatorView
 import UIKit
 import PagingKit
 
-class SettingViewController: UIViewController {
+class SettingViewController: UITableViewController {
     
     lazy var indicator: NVActivityIndicatorView = {
         let indicator = NVActivityIndicatorView(
@@ -52,7 +52,7 @@ class SettingViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
     override func viewDidLoad() {
