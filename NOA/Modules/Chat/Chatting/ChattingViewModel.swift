@@ -54,6 +54,7 @@ class ChattingViewModel: ChattingViewModelType {
         register = registerSocket.asObserver()
         
         registerSocket
+            .debug()
             .subscribe(onNext: {
                 SocketIOManager.shared.start()
                 SocketIOManager.shared.connect()
