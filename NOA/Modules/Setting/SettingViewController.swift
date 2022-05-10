@@ -14,26 +14,6 @@ import PagingKit
 
 class SettingViewController: UITableViewController {
     
-    lazy var indicator: NVActivityIndicatorView = {
-        let indicator = NVActivityIndicatorView(
-            frame: CGRect(
-                x: self.view.frame.width/2 - 25,
-                y: self.view.frame.height/2 - 25,
-                width: 50,
-                height: 50),
-            type: .ballScaleMultiple,
-            color: .black,
-            padding: 0)
-        
-        indicator.center = self.view.center
-                
-        // 기타 옵션
-        indicator.color = .purple
-        
-        indicator.stopAnimating()
-        return indicator
-    }()
-    
     let viewModel: SettingViewModelType
     var disposeBag = DisposeBag()
 
@@ -88,7 +68,21 @@ extension SettingViewController {
         // ------------------------------
         //     INPUT
         // ------------------------------
-
+        self.tableView.rx.itemSelected
+            .subscribe(onNext: { [weak self] indexPath in
+                switch(indexPath.row) {
+                case 0:
+                    self?.performSegue(withIdentifier: "InfoSegue", sender: nil)
+                    break
+                case 1:
+                    break
+                case 2:
+                    break
+                default:
+                    break
+                }
+            })
+            .disposed(by: disposeBag)
         // 처음 로딩할 때 하고, 당겨서 새로고침 할 때
         
         // 무한 스크롤
