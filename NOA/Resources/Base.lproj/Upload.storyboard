@@ -12,12 +12,26 @@
         <!--Title-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController id="Y6W-OH-hqX" customClass="UploadViewController" customModule="NOA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UploadViewController" id="Y6W-OH-hqX" customClass="UploadViewController" customModule="NOA" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="edH-pW-nro">
+                                <rect key="frame" x="97" y="108" width="220" height="220"/>
+                                <color key="backgroundColor" systemColor="linkColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="220" id="LnY-dn-eAH"/>
+                                    <constraint firstAttribute="width" constant="220" id="vS7-b2-QDe"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="edH-pW-nro" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="SlB-Fm-4XZ"/>
+                            <constraint firstItem="edH-pW-nro" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="20" id="olq-uK-Lov"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="GbJ-A1-rQx">
                         <barButtonItem key="leftBarButtonItem" style="done" id="FwW-9x-ZqA">
@@ -31,6 +45,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="back" destination="vrk-px-T8e" id="GqG-w9-LcZ"/>
+                        <outlet property="work" destination="edH-pW-nro" id="ecA-rM-6TL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -40,6 +55,7 @@
         <!--업로드-->
         <scene sceneID="qv1-jb-6VN">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SkL-ii-BAe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController storyboardIdentifier="Upload" automaticallyAdjustsScrollViewInsets="NO" id="NRZ-18-qsi" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="업로드" image="upload_asset" selectedImage="upload_asset" id="IdG-62-WpY"/>
                     <toolbarItems/>
@@ -53,13 +69,15 @@
                         <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="aVQ-Wr-k4a"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="SkL-ii-BAe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="131.8840579710145" y="115.84821428571428"/>
         </scene>
     </scenes>
     <resources>
         <image name="upload_asset" width="24" height="24"/>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
