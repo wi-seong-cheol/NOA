@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Ikg-6i-6Nh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Ikg-6i-6Nh">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -355,7 +355,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eZv-A8-lAm">
-                                                        <rect key="frame" x="52" y="5.5" width="41.5" height="21"/>
+                                                        <rect key="frame" x="52" y="5.5" width="318" height="21"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -372,21 +372,20 @@
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
+                                                    <constraint firstItem="T8m-9q-bKV" firstAttribute="leading" secondItem="eZv-A8-lAm" secondAttribute="trailing" constant="10" id="0nM-ab-u9e"/>
                                                     <constraint firstItem="eZv-A8-lAm" firstAttribute="leading" secondItem="UKv-cG-SUK" secondAttribute="trailing" constant="10" id="69b-u6-ELe"/>
                                                     <constraint firstAttribute="height" constant="40" id="A3o-tt-oeh"/>
                                                     <constraint firstAttribute="trailing" secondItem="T8m-9q-bKV" secondAttribute="trailing" constant="10" id="Bjv-hj-6KM"/>
                                                     <constraint firstItem="T8m-9q-bKV" firstAttribute="top" secondItem="IMh-4a-g8J" secondAttribute="top" constant="8" id="LOc-Ef-mV4"/>
                                                     <constraint firstItem="UKv-cG-SUK" firstAttribute="top" secondItem="IMh-4a-g8J" secondAttribute="top" id="S4i-8D-9tu"/>
                                                     <constraint firstItem="eZv-A8-lAm" firstAttribute="centerY" secondItem="UKv-cG-SUK" secondAttribute="centerY" id="VI8-pu-WIv"/>
-                                                    <constraint firstItem="T8m-9q-bKV" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="eZv-A8-lAm" secondAttribute="trailing" constant="10" id="Wgg-bD-S3Z"/>
                                                     <constraint firstItem="UKv-cG-SUK" firstAttribute="leading" secondItem="IMh-4a-g8J" secondAttribute="leading" constant="10" id="yIP-Ai-23E"/>
                                                 </constraints>
                                             </view>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cBu-Qv-wJ4">
                                                 <rect key="frame" x="0.0" y="40" width="414" height="414"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" secondItem="cBu-Qv-wJ4" secondAttribute="height" multiplier="1:1" id="H9t-gT-1SC"/>
-                                                    <constraint firstAttribute="height" constant="414" id="rF6-7I-pjW"/>
+                                                    <constraint firstAttribute="width" secondItem="cBu-Qv-wJ4" secondAttribute="height" multiplier="1:1" id="4im-Yd-4cC"/>
                                                 </constraints>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jQ5-fG-TzQ">
