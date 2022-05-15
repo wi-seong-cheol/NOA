@@ -63,10 +63,11 @@ extension TabBarViewController: UINavigationControllerDelegate, CropViewControll
 
     func cropViewController(_ cropViewController: CropViewController, didCropToImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
         let storyboard = UIStoryboard(name: "Upload", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "Upload")
+        let vc = storyboard.instantiateViewController(withIdentifier: "Upload")// as! UploadViewController
         vc.modalPresentationStyle = .fullScreen
         vc.modalTransitionStyle = .crossDissolve
-
+        UserInfo.shared.setImage("workImage", image, 1.0)
+        
         self.dismiss(animated: true, completion: nil)
         self.present(vc, animated: true, completion: nil)
     }
