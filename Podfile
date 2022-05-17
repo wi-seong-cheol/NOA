@@ -25,6 +25,9 @@ target 'NOA' do
   pod 'Firebase/Analytics'
   pod 'Firebase/Messaging'
   
+  # pod for web3swift
+  pod 'web3swift'
+  
   # pod SwiftyJSON
   pod 'SwiftyJSON'
   
