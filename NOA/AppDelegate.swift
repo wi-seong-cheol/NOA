@@ -8,17 +8,44 @@
 import UIKit
 import CoreData
 import Firebase
+import UserNotifications
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     
     var window: UIWindow?
+    let gcmMessageIDKey = "gcm.message_id"
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
+        
         utilRegisterDependencies()
         serviceRegisterDependencies()
+        
+        // FCM Setting
+        UNUserNotificationCenter.current().delegate = self
+
+        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+        UNUserNotificationCenter.current().requestAuthorization(
+            options: authOptions,
+            completionHandler: { _, _ in }
+        )
+        
+        // APNS 등록
+        application.registerForRemoteNotifications()
+
+        Messaging.messaging().delegate = self
+
+        // Override point for customization after application launch.
+        Messaging.messaging().token { token, error in
+            if let error = error {
+                print("Error fetching FCM registration token: \(error)")
+            } else if let token = token {
+                print("FCM registration token: \(token)")
+                // print("Remote FCM registration token: \(token)")
+            }
+        }
         
         return true
     }
@@ -105,6 +132,120 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
+    
+    // 토큰 받기
+    // 성공시
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        let tokenParts = deviceToken.map{data -> String in
+            return String(format: "%02.2hhx", data)
+        }
+        let token = tokenParts.joined()
+        // pushToken 값 넣기
+        print("push token -> \(token)")
+        Messaging.messaging().setAPNSToken(deviceToken, type: .unknown)
+    }
 
+
+    // 실패시
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("Failed to register for notifications: \(error.localizedDescription)")
+    }
+
+    // Foreground Notification
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions)
+                                    -> Void) {
+        
+        UIApplication.shared.applicationIconBadgeNumber = 1
+        
+        let userInfo = notification.request.content.userInfo
+
+        // With swizzling disabled you must let Messaging know about the message, for Analytics
+        Messaging.messaging().appDidReceiveMessage(userInfo)
+
+        // ...
+
+        // Print full message.
+        print(userInfo)
+
+        // Change this to your preferred presentation option
+        if #available(iOS 14.0, *) {
+            completionHandler([[.banner, .list, .sound]])
+        } else {
+            completionHandler([[.alert, .sound]])
+        }
+    }
+
+    // Background Notification
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                didReceive response: UNNotificationResponse,
+                                withCompletionHandler completionHandler: @escaping () -> Void) {
+        let userInfo = response.notification.request.content.userInfo
+        
+        Messaging.messaging().appDidReceiveMessage(userInfo)
+        
+        print(userInfo)
+        // ...
+        // With swizzling disabled you must let Messaging know about the message, for Analytics
+
+        completionHandler()
+    }
+
+    func application(_ application: UIApplication,
+                     didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
+        // If you are receiving a notification message while your app is in the background,
+        // this callback will not be fired till the user taps on the notification launching the application.
+        // TODO: Handle data of notification
+        // With swizzling disabled you must let Messaging know about the message, for Analytics
+        // Messaging.messaging().appDidReceiveMessage(userInfo)
+        // Print message ID.
+        if let messageID = userInfo[gcmMessageIDKey] {
+            print("Message ID: \(messageID)")
+        }
+
+        // Print full message.
+        print(userInfo)
+    }
+
+    //알림 메세지 정보에 관한 것
+    func application(_ application: UIApplication,
+                     didReceiveRemoteNotification userInfo: [AnyHashable: Any],
+                     fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult)
+                        -> Void) {
+        // If you are receiving a notification message while your app is in the background,
+        // this callback will not be fired till the user taps on the notification launching the application.
+        // TODO: Handle data of notification
+
+        // With swizzling disabled you must let Messaging know about the message, for Analytics
+        Messaging.messaging().appDidReceiveMessage(userInfo)
+
+        // Print message ID.
+        if let messageID = userInfo[gcmMessageIDKey] {
+            print("Message ID: \(messageID)")
+        }
+
+        // Print full message.
+        print(userInfo)
+
+        completionHandler(UIBackgroundFetchResult.newData)
+    }
 }
 
+extension AppDelegate: MessagingDelegate {
+    // ------ MESSAGING ------
+
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+        print("Firebase registration token: \(String(describing: fcmToken))")
+
+        let dataDict: [String: String] = ["token": fcmToken ?? ""]
+        NotificationCenter.default.post(
+            name: Notification.Name("FCMToken"),
+            object: nil,
+            userInfo: dataDict
+        )
+        
+        
+        UserInfo.shared.savePushToken(fcmToken ?? "")
+    }
+}
