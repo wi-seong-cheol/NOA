@@ -2,27 +2,29 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UIAppFonts</key>
-	<array>
-		<string>NotoSansCJKkr-Regular.otf</string>
-		<string>NotoSansCJKkr-Medium.otf</string>
-	</array>
+	<key>APIUrl</key>
+	<dict>
+		<key>DEV_API_URL</key>
+		<string>http://apis.data.go.kr/B552881/kmooc</string>
+		<key>DEV_FLAG</key>
+		<true/>
+		<key>New item</key>
+		<string></string>
+		<key>PROD_API_URL</key>
+		<string></string>
+	</dict>
+	<key>FirebaseAppDelegateProxyEnabled</key>
+	<false/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
-	<key>APIUrl</key>
-	<dict>
-		<key>PROD_API_URL</key>
-		<string></string>
-		<key>DEV_API_URL</key>
-		<string>http://apis.data.go.kr/B552881/kmooc</string>
-		<key>New item</key>
-		<string></string>
-		<key>DEV_FLAG</key>
-		<true/>
-	</dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>NotoSansCJKkr-Regular.otf</string>
+		<string>NotoSansCJKkr-Medium.otf</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -42,5 +44,11 @@
 			</array>
 		</dict>
 	</dict>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>processing</string>
+		<string>remote-notification</string>
+	</array>
 </dict>
 </plist>
