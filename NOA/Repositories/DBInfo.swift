@@ -31,4 +31,19 @@ struct DBInfo{
     
     /*******************************************************/
     
+    /*******************************************************/
+    // Infomation URL
+    static let dataPolicy: String =
+        "https://bronzed-prince-40e.notion.site/55b5d23bde8a49f0aa7993ba9591848d"
+    
+    static let termsOfService: String =
+        "https://bronzed-prince-40e.notion.site/55b5d23bde8a49f0aa7993ba9591848d"
+    
+    static let openSourceLicense: String =
+        "https://bronzed-prince-40e.notion.site/55b5d23bde8a49f0aa7993ba9591848d"
+    /*******************************************************/
+    
+    static let nftUrl: String = "https://api.baobab.klaytn.net:8651"
+    
+    static let contractAddress: String = "0x60ACe5b3B6b718dd75aE7450EFDd98dedFd13D87"
 }
