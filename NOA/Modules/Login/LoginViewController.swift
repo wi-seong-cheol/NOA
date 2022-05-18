@@ -15,9 +15,10 @@ class  LoginViewController: UIViewController {
     
     @IBOutlet weak var login: UIButton!
     @IBOutlet weak var signUp: UIButton!
-    @IBOutlet weak var privacyKeyLabel: UILabel!
-    @IBOutlet weak var privacyKey: UITextField!
-    @IBOutlet weak var shape: UIView!
+    @IBOutlet weak var nickname: UITextField!
+    @IBOutlet weak var privateKey: UITextField!
+    @IBOutlet weak var password: UITextField!
+    @IBOutlet var shape: [UIView]!
     
     var _mnemonics: String = ""
     
@@ -41,18 +42,18 @@ class  LoginViewController: UIViewController {
         return indicator
     }()
     
-    let viewModel: HomeViewModelType
+    let viewModel: LoginViewModelType
     var disposeBag = DisposeBag()
 
     // MARK: - Life Cycle
 
-    init(viewModel: HomeViewModelType = HomeViewModel()) {
+    init(viewModel: LoginViewModelType = LoginViewModel()) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
 
     required init?(coder aDecoder: NSCoder) {
-        viewModel = HomeViewModel()
+        viewModel = LoginViewModel()
         super.init(coder: aDecoder)
     }
     
@@ -88,11 +89,11 @@ class  LoginViewController: UIViewController {
 extension LoginViewController {
     // MARK: - UI Setting
     func configure() {
-        privacyKeyLabel.font = UIFont.NotoSansCJKkr(type: .medium, size: 14)
-        privacyKey.font = UIFont.NotoSansCJKkr(type: .regular, size: 14)
-        shape.layer.cornerRadius = 4
-        shape.layer.borderWidth = 1
-        shape.layer.borderColor = UIColor(red: 204, green: 204, blue: 204).cgColor
+        for s in shape {
+            s.layer.cornerRadius = 4
+            s.layer.borderWidth = 1
+            s.layer.borderColor = UIColor(red: 204, green: 204, blue: 204).cgColor
+        }
         login.applyBorderGradient(colors: [UIColor(red: 225, green: 229, blue: 245).cgColor,
                                       UIColor(red: 154, green: 173, blue: 224).cgColor,
                                        UIColor(red: 237, green: 106, blue: 201).cgColor])
@@ -108,15 +109,27 @@ extension LoginViewController {
         // ------------------------------
         //     INPUT
         // ------------------------------
-//        createWallet.rx.tap
-//            .throttle(500, scheduler: MainScheduler)
-//
-
+        nickname.rx.text
+            .orEmpty
+            .map{ $0 as String }
+            .bind(to: viewModel.nickname)
+            .disposed(by: disposeBag)
+        
+        privateKey.rx.text
+            .orEmpty
+            .map{ $0 as String }
+            .bind(to: viewModel.privateKey)
+            .disposed(by: disposeBag)
+        
+        password.rx.text
+            .orEmpty
+            .map{ $0 as String }
+            .bind(to: viewModel.password)
+            .disposed(by: disposeBag)
+        
         login.rx.tap
             .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] in
-                
-            })
+            .bind(to: viewModel.login)
             .disposed(by: disposeBag)
         
         signUp.rx.tap
@@ -129,11 +142,35 @@ extension LoginViewController {
         // ------------------------------
         //     Page Move
         // ------------------------------
-
+        viewModel.start
+            .filter{ $0 }
+            .bind { [weak self] _ in
+                let keyWindow = UIApplication.shared.connectedScenes
+                        .filter({$0.activationState == .foregroundActive})
+                        .map({$0 as? UIWindowScene})
+                        .compactMap({$0})
+                        .first?.windows
+                        .filter({$0.isKeyWindow}).first
+                let storyboard = UIStoryboard(name:"Main", bundle: nil)
+                if let viewController = storyboard.instantiateViewController(identifier: "SplashViewController") as? SplashViewController {
+                    keyWindow?.replaceRootViewController(viewController, animated: true, completion: nil)
+                }
+            }
+            .disposed(by: disposeBag)
+        
         // ------------------------------
         //     OUTPUT
         // ------------------------------
 
+        // Alert
+        viewModel.alertMessage
+            .skip(1)
+            .map{ $0 as String }
+            .subscribe(onNext: { [weak self] message in
+                self?.OKDialog(message)
+            })
+            .disposed(by: disposeBag)
+        
         // 에러 처리
         viewModel.errorMessage
             .map { $0.domain }
