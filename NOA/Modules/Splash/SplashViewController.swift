@@ -59,13 +59,20 @@ extension SplashViewController {
         // ------------------------------
         //     Page Move
         // ------------------------------
-
+        
         // 페이지 이동
-        viewModel.activated
-            .filter { !$0 }
-            .subscribe(onNext: { [weak self] _ in
-                self?.performSegue(withIdentifier: "MainSegue",
-                                   sender: nil)
+        viewModel.isLogin
+            .skip(1)
+            .map { $0 as Bool }
+            .delay(.milliseconds(1000), scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] status in
+                if status {
+                    self?.performSegue(withIdentifier: "MainSegue",
+                                       sender: nil)
+                } else {
+                    self?.performSegue(withIdentifier: "LoginSegue",
+                                       sender: nil)
+                }
             })
             .disposed(by: disposeBag)
 
