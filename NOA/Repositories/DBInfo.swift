@@ -46,4 +46,6 @@ struct DBInfo{
     static let nftUrl: String = "https://api.baobab.klaytn.net:8651"
     
     static let contractAddress: String = "0x60ACe5b3B6b718dd75aE7450EFDd98dedFd13D87"
+    
+    static let exhibitionUrl: String =  "https://noagallerybucket.s3.ap-northeast-2.amazonaws.com/test/index.html"
 }
