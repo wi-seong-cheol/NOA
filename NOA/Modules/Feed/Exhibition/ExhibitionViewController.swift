@@ -60,7 +60,7 @@ extension ExhibitionViewController {
         
         webView.allowsBackForwardNavigationGestures = true
         
-        if let url = URL(string: "https://m.officecheckin.com") {
+        if let url = URL(string: DBInfo.exhibitionUrl) {
             let request = URLRequest(url: url)
             webView.load(request)
         }
@@ -105,4 +105,3 @@ extension ExhibitionViewController: WKUIDelegate, WKNavigationDelegate {
         self.present(alert, animated: true, completion: nil)
     }
 }
-//, WKUIDelegate, WKNavigationDelegate
