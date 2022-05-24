@@ -17,17 +17,19 @@ class MyMessageCell: UITableViewCell {
     private let cellDisposeBag = DisposeBag()
     
     var disposeBag = DisposeBag()
-    let onData: AnyObserver<Lecture>
+    let onData: AnyObserver<MyMessageType>
     
     required init?(coder aDecoder: NSCoder) {
-        let data = PublishSubject<Lecture>()
+        let data = PublishSubject<MyMessageType>()
         
         onData = data.asObserver()
         
         super.init(coder: aDecoder)
         
         data.observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] lecture in
+            .subscribe(onNext: { [weak self] msg in
+                self?.message.text = msg.message
+                self?.timestamp.text = msg.timestamp
             })
             .disposed(by: cellDisposeBag)
     }
