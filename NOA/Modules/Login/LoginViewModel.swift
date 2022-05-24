@@ -22,7 +22,7 @@ protocol LoginViewModelType {
     var activated: Observable<Bool> { get }
     var alertMessage: Observable<String> { get }
     var errorMessage: Observable<NSError> { get }
-    func importWalletWith(privateKey: String) -> String
+    func importWalletWith(privateKey: String, _ completion: @escaping (String) -> Void)
 }
 
 class LoginViewModel: LoginViewModelType {
@@ -69,40 +69,45 @@ class LoginViewModel: LoginViewModelType {
                 if self?.nickname.value == "" || self?.privateKey.value == ""{
                     alert.onNext("빈칸을 채워주세요")
                 } else {
-                    let message = self?.importWalletWith(privateKey: (self?.privateKey.value)!)
-                    if message != "Success" {
-                        alert.onNext(message!)
-                    } else {
-                        startService.onNext(true)
-//                        alert.onNext("success")
+                    self?.importWalletWith(privateKey: (self?.privateKey.value)!) { message in
+                        if message != "Success" {
+                            alert.onNext(message)
+                        } else {
+                            startService.onNext(true)
+                            // alert.onNext("success")
+                        }
                     }
                 }
             })
             .disposed(by: disposeBag)
     }
     
-    func importWalletWith(privateKey: String) -> String {
+    func importWalletWith(privateKey: String, _ completion: @escaping (String) -> Void)  {
         let formattedKey = privateKey.trimmingCharacters(in: .whitespacesAndNewlines)
         guard let dataKey = Data.fromHex(formattedKey) else {
-            return "Please enter a valid Private key"
+            completion("Please enter a valid Private key")
+            return
         }
-        do {
-            let name = "New Wallet"
-            guard let keystore = try EthereumKeystoreV3(privateKey: dataKey, password: password.value) else {
-                return "Error"
+        DispatchQueue.global(qos: .background).async { [weak self] in
+            do {
+                let name = "New Wallet"
+                guard let keystore = try EthereumKeystoreV3(privateKey: dataKey, password: (self?.password.value)!) else {
+                    completion("Keystore get fail")
+                    return
+                }
+                let keyData = try JSONEncoder().encode(keystore.keystoreParams)
+                let address = keystore.addresses!.first!.address
+                let wallet = Wallet(address: address, data: keyData, name: name, isHD: false)
+                UserInfo.shared.saveWallet(wallet)
+                UserInfo.shared.saveIsLogin(true)
+                completion("Success")
+            } catch {
+    #if DEBUG
+                print("error creating keyStrore")
+                print("Private key error.")
+    #endif
+                completion("Please enter correct Private key")
             }
-            let keyData = try JSONEncoder().encode(keystore.keystoreParams)
-            let address = keystore.addresses!.first!.address
-            let wallet = Wallet(address: address, data: keyData, name: name, isHD: false)
-            UserInfo.shared.saveWallet(wallet)
-            UserInfo.shared.saveIsLogin(true)
-            return "Success"
-        } catch {
-#if DEBUG
-            print("error creating keyStrore")
-            print("Private key error.")
-#endif
-            return "Please enter correct Private key"
         }
     }
     
