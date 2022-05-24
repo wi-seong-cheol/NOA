@@ -20,7 +20,8 @@ class UserService: UserFetchable {
     
     // User Data 조회 메소드
     func getUserData()-> Observable<[UserResponse]> {
-        let URL = apiUrlService.serviceUrl(version: "", path: "/courseList")
+//        let URL = apiUrlService.serviceUrl(version: "", path: "/courseList")
+        let URL = apiUrlService.serviceUrl(.duplication)
         let query: [String: Any] = ["serviceKey": DBInfo.serviceKey, "Mobile": 1]
         return apiRequestService.getable(URL: URL, query: query, interceptor: .none) ?? Observable.empty()
     }
