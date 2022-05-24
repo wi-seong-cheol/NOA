@@ -23,6 +23,7 @@ class APIRequestService {
                                            encoding: URLEncoding.default,
                                            headers: header.headerSetting(),
                                            interceptor: interceptor)
+                .debug()
                 .mapObject(type: T.self)
         } else {
             if let vc = UIApplication.topViewController() {
@@ -39,6 +40,7 @@ class APIRequestService {
                                            encoding: JSONEncoding.default,
                                            headers: header.headerSetting(),
                                            interceptor: interceptor)
+                .debug()
                 .mapObject(type: T.self)
         }else {
             let window = UIApplication.shared.windows.first { $0.isKeyWindow } //최상단 뷰 select
@@ -47,7 +49,44 @@ class APIRequestService {
             }
             return nil
         }
-        
+    }
+    
+    func postUploadable<T:Codable>(data: Data, URL: String, body:[String:Any]?, interceptor: Interceptor?)-> Observable<T>? {
+        if isInternetAvailable() {
+            return Observable<T>.create { observer in
+                let dataRequest = AF.upload(multipartFormData: { multipartFormData in
+                    if let body = body {
+                        for (key, value) in body {
+                            multipartFormData.append("\(value)".data(using: .utf8)!, withName: key)
+                        }
+                    }
+                    let uuid = UUID().uuidString
+                    multipartFormData.append(data, withName: "img", fileName: "\(uuid).jpg", mimeType: "image/jpg")
+                    print("-> \(multipartFormData.contentLength)")
+                },to: URL, method: .post, headers: self.header.headerSetting(), interceptor: interceptor).responseData
+                { response in
+                    switch response.result {
+                    case .success(let data) : do {
+                        let model : T = try JSONDecoder().decode(T.self, from: data)
+                        observer.onNext(model)
+                    }
+                        catch let error {
+                            observer.onError(error)
+                        }
+                    case .failure(let error):
+                        observer.onError(error)
+                    }
+                    observer.onCompleted()
+                }
+                return Disposables.create { dataRequest.cancel() }
+            }
+        } else {
+            let window = UIApplication.shared.windows.first { $0.isKeyWindow } //최상단 뷰 select
+            if let vc = window?.rootViewController {
+                globalAlert.commonAlert(title: "네트워크 연결 확인\n", content: "네트워크 연결이 되어있지 않습니다.\n연결상태를 확인해주세요.", vc: vc)
+            }
+            return nil
+        }
     }
     
     func deletaable<T:Codable>(URL:String, body:[String:Any]?, interceptor: Interceptor?)-> Observable<T>? {
@@ -83,7 +122,44 @@ class APIRequestService {
             }
             return nil
         }
-        
+    }
+    
+    func putUploadable<T:Codable>(data: Data, URL: String, body:[String:Any]?, interceptor: Interceptor?)-> Observable<T>? {
+        if isInternetAvailable() {
+            return Observable<T>.create { observer in
+                let dataRequest = AF.upload(multipartFormData: { multipartFormData in
+                    if let body = body {
+                        for (key, value) in body {
+                            multipartFormData.append("\(value)".data(using: .utf8)!, withName: key)
+                        }
+                    }
+                    let uuid = UUID().uuidString
+                    multipartFormData.append(data, withName: "img", fileName: "\(uuid).jpg", mimeType: "image/jpg")
+                    print("-> \(multipartFormData.contentLength)")
+                },to: URL, method: .put, headers: self.header.headerSetting(), interceptor: interceptor).responseData
+                { response in
+                    switch response.result {
+                    case .success(let data) : do {
+                        let model : T = try JSONDecoder().decode(T.self, from: data)
+                        observer.onNext(model)
+                    }
+                        catch let error {
+                            observer.onError(error)
+                        }
+                    case .failure(let error):
+                        observer.onError(error)
+                    }
+                    observer.onCompleted()
+                }
+                return Disposables.create { dataRequest.cancel() }
+            }
+        } else {
+            let window = UIApplication.shared.windows.first { $0.isKeyWindow } //최상단 뷰 select
+            if let vc = window?.rootViewController {
+                globalAlert.commonAlert(title: "네트워크 연결 확인\n", content: "네트워크 연결이 되어있지 않습니다.\n연결상태를 확인해주세요.", vc: vc)
+            }
+            return nil
+        }
     }
     
     func patchable<T:Codable>(URL:String, body:[String:Any]?, interceptor: Interceptor?)-> Observable<T>? {
