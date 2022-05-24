@@ -230,7 +230,16 @@
                             <constraint firstItem="YbC-UV-6qq" firstAttribute="trailing" secondItem="7Ki-Os-I1E" secondAttribute="trailing" constant="10" id="kV6-28-8yj"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="RpW-bj-1Qi"/>
+                    <navigationItem key="navigationItem" id="RpW-bj-1Qi">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="LcF-Y9-iZT">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="sMf-h9-wZi">
+                                <rect key="frame" x="302" y="5" width="92" height="34.5"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="수정"/>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="nickname" destination="7Ki-Os-I1E" id="7XW-AX-fb8"/>
                         <outlet property="profile" destination="1hL-zz-LPW" id="Tvw-6P-ylx"/>
