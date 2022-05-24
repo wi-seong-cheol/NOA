@@ -94,6 +94,9 @@ extension LoginViewController {
             s.layer.borderWidth = 1
             s.layer.borderColor = UIColor(red: 204, green: 204, blue: 204).cgColor
         }
+        nickname.font = UIFont.NotoSansCJKkr(type: .regular, size: 14)
+        privateKey.font = UIFont.NotoSansCJKkr(type: .regular, size: 14)
+        password.font = UIFont.NotoSansCJKkr(type: .regular, size: 14)
         login.applyBorderGradient(colors: [UIColor(red: 225, green: 229, blue: 245).cgColor,
                                       UIColor(red: 154, green: 173, blue: 224).cgColor,
                                        UIColor(red: 237, green: 106, blue: 201).cgColor])
@@ -102,6 +105,8 @@ extension LoginViewController {
                                        UIColor(red: 237, green: 106, blue: 201).cgColor])
         login.titleLabel?.font = UIFont.NotoSansCJKkr(type: .medium, size: 14)
         signUp.titleLabel?.font = UIFont.NotoSansCJKkr(type: .medium, size: 14)
+        self.navigationController?.navigationBar.tintColor = .black
+        self.navigationController?.navigationBar.topItem?.title = ""
     }
     
     // MARK: - UI Binding
