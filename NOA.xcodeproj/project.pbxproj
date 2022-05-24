@@ -10,6 +10,7 @@
 		08B6A19C8BCD75727DAD8188 /* Pods_NOATests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7D77AF13124344D25470DC3 /* Pods_NOATests.framework */; };
 		4D1BEC4F28199B6D006D12D6 /* UIFont + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1BEC4E28199B6D006D12D6 /* UIFont + Extension.swift */; };
 		4D1BEC5228199F75006D12D6 /* UILabel + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1BEC5128199F75006D12D6 /* UILabel + Extension.swift */; };
+		4D1CD693283A25F700305A41 /* ABI.json in Resources */ = {isa = PBXBuildFile; fileRef = 4D1CD692283A24FE00305A41 /* ABI.json */; };
 		4D26A0AE2818FDA700D0C75F /* ChattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D26A0AD2818FDA700D0C75F /* ChattingViewController.swift */; };
 		4D26A0B02818FDB500D0C75F /* ChattingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D26A0AF2818FDB500D0C75F /* ChattingViewModel.swift */; };
 		4D26A0B22819057A00D0C75F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D26A0B12819057A00D0C75F /* ProfileViewController.swift */; };
@@ -47,6 +48,9 @@
 		4D776D9D2820DA3D00112A96 /* SearchWorkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D776D9C2820DA3D00112A96 /* SearchWorkViewModel.swift */; };
 		4D77B5582805D26A00C2E90D /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D77B5572805D26A00C2E90D /* SplashViewModel.swift */; };
 		4D77B55A2805D75900C2E90D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4D77B5592805D75900C2E90D /* GoogleService-Info.plist */; };
+		4D79BE452837E5D6001513B2 /* Wallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D79BE442837E5D6001513B2 /* Wallet.swift */; };
+		4D7AE8BD2838B6B8002B7080 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7AE8BC2838B6B8002B7080 /* Storage.swift */; };
+		4D7AE8BF2838E10E002B7080 /* Window + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7AE8BE2838E10E002B7080 /* Window + Extension.swift */; };
 		4D8A2DE528094442007F3EF2 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8A2DE428094442007F3EF2 /* ImageLoader.swift */; };
 		4D8C47E12806F3A400E667B1 /* DBInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8C47E02806F3A400E667B1 /* DBInfo.swift */; };
 		4D8C47E32806F57500E667B1 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8C47E22806F57500E667B1 /* Test.swift */; };
@@ -140,6 +144,7 @@
 		463155DA60952C99D9637A1C /* Pods-NOA.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NOA.release.xcconfig"; path = "Target Support Files/Pods-NOA/Pods-NOA.release.xcconfig"; sourceTree = "<group>"; };
 		4D1BEC4E28199B6D006D12D6 /* UIFont + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont + Extension.swift"; sourceTree = "<group>"; };
 		4D1BEC5128199F75006D12D6 /* UILabel + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel + Extension.swift"; sourceTree = "<group>"; };
+		4D1CD692283A24FE00305A41 /* ABI.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ABI.json; sourceTree = "<group>"; };
 		4D26A0AD2818FDA700D0C75F /* ChattingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingViewController.swift; sourceTree = "<group>"; };
 		4D26A0AF2818FDB500D0C75F /* ChattingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingViewModel.swift; sourceTree = "<group>"; };
 		4D26A0B12819057A00D0C75F /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -181,6 +186,9 @@
 		4D776D9C2820DA3D00112A96 /* SearchWorkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchWorkViewModel.swift; sourceTree = "<group>"; };
 		4D77B5572805D26A00C2E90D /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
 		4D77B5592805D75900C2E90D /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		4D79BE442837E5D6001513B2 /* Wallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wallet.swift; sourceTree = "<group>"; };
+		4D7AE8BC2838B6B8002B7080 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
+		4D7AE8BE2838E10E002B7080 /* Window + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Window + Extension.swift"; sourceTree = "<group>"; };
 		4D8A2DE428094442007F3EF2 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		4D8C47E02806F3A400E667B1 /* DBInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBInfo.swift; sourceTree = "<group>"; };
 		4D8C47E22806F57500E667B1 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
@@ -499,6 +507,7 @@
 			isa = PBXGroup;
 			children = (
 				4DC03D1F28069B4900CEE554 /* Feed.json */,
+				4D1CD692283A24FE00305A41 /* ABI.json */,
 			);
 			path = Json;
 			sourceTree = "<group>";
@@ -515,6 +524,7 @@
 				4D54C7C5280E846400F2AC0D /* UIScrollView + Extension.swift */,
 				4D8C47E4280709ED00E667B1 /* UIViewController + Extension.swift */,
 				4D33D86B283282CB004B17CC /* UIButton + Extension.swift */,
+				4D7AE8BE2838E10E002B7080 /* Window + Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -543,6 +553,7 @@
 				4D8C47E22806F57500E667B1 /* Test.swift */,
 				4DBF570D2816A0A90056967C /* Chat.swift */,
 				4DA4B6AE282023880055F084 /* Search.swift */,
+				4D79BE442837E5D6001513B2 /* Wallet.swift */,
 				4D8DDB822823CF4A00FD374D /* Message */,
 			);
 			path = Models;
@@ -562,6 +573,7 @@
 			children = (
 				4DC03D302806B4B100CEE554 /* GlobalAlert.swift */,
 				4DC03D362806BAE500CEE554 /* ReadPList.swift */,
+				4D7AE8BC2838B6B8002B7080 /* Storage.swift */,
 			);
 			path = Utiles;
 			sourceTree = "<group>";
@@ -833,6 +845,7 @@
 				4DCCD12E28007EBA0035002A /* Upload.storyboard in Resources */,
 				4D9D5BE8281A8C8A00343332 /* Setting.storyboard in Resources */,
 				4DCCD13C280080F40035002A /* Main.storyboard in Resources */,
+				4D1CD693283A25F700305A41 /* ABI.json in Resources */,
 				4D33602227E8C8EB007640F7 /* Assets.xcassets in Resources */,
 				4DC03D232806A9E500CEE554 /* NotoSansCJKkr-Medium.otf in Resources */,
 				4DC03D242806A9E500CEE554 /* NotoSansCJKkr-Regular.otf in Resources */,
@@ -1013,11 +1026,13 @@
 				4D26A0D328193B5400D0C75F /* UploadViewController.swift in Sources */,
 				4D6D35562801CD080001B18F /* Feed.swift in Sources */,
 				4DD5C37D282A1CAC00D64088 /* ProfileEditViewController.swift in Sources */,
+				4D79BE452837E5D6001513B2 /* Wallet.swift in Sources */,
 				4DC03D262806AD0100CEE554 /* APIRequestService.swift in Sources */,
 				4D26A0CC2819147B00D0C75F /* MenuCell.swift in Sources */,
 				4DD5C377282A0ED800D64088 /* InformationViewController.swift in Sources */,
 				4D33601827E8C8E9007640F7 /* SceneDelegate.swift in Sources */,
 				4DD91C73281ED3A900678943 /* SettingViewController.swift in Sources */,
+				4D7AE8BD2838B6B8002B7080 /* Storage.swift in Sources */,
 				4D8C47E32806F57500E667B1 /* Test.swift in Sources */,
 				4D8DDB7B2823CC3600FD374D /* OtherMessageCell.swift in Sources */,
 				4DCCD11A28007C330035002A /* SplashViewController.swift in Sources */,
@@ -1044,6 +1059,7 @@
 				4DBF570C28159A170056967C /* ChatTableCell.swift in Sources */,
 				4D33D86A28327F81004B17CC /* SignUpViewController.swift in Sources */,
 				4DBF57142816A4840056967C /* ChatListLocalDB.swift in Sources */,
+				4D7AE8BF2838E10E002B7080 /* Window + Extension.swift in Sources */,
 				4D26A0B22819057A00D0C75F /* ProfileViewController.swift in Sources */,
 				4DA4B6AD282022D60055F084 /* SearchService.swift in Sources */,
 				4DFA7528281446F000468763 /* ChatViewModel.swift in Sources */,
