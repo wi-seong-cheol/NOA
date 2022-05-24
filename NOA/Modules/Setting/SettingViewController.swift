@@ -69,12 +69,25 @@ extension SettingViewController {
         //     INPUT
         // ------------------------------
         self.tableView.rx.itemSelected
+            
             .subscribe(onNext: { [weak self] indexPath in
                 switch(indexPath.row) {
                 case 0:
                     self?.performSegue(withIdentifier: "InfoSegue", sender: nil)
                     break
                 case 1:
+                    print("click")
+                    UserInfo.shared.saveIsLogin(false)
+                    let keyWindow = UIApplication.shared.connectedScenes
+                            .filter({$0.activationState == .foregroundActive})
+                            .map({$0 as? UIWindowScene})
+                            .compactMap({$0})
+                            .first?.windows
+                            .filter({$0.isKeyWindow}).first
+                    let storyboard = UIStoryboard(name:"Main", bundle: nil)
+                    if let viewController = storyboard.instantiateViewController(identifier: "SplashViewController") as? SplashViewController {
+                        keyWindow?.replaceRootViewController(viewController, animated: true, completion: nil)
+                    }
                     break
                 case 2:
                     break
@@ -83,16 +96,24 @@ extension SettingViewController {
                 }
             })
             .disposed(by: disposeBag)
-        // 처음 로딩할 때 하고, 당겨서 새로고침 할 때
         
-        // 무한 스크롤
+            
 
         // ------------------------------
         //     Page Move
         // ------------------------------
 
         // 페이지 이동
-
+        viewModel.present
+            .skip(1)
+            .filter{ $0 }
+            .subscribe(onNext: {[weak self] _ in
+                let storyboard = UIStoryboard(name:"Main", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "SplashViewController")
+                self?.present(vc, animated: true, completion: nil)
+            })
+            .disposed(by: disposeBag)
+        
         // ------------------------------
         //     OUTPUT
         // ------------------------------
