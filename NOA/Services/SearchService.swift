@@ -7,6 +7,7 @@
 
 import Foundation
 import RxSwift
+import Alamofire
 
 protocol SearchFetchable {
     func search(_ keyword: String) -> Observable<[Search]>
@@ -20,14 +21,16 @@ class SearchService: SearchFetchable {
     
     //포스트 리스트 조회 메소드
     func search(_ keyword: String) -> Observable<[Search]> {
+        let interceptor: Interceptor = Interceptor(interceptors: [BaseInterceptor()])
         guard !keyword.isEmpty else {
             return Observable.just([])
         }
-        let URL = "https://api.github.com/users/\(keyword)/repos"
+        let URL: String = apiUrlService.serviceUrl(.searchTitleContent)
         if keyword != "", let cachedData = self.cache[keyword] {
             return Observable.just(cachedData)
         } else {
-            return apiRequestService.getable(URL: URL, query: [:], interceptor: .none)!
+            let query: [String: Any] = ["word": keyword]
+            return apiRequestService.getable(URL: URL, query: query, interceptor: interceptor)!
                 .do(onNext: { data in
                     if keyword != "" {
                         self.cache[keyword] = data
