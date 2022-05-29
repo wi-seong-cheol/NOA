@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+enum WalletError: Error {
+    case validation(String)
+    case notFound(String)
+    case unable(String)
+}
