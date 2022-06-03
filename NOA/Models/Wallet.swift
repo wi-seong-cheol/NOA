@@ -8,6 +8,17 @@
 import Foundation
 import web3swift
 
+struct WalletResponse: Codable {
+    let walletAddress: String
+    let privateKey: String
+    
+    init(walletAddress: String,
+         privateKey: String) {
+        self.walletAddress = walletAddress
+        self.privateKey = privateKey
+    }
+}
+
 struct Wallet: Codable {
     enum walletType {
         case EthereumKeystoreV3
