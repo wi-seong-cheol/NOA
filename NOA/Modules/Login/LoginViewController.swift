@@ -17,7 +17,6 @@ class  LoginViewController: UIViewController {
     @IBOutlet weak var signUp: UIButton!
     @IBOutlet weak var nickname: UITextField!
     @IBOutlet weak var privateKey: UITextField!
-    @IBOutlet weak var password: UITextField!
     @IBOutlet var shape: [UIView]!
     
     var _mnemonics: String = ""
@@ -29,25 +28,24 @@ class  LoginViewController: UIViewController {
                 y: self.view.frame.height/2 - 25,
                 width: 50,
                 height: 50),
-            type: .ballScaleMultiple,
+            type: .circleStrokeSpin,
             color: .black,
             padding: 0)
         
         indicator.center = self.view.center
                 
         // 기타 옵션
-        indicator.color = .purple
+        indicator.color = UIColor(red: 237, green: 106, blue: 201)
         
-        indicator.stopAnimating()
         return indicator
     }()
     
-    let viewModel: LoginViewModelType
+    let viewModel: LoginViewModel
     var disposeBag = DisposeBag()
 
     // MARK: - Life Cycle
 
-    init(viewModel: LoginViewModelType = LoginViewModel()) {
+    init(viewModel: LoginViewModel = LoginViewModel()) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -73,17 +71,6 @@ class  LoginViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        let identifier = segue.identifier ?? ""
-//
-//        if identifier == "HomeDetailSegue",
-//           let selectedFeed = sender as? Lecture,
-//           let feedVC = segue.destination as? HomeDetailViewController {
-//            let feedViewModel = HomeDetailViewModel(selectedFeed)
-//            feedVC.viewModel = feedViewModel
-//        }
-    }
 }
 
 extension LoginViewController {
@@ -96,7 +83,6 @@ extension LoginViewController {
         }
         nickname.font = UIFont.NotoSansCJKkr(type: .regular, size: 14)
         privateKey.font = UIFont.NotoSansCJKkr(type: .regular, size: 14)
-        password.font = UIFont.NotoSansCJKkr(type: .regular, size: 14)
         login.applyBorderGradient(colors: [UIColor(red: 225, green: 229, blue: 245).cgColor,
                                       UIColor(red: 154, green: 173, blue: 224).cgColor,
                                        UIColor(red: 237, green: 106, blue: 201).cgColor])
@@ -105,8 +91,11 @@ extension LoginViewController {
                                        UIColor(red: 237, green: 106, blue: 201).cgColor])
         login.titleLabel?.font = UIFont.NotoSansCJKkr(type: .medium, size: 14)
         signUp.titleLabel?.font = UIFont.NotoSansCJKkr(type: .medium, size: 14)
+        self.view.addSubview(indicator)
+        
         self.navigationController?.navigationBar.tintColor = .black
         self.navigationController?.navigationBar.topItem?.title = ""
+        self.hideKeyboard()
     }
     
     // MARK: - UI Binding
@@ -117,24 +106,18 @@ extension LoginViewController {
         nickname.rx.text
             .orEmpty
             .map{ $0 as String }
-            .bind(to: viewModel.nickname)
+            .bind(to: viewModel.input.nickname)
             .disposed(by: disposeBag)
         
         privateKey.rx.text
             .orEmpty
             .map{ $0 as String }
-            .bind(to: viewModel.privateKey)
-            .disposed(by: disposeBag)
-        
-        password.rx.text
-            .orEmpty
-            .map{ $0 as String }
-            .bind(to: viewModel.password)
+            .bind(to: viewModel.input.privateKey)
             .disposed(by: disposeBag)
         
         login.rx.tap
             .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
-            .bind(to: viewModel.login)
+            .bind(to: viewModel.input.login)
             .disposed(by: disposeBag)
         
         signUp.rx.tap
@@ -147,9 +130,9 @@ extension LoginViewController {
         // ------------------------------
         //     Page Move
         // ------------------------------
-        viewModel.start
+        viewModel.output.start
             .filter{ $0 }
-            .bind { [weak self] _ in
+            .bind { _ in
                 let keyWindow = UIApplication.shared.connectedScenes
                         .filter({$0.activationState == .foregroundActive})
                         .map({$0 as? UIWindowScene})
@@ -166,9 +149,23 @@ extension LoginViewController {
         // ------------------------------
         //     OUTPUT
         // ------------------------------
-
+        
+        viewModel.output.activated
+            .skip(1)
+            .map { $0 }
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: {[weak self] finished in
+                print("-> \(finished)")
+                if finished {
+                    self?.indicator.startAnimating()
+                } else {
+                    self?.indicator.stopAnimating()
+                }
+            })
+            .disposed(by: disposeBag)
+                
         // Alert
-        viewModel.alertMessage
+        viewModel.output.alertMessage
             .skip(1)
             .map{ $0 as String }
             .subscribe(onNext: { [weak self] message in
@@ -177,7 +174,7 @@ extension LoginViewController {
             .disposed(by: disposeBag)
         
         // 에러 처리
-        viewModel.errorMessage
+        viewModel.output.errorMessage
             .map { $0.domain }
             .subscribe(onNext: { [weak self] message in
                 self?.OKDialog("Order Fail")
