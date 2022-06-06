@@ -8,110 +8,151 @@
 import Foundation
 import RxSwift
 import RxRelay
+import RxCocoa
 import web3swift
 
 protocol LoginViewModelType {
+    associatedtype Input
+    associatedtype Output
+    
     // MARK: INPUT
-    var login: AnyObserver<Void> { get }
-    var password: BehaviorRelay<String> { get }
-    var nickname: BehaviorRelay<String> { get }
-    var privateKey: BehaviorRelay<String> { get }
+    var login$: PublishSubject<Void> { get }
+    var nickname$: BehaviorSubject<String> { get }
+    var privateKey$: BehaviorSubject<String> { get }
     
     // MARK: OUTPUT
-    var start: Observable<Bool> { get }
-    var activated: Observable<Bool> { get }
-    var alertMessage: Observable<String> { get }
-    var errorMessage: Observable<NSError> { get }
-    func importWalletWith(privateKey: String, _ completion: @escaping (String) -> Void)
+    var start$: Observable<Bool> { get }
+    var activated$: Observable<Bool> { get }
+    var alertMessage$: Observable<String> { get }
+    var errorMessage$: Observable<Error> { get }
 }
 
 class LoginViewModel: LoginViewModelType {
     
     let disposeBag = DisposeBag()
     
+    struct Input {
+        var login: AnyObserver<Void>
+        var walletAddress: AnyObserver<String>
+        var nickname: AnyObserver<String>
+        var privateKey: AnyObserver<String>
+    }
+    
+    struct Output {
+        var start: Observable<Bool>
+        var activated: Observable<Bool>
+        var alertMessage: Observable<String>
+        var errorMessage: Observable<NSError>
+    }
+    
+    let input: Input
+    let output: Output
+    
     // MARK: INPUT
-    let login: AnyObserver<Void>
-    let password = BehaviorRelay<String>(value: "")
-    let nickname = BehaviorRelay<String>(value: "")
-    let privateKey = BehaviorRelay<String>(value: "")
+    internal let login$: PublishSubject<Void>
+    internal let nickname$: BehaviorSubject<String>
+    internal let privateKey$: BehaviorSubject<String>
+    internal let walletAddress$: BehaviorSubject<String>
     
     // MARK: OUTPUT
-    let start: Observable<Bool>
-    let activated: Observable<Bool>
-    let alertMessage: Observable<String>
-    let errorMessage: Observable<NSError>
+    internal let start$: Observable<Bool>
+    internal let activated$: Observable<Bool>
+    internal let alertMessage$: Observable<String>
+    internal let errorMessage$: Observable<Error>
     
-    init(service: FeedFetchable = FeedService()) {
-        let loggingIn = PublishSubject<Void>()
+    init(service: AuthFetchable = AuthService()) {
+        // MARK: Input
+        let login$ = PublishSubject<Void>()
+        let nickname$ = BehaviorSubject<String>(value: "")
+        let privateKey$ = BehaviorSubject<String>(value: "")
+        let walletAddress$ = BehaviorSubject<String>(value: "")
         
-        let activating = BehaviorSubject<Bool>(value: false)
-        let startService = BehaviorSubject<Bool>(value: false)
-        let alert = BehaviorSubject<String>(value: "")
-        let error = PublishSubject<Error>()
-                        
+        // MARK: Output
+        let start$ = BehaviorSubject<Bool>(value: false)
+        let activated$ = BehaviorSubject<Bool>(value: false)
+        let alertMessage$ = BehaviorSubject<String>(value: "")
+        let errorMessage$ = PublishSubject<Error>()
         
-        // MARK: OUTPUT
-        
-        start = startService.map { $0 as Bool }
-        
-        alertMessage = alert.map { $0 as String }
-        
-        errorMessage = error.map { $0 as NSError }
-        
-        activated = activating.distinctUntilChanged()
-        
-        
+
         // MARK: INPUT
-        login = loggingIn.asObserver()
+        self.input = Input(login: login$.asObserver(),
+                           walletAddress: walletAddress$.asObserver(),
+                           nickname: nickname$.asObserver(),
+                           privateKey: privateKey$.asObserver())
         
-        loggingIn
-            .subscribe(onNext: { [weak self] in
-                if self?.nickname.value == "" || self?.privateKey.value == ""{
-                    alert.onNext("빈칸을 채워주세요")
+        self.login$ = login$
+        self.nickname$ = nickname$
+        self.privateKey$ = privateKey$
+        self.walletAddress$ = walletAddress$
+        
+        login$
+            .filter{
+                if (try! nickname$.value() == "") || (try! privateKey$.value() == "" ){
+                    alertMessage$.onNext("빈칸을 채워주세요")
+                    activated$.onNext(false)
+                    return false
+                } else { return true }
+            }
+            .do(onNext: { _ in activated$.onNext(true) })
+            .observe(on: ConcurrentDispatchQueueScheduler(qos: .background))
+            .flatMapLatest{ service.importWalletWith(privateKey: try! privateKey$.value())}
+            .filter{ result in
+                if !validation(result.walletAddress) {
+                    return false
                 } else {
-                    self?.importWalletWith(privateKey: (self?.privateKey.value)!) { message in
-                        if message != "Success" {
-                            alert.onNext(message)
-                        } else {
-                            startService.onNext(true)
-                            // alert.onNext("success")
-                        }
+                    walletAddress$.onNext(result.walletAddress)
+                    return true
+                }
+            }
+            .flatMapLatest{_ in service.login(nickname: try! nickname$.value(), address: try! walletAddress$.value())}
+            .do(onNext: { _ in activated$.onNext(false) })
+            .do(onError: { err in
+                activated$.onNext(false)
+                errorMessage$.onNext(err)
+            })
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { result in
+//                print(result.datax)
+                if result.status_code == 200 {
+                    guard let data = result.data else {
+                        return
                     }
+                    Token.shared.save(account: "accessToken", value: data.accessToken)
+                    Token.shared.save(account: "refreshToken", value: data.accessToken)
+                    var user = UserInfo.shared.getUser()
+                    user.id = data.user_code
+                    UserInfo.shared.saveUser(user)
+                    UserInfo.shared.saveIsLogin(true)
+                    start$.onNext(true)
+                } else {
+                    alertMessage$.onNext("닉네임과 PrivateKey를 확인해주세요.")
                 }
             })
             .disposed(by: disposeBag)
+                
+        
+        // MARK: OUTPUT
+        
+        self.output = Output(start: start$.map { $0 as Bool },
+                             activated: activated$.distinctUntilChanged(),
+                             alertMessage: alertMessage$.map { $0 as String },
+                             errorMessage: errorMessage$.map { $0 as NSError })
+                
+        self.start$ = start$
+        self.activated$ = activated$
+        self.alertMessage$ = alertMessage$
+        self.errorMessage$ = errorMessage$
     }
+}
+
+private func validation(_ walletAddress: String) -> Bool {
+    let pattern = "^0x[a-fA-F0-9]{40}$"
+    let address = NSPredicate(format: "SELF MATCHES %@", pattern)
+    let isValid = address.evaluate(with: walletAddress)
     
-    func importWalletWith(privateKey: String, _ completion: @escaping (String) -> Void)  {
-        let formattedKey = privateKey.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard let dataKey = Data.fromHex(formattedKey) else {
-            completion("Please enter a valid Private key")
-            return
-        }
-        DispatchQueue.global(qos: .background).async { [weak self] in
-            do {
-                let name = "New Wallet"
-                guard let keystore = try EthereumKeystoreV3(privateKey: dataKey, password: (self?.password.value)!) else {
-                    completion("Keystore get fail")
-                    return
-                }
-                let keyData = try JSONEncoder().encode(keystore.keystoreParams)
-                let address = keystore.addresses!.first!.address
-                let wallet = Wallet(address: address, data: keyData, name: name, isHD: false)
-                UserInfo.shared.saveWallet(wallet)
-                UserInfo.shared.saveIsLogin(true)
-                completion("Success")
-            } catch {
-    #if DEBUG
-                print("error creating keyStrore")
-                print("Private key error.")
-    #endif
-                completion("Please enter correct Private key")
-            }
-        }
-    }
-    
+    return isValid
 }
 // 0x6FCA51AD4461eE27Ae92f3e11596b23EC107b4a7
-// d16b6f87af2c110e957a3564d461f168174e0bbf1c38b4338ca2652227c8eabe
+// d16b6f87af2c110e957a3564d461f168174e0bbf1c38b4338ca2652227c8eabed16b6f87af2c110e957a3564d461f168174e0bbf1c38b4338ca2652227c8eabed16b6f87af2c110e957a3564d461f168174e0bbf1c38b4338ca2652227c8eabed16b6f87af2c110e957a3564d461f168174e0bbf1c38b4338ca2652227c8eabe
 // noa12345
+//62826d11709638661f985034350ef489716500870a30cad82efd605999cf9603
