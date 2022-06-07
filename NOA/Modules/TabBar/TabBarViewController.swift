@@ -66,7 +66,7 @@ extension TabBarViewController: UINavigationControllerDelegate, CropViewControll
         let vc = storyboard.instantiateViewController(withIdentifier: "Upload")// as! UploadViewController
         vc.modalPresentationStyle = .fullScreen
         vc.modalTransitionStyle = .crossDissolve
-        UserInfo.shared.setImage("workImage", image, 1.0)
+        UserInfo.shared.setImage("workImage", image, 0.1)
         
         self.dismiss(animated: true, completion: nil)
         self.present(vc, animated: true, completion: nil)
