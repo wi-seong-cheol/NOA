@@ -58,10 +58,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1fK-k2-Gss">
-                                <rect key="frame" x="10" y="280.66666666666669" width="408" height="365.00000000000006"/>
+                                <rect key="frame" x="10" y="305.66666666666669" width="408" height="315.00000000000006"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JDH-cc-sNL">
-                                        <rect key="frame" x="0.0" y="280.99999999999994" width="408" height="40"/>
+                                        <rect key="frame" x="0.0" y="230.99999999999994" width="408" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="ZrZ-oP-gQD"/>
                                         </constraints>
@@ -71,7 +71,7 @@
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tlx-YB-Xsm">
-                                        <rect key="frame" x="0.0" y="330.99999999999994" width="408" height="34"/>
+                                        <rect key="frame" x="0.0" y="280.99999999999994" width="408" height="34"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="회원가입">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -96,6 +96,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="18" id="Et6-fa-ZMl"/>
                                         </constraints>
+                                        <color key="textColor" red="0.43921568630000002" green="0.43921568630000002" blue="0.43921568630000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
@@ -104,6 +105,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="18" id="9lI-Ok-7QZ"/>
                                         </constraints>
+                                        <color key="textColor" red="0.4392156862745098" green="0.4392156862745098" blue="0.4392156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
@@ -114,21 +116,6 @@
                                             <constraint firstAttribute="height" constant="8" id="bdy-jr-zpF"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yEb-hF-FQ9">
-                                        <rect key="frame" x="0.0" y="232.99999999999994" width="408" height="8"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="8" id="4kh-1g-9gQ"/>
-                                        </constraints>
-                                    </view>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="패스워드" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ksH-oY-ILh">
-                                        <rect key="frame" x="10" y="211" width="388" height="18"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="18" id="FKz-8G-ax6"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
-                                    </textField>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
@@ -137,22 +124,16 @@
                                     <constraint firstAttribute="trailing" secondItem="R7f-65-YzT" secondAttribute="trailing" constant="10" id="27O-VW-Al4"/>
                                     <constraint firstItem="wmD-Nb-eMF" firstAttribute="top" secondItem="ACO-k8-33c" secondAttribute="bottom" constant="4" id="39I-a8-yes"/>
                                     <constraint firstItem="3tb-pZ-nm1" firstAttribute="top" secondItem="1fK-k2-Gss" secondAttribute="top" id="9FA-ld-aDZ"/>
-                                    <constraint firstAttribute="trailing" secondItem="ksH-oY-ILh" secondAttribute="trailing" constant="10" id="BjU-jZ-lqP"/>
-                                    <constraint firstItem="ksH-oY-ILh" firstAttribute="top" secondItem="wX7-db-o76" secondAttribute="bottom" constant="20" id="Cdy-vq-3VL"/>
-                                    <constraint firstAttribute="trailing" secondItem="yEb-hF-FQ9" secondAttribute="trailing" id="JdN-3d-e72"/>
                                     <constraint firstItem="ACO-k8-33c" firstAttribute="top" secondItem="3tb-pZ-nm1" secondAttribute="bottom" constant="75" id="LDW-QF-onn"/>
                                     <constraint firstItem="wmD-Nb-eMF" firstAttribute="leading" secondItem="1fK-k2-Gss" secondAttribute="leading" id="PK0-AW-9Zx"/>
-                                    <constraint firstItem="yEb-hF-FQ9" firstAttribute="leading" secondItem="1fK-k2-Gss" secondAttribute="leading" id="Qio-vg-8hv"/>
                                     <constraint firstItem="R7f-65-YzT" firstAttribute="leading" secondItem="1fK-k2-Gss" secondAttribute="leading" constant="10" id="RMp-Vf-mhl"/>
                                     <constraint firstAttribute="trailing" secondItem="wmD-Nb-eMF" secondAttribute="trailing" id="UUJ-iz-nR8"/>
+                                    <constraint firstItem="JDH-cc-sNL" firstAttribute="top" secondItem="wX7-db-o76" secondAttribute="bottom" constant="40" id="Vy5-O7-dZY"/>
                                     <constraint firstAttribute="bottom" secondItem="Tlx-YB-Xsm" secondAttribute="bottom" id="Wpc-mr-yBJ"/>
                                     <constraint firstAttribute="trailing" secondItem="ACO-k8-33c" secondAttribute="trailing" constant="10" id="Y5y-md-CaL"/>
-                                    <constraint firstItem="JDH-cc-sNL" firstAttribute="top" secondItem="yEb-hF-FQ9" secondAttribute="bottom" constant="40" id="act-6k-meb"/>
-                                    <constraint firstItem="ksH-oY-ILh" firstAttribute="leading" secondItem="1fK-k2-Gss" secondAttribute="leading" constant="10" id="dSW-Qr-HGG"/>
                                     <constraint firstItem="ACO-k8-33c" firstAttribute="leading" secondItem="1fK-k2-Gss" secondAttribute="leading" constant="10" id="fEW-Xx-M4O"/>
                                     <constraint firstItem="wX7-db-o76" firstAttribute="top" secondItem="R7f-65-YzT" secondAttribute="bottom" constant="4" id="ffZ-Fa-v0A"/>
                                     <constraint firstAttribute="trailing" secondItem="Tlx-YB-Xsm" secondAttribute="trailing" id="gts-UO-lIA"/>
-                                    <constraint firstItem="yEb-hF-FQ9" firstAttribute="top" secondItem="ksH-oY-ILh" secondAttribute="bottom" constant="4" id="kk9-0m-jIs"/>
                                     <constraint firstItem="Tlx-YB-Xsm" firstAttribute="top" secondItem="JDH-cc-sNL" secondAttribute="bottom" constant="10" id="lit-yC-xLU"/>
                                     <constraint firstAttribute="trailing" secondItem="JDH-cc-sNL" secondAttribute="trailing" id="odg-Uc-NSX"/>
                                     <constraint firstItem="R7f-65-YzT" firstAttribute="top" secondItem="wmD-Nb-eMF" secondAttribute="bottom" constant="20" id="sil-g1-Alt"/>
@@ -174,12 +155,10 @@
                     <connections>
                         <outlet property="login" destination="JDH-cc-sNL" id="iXA-dN-WHf"/>
                         <outlet property="nickname" destination="ACO-k8-33c" id="qs9-TL-FFl"/>
-                        <outlet property="password" destination="ksH-oY-ILh" id="sMb-dC-JqZ"/>
                         <outlet property="privateKey" destination="R7f-65-YzT" id="29c-kn-tAW"/>
                         <outlet property="signUp" destination="Tlx-YB-Xsm" id="0zA-8T-jwR"/>
                         <outletCollection property="shape" destination="wX7-db-o76" collectionClass="NSMutableArray" id="sHr-6Y-T4f"/>
                         <outletCollection property="shape" destination="wmD-Nb-eMF" collectionClass="NSMutableArray" id="7gA-oR-XSd"/>
-                        <outletCollection property="shape" destination="yEb-hF-FQ9" collectionClass="NSMutableArray" id="lIg-jJ-NV6"/>
                         <segue destination="YRP-SP-0M8" kind="show" identifier="signUpSegue" id="2gV-FJ-JKY"/>
                     </connections>
                 </viewController>
@@ -437,7 +416,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="B3W-Qi-qBc">
-                        <barButtonItem key="rightBarButtonItem" title="시작하기" id="GYB-70-k51"/>
+                        <barButtonItem key="rightBarButtonItem" title="가입하기" id="GYB-70-k51"/>
                     </navigationItem>
                     <connections>
                         <outlet property="check" destination="hkI-gM-5fz" id="PCG-QN-3fa"/>
@@ -445,14 +424,14 @@
                         <outlet property="copyKey" destination="Ura-Yn-0gu" id="RGK-83-YxJ"/>
                         <outlet property="createWallet" destination="2jH-cH-Wqs" id="973-K1-GwV"/>
                         <outlet property="nickname" destination="5Ee-ae-OoT" id="g9n-To-1ZY"/>
-                        <outlet property="privateKeyLabel" destination="pAJ-dD-d17" id="kBj-sB-l3l"/>
-                        <outlet property="start" destination="GYB-70-k51" id="CQn-zp-mBS"/>
-                        <outlet property="warning1" destination="3YS-55-Up7" id="XZG-WQ-zsN"/>
-                        <outlet property="warning2" destination="K8r-ba-xWs" id="Znt-0T-iTj"/>
+                        <outlet property="privateKeyLabel" destination="pAJ-dD-d17" id="9Qm-Rn-NdL"/>
+                        <outlet property="start" destination="GYB-70-k51" id="Niu-Ff-frX"/>
                         <outletCollection property="shape" destination="kGr-t6-ghA" collectionClass="NSMutableArray" id="1qb-yQ-fsJ"/>
                         <outletCollection property="shape" destination="2si-iG-CMV" collectionClass="NSMutableArray" id="3iM-5C-ERL"/>
-                        <outletCollection property="titleLabel" destination="OLY-gG-bD9" collectionClass="NSMutableArray" id="NIX-4x-acl"/>
-                        <outletCollection property="titleLabel" destination="Wus-8K-GBB" collectionClass="NSMutableArray" id="CND-jS-CWe"/>
+                        <outletCollection property="warning" destination="3YS-55-Up7" collectionClass="NSMutableArray" id="4NK-PT-uGL"/>
+                        <outletCollection property="warning" destination="K8r-ba-xWs" collectionClass="NSMutableArray" id="kXc-tk-a6p"/>
+                        <outletCollection property="titleLabel" destination="OLY-gG-bD9" collectionClass="NSMutableArray" id="TWN-zf-jri"/>
+                        <outletCollection property="titleLabel" destination="Wus-8K-GBB" collectionClass="NSMutableArray" id="cvM-p7-vQH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8fF-1H-Cnv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
