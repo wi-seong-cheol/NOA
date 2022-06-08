@@ -151,7 +151,9 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="desc" destination="x0S-qZ-tTs" id="SGS-xM-mfT"/>
+                                            <outlet property="like" destination="frv-GD-fQv" id="jx7-ay-W6U"/>
                                             <outlet property="likeCount" destination="j1z-y7-LFI" id="QFP-wW-Irn"/>
+                                            <outlet property="nft" destination="xZr-g9-ndk" id="E9W-MC-h1b"/>
                                             <outlet property="nickname" destination="FSd-z5-4lI" id="WMX-GA-K5V"/>
                                             <outlet property="profile" destination="Blw-4J-QsT" id="3PX-Je-KEj"/>
                                             <outlet property="thumbnail" destination="N5K-HX-nN8" id="oBF-DS-own"/>
