@@ -31,13 +31,12 @@
                                                     <constraint firstAttribute="width" constant="220" id="vS7-b2-QDe"/>
                                                 </constraints>
                                             </imageView>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="jFN-oh-wHg">
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" restorationIdentifier="title" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="jFN-oh-wHg">
                                                 <rect key="frame" x="10" y="270.5" width="394" height="44"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="JpE-Su-K4o"/>
                                                 </constraints>
-                                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                 <color key="textColor" systemColor="labelColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -48,13 +47,12 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="4EW-lU-fEX">
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" restorationIdentifier="contents" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="4EW-lU-fEX">
                                                 <rect key="frame" x="10" y="365" width="394" height="176"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="176" id="VXb-vM-7sx"/>
                                                 </constraints>
-                                                <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
                                                 <color key="textColor" systemColor="labelColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -107,30 +105,20 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="GbJ-A1-rQx">
-                        <barButtonItem key="leftBarButtonItem" style="done" id="FwW-9x-ZqA">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="vrk-px-T8e">
-                                <rect key="frame" x="20" y="5" width="92" height="34.5"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="취소"/>
-                            </button>
+                        <barButtonItem key="leftBarButtonItem" style="done" systemItem="cancel" id="FwW-9x-ZqA">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="QEz-jV-S4X">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="gSw-iW-Jba">
-                                <rect key="frame" x="302" y="4.5" width="92" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="업로드"/>
-                            </button>
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="QEz-jV-S4X">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="back" destination="vrk-px-T8e" id="GqG-w9-LcZ"/>
+                        <outlet property="back" destination="FwW-9x-ZqA" id="htu-2b-Ehy"/>
                         <outlet property="contentsLabel" destination="3vR-NG-2Ds" id="NTY-tj-cSl"/>
                         <outlet property="contentsTextView" destination="4EW-lU-fEX" id="5Lg-y8-Yc8"/>
                         <outlet property="titleLabel" destination="mNm-2d-YM7" id="ECf-4b-IRG"/>
                         <outlet property="titleTextView" destination="jFN-oh-wHg" id="U1c-Fa-ToU"/>
-                        <outlet property="upload" destination="gSw-iW-Jba" id="FVN-7g-pGB"/>
+                        <outlet property="upload" destination="QEz-jV-S4X" id="MBy-o3-DSQ"/>
                         <outlet property="work" destination="edH-pW-nro" id="ecA-rM-6TL"/>
                     </connections>
                 </viewController>
