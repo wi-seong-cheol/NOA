@@ -22,7 +22,7 @@ extension ObservableType {
             }
             
             let json = try? JSONSerialization.jsonObject(with: jsonData, options: [])
-            //json데이터print해서 볼 수 있도록 조치.
+            // json데이터 print해서 볼 수 있도록 조치.
             print(json!)
             
             let decoder = JSONDecoder()
