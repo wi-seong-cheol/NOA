@@ -22,4 +22,15 @@ extension UIScrollView {
                 return y > threshold ? Observable.just(()) : Observable.empty()
         }
     }
+    
+    var rx_reachedTop: Observable<Void> {
+        return rx.contentOffset
+            .flatMap { [weak self] contentOffset -> Observable<Void> in
+                guard let scrollView = self else {
+                    return Observable.empty()
+                }
+                
+                return scrollView.contentOffset.y == 0 ? Observable.just(()) : Observable.empty()
+        }
+    }
 }
