@@ -12,12 +12,12 @@ import UIKit
 
 class SplashViewController: UIViewController {
     
-    let viewModel: SplashViewModelType
+    let viewModel: SplashViewModel
     var disposeBag = DisposeBag()
 
     // MARK: - Life Cycle
 
-    init(viewModel: SplashViewModelType = SplashViewModel()) {
+    init(viewModel: SplashViewModel = SplashViewModel()) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -43,55 +43,49 @@ extension SplashViewController {
     
     // MARK: - UI Binding
     func setupBindings() {
-        // ------------------------------
-        //     INPUT
-        // ------------------------------
-
-        // 처음 로딩할 때 하고, 당겨서 새로고침 할 때
-        let firstLoad = rx.viewWillAppear
-            .take(1)
-            .map { _ in () }
-        
-        firstLoad
-            .bind(to: viewModel.fetchList)
-            .disposed(by: disposeBag)
 
         // ------------------------------
         //     Page Move
         // ------------------------------
         
         // 페이지 이동
-        viewModel.isLogin
-            .skip(1)
+        viewModel.output.isLogin
             .map { $0 as Bool }
             .delay(.milliseconds(1000), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] status in
                 if status {
-                    self?.performSegue(withIdentifier: "MainSegue",
-                                       sender: nil)
+                    Observable<Void>.just(Void())
+                        .subscribe(onNext: { _ in
+                            self?.viewModel.input.getUser.onNext(Void())
+            
+                        })
+                        .disposed(by: (self?.disposeBag)!)
                 } else {
                     self?.performSegue(withIdentifier: "LoginSegue",
                                        sender: nil)
                 }
             })
             .disposed(by: disposeBag)
+        
 
         // ------------------------------
         //     OUTPUT
         // ------------------------------
-
+        viewModel.output.move
+            .subscribe(onNext: {
+                if $0 {
+                    self.performSegue(withIdentifier: "MainSegue",
+                                                   sender: nil)
+                }
+            })
+            .disposed(by: disposeBag)
+        
         // 에러 처리
-        viewModel.errorMessage
+        viewModel.output.errorMessage
             .map { $0.domain }
             .subscribe(onNext: { [weak self] message in
                 self?.OKDialog("Order Fail")
             })
-            .disposed(by: disposeBag)
-        
-        viewModel.lectureList
-            .bind() { result in
-                print(result)
-            }
             .disposed(by: disposeBag)
     }
 }
