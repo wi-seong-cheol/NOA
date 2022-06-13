@@ -37,18 +37,18 @@ class FeedViewController: UIViewController {
         return indicator
     }()
     
-    let viewModel: WorkViewModelType
+    let viewModel: FeedViewModel
     var disposeBag = DisposeBag()
 
     // MARK: - Life Cycle
 
-    init(viewModel: WorkViewModelType = WorkViewModel()) {
+    init(viewModel: FeedViewModel = FeedViewModel()) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
 
     required init?(coder aDecoder: NSCoder) {
-        viewModel = WorkViewModel()
+        viewModel = FeedViewModel()
         super.init(coder: aDecoder)
     }
     
@@ -73,7 +73,7 @@ class FeedViewController: UIViewController {
         let identifier = segue.identifier ?? ""
         
         if identifier == "FeedDetailSegue",
-           let selectedFeed = sender as? Lecture,
+           let selectedFeed = sender as? Feed,
            let feedVC = segue.destination as? FeedDetailViewController {
             let feedViewModel = FeedDetailViewModel(selectedFeed)
             feedVC.viewModel = feedViewModel
@@ -86,6 +86,8 @@ extension FeedViewController {
     func configure() {
         collectionView.refreshControl = UIRefreshControl()
         search.titleLabel?.font = UIFont.NotoSansCJKkr(type: .medium, size: 14)
+        self.navigationController?.navigationBar.tintColor = .black
+        self.navigationController?.navigationBar.topItem?.title = ""
     }
     
     // MARK: - UI Binding
@@ -103,13 +105,13 @@ extension FeedViewController {
             .map { _ in () } ?? Observable.just(())
         
         Observable.merge([firstLoad, reload])
-            .bind(to: self.viewModel.fetchList)
+            .bind(to: self.viewModel.input.fetchList)
             .disposed(by: disposeBag)
         
         // 무한 스크롤
         self.collectionView.rx_reachedBottom
             .map { _ in () }
-            .bind(to: self.viewModel.moreFetchList)
+            .bind(to: self.viewModel.input.moreFetchList)
             .disposed(by: disposeBag)
 
         // ------------------------------
@@ -117,7 +119,7 @@ extension FeedViewController {
         // ------------------------------
 
         // 페이지 이동
-        Observable.zip(collectionView.rx.modelSelected(Lecture.self), collectionView.rx.itemSelected) .bind { [weak self] item, indexPath in
+        Observable.zip(collectionView.rx.modelSelected(Feed.self), collectionView.rx.itemSelected) .bind { [weak self] item, indexPath in
             self?.performSegue(withIdentifier: "FeedDetailSegue", sender: item)
             
         } .disposed(by: disposeBag)
@@ -139,14 +141,14 @@ extension FeedViewController {
         // ------------------------------
 
         // 에러 처리
-        viewModel.errorMessage
+        viewModel.output.errorMessage
             .map { $0.domain }
             .subscribe(onNext: { [weak self] message in
                 self?.OKDialog("Order Fail")
             }).disposed(by: disposeBag)
         
         // 액티비티 인디케이터
-        viewModel.activated
+        viewModel.output.activated
             .map { !$0 }
             .observe(on: MainScheduler.instance)
             .do(onNext: { [weak self] finished in
@@ -158,9 +160,9 @@ extension FeedViewController {
             .disposed(by: disposeBag)
                 
         // 테이블뷰 아이템들
-        viewModel
+        viewModel.output
             .items
-            .bind(to: collectionView.rx.items(cellIdentifier: FeedCollectionCell.identifier, cellType: FeedCollectionCell.self)) {
+            .drive(collectionView.rx.items(cellIdentifier: FeedCollectionCell.identifier, cellType: FeedCollectionCell.self)) {
                 indexPath, item, cell in
                 cell.onData.onNext(item)
             }
