@@ -13,23 +13,27 @@ class FeedCollectionCell: UICollectionViewCell {
     static let identifier = "FeedCollectionCell"
    
     @IBOutlet var thumbnail: UIImageView!
+    @IBOutlet weak var nft: UIImageView!
     
     private let cellDisposeBag = DisposeBag()
     
     var disposeBag = DisposeBag()
-    let onData: AnyObserver<Lecture>
+    let onData: AnyObserver<Feed>
+    let workId = BehaviorRelay<Int>(value: -1)
     
     required init?(coder aDecoder: NSCoder) {
-        let data = PublishSubject<Lecture>()
+        let data = PublishSubject<Feed>()
 
         onData = data.asObserver()
         
         super.init(coder: aDecoder)
         
         data.observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] lecture in
+            .subscribe(onNext: { [weak self] feed in
+                self?.workId.accept(feed.post.id)
+                self?.nft.image = feed.post.nft == 0 ? UIImage() : UIImage(named: "nft_asset")!
                 self?.thumbnail.image = UIImage()
-                ImageLoader.cache_loadImage(url: lecture.courseImage)
+                ImageLoader.cache_loadImage(url: feed.post.img)
                     .observe(on: MainScheduler.instance)
                     .subscribe(onNext: { (image) in
                         self?.thumbnail.image = image

@@ -14,6 +14,7 @@ class MyMessageCell: UITableViewCell {
     
     @IBOutlet weak var message: UILabel!
     @IBOutlet weak var timestamp: UILabel!
+    @IBOutlet weak var background: UIView!
     private let cellDisposeBag = DisposeBag()
     
     var disposeBag = DisposeBag()
@@ -29,13 +30,19 @@ class MyMessageCell: UITableViewCell {
         data.observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] msg in
                 self?.message.text = msg.message
-                self?.timestamp.text = msg.timestamp
+                self?.timestamp.text = Transform.shared.sendTimestamp(msg.timestamp)
             })
             .disposed(by: cellDisposeBag)
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        message.font = UIFont.NotoSansCJKkr(type: .regular, size: 12)
+        timestamp.font = UIFont.NotoSansCJKkr(type: .regular, size: 10)
+        background.layer.cornerRadius = 4
+        background.layer.borderWidth = 0.5
+        background.layer.borderColor = UIColor(red: 112, green: 112, blue: 112).cgColor
     }
     
     override func prepareForReuse() {

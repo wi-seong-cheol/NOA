@@ -29,24 +29,26 @@ class ChatTableCell: UITableViewCell {
     private let cellDisposeBag = DisposeBag()
     
     var disposeBag = DisposeBag()
-    let onData: AnyObserver<Lecture>
+    let onData: AnyObserver<ChatRoom>
+    let artist = BehaviorRelay<Artist>(value: Artist.EMPTY)
     let profileId = BehaviorRelay<String>(value: "")
     
     required init?(coder aDecoder: NSCoder) {
-        let data = PublishSubject<Lecture>()
+        let data = PublishSubject<ChatRoom>()
         
         onData = data.asObserver()
         
         super.init(coder: aDecoder)
         
         data.observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] lecture in
+            .subscribe(onNext: { [weak self] room in
+                self?.artist.accept(room.owner)
                 self?.profile.image = UIImage()
-                self?.name.text = lecture.number
-                self?.contents.text = lecture.id
-                self?.date.text = lecture.id
-                self?.count.text = lecture.id
-                ImageLoader.loadImage(from: lecture.courseImage)
+                self?.name.text = room.owner.nickname
+                self?.contents.text =  room.message.message
+                self?.date.text = room.message.created == "" ? "": Transform.shared.messageDate(room.message.created)
+                self?.count.text = room.message.unreadCount == 0 ? "" : String(room.message.unreadCount)
+                ImageLoader.loadImage(from: room.owner.profile)
                     .observe(on: MainScheduler.instance)
                     .subscribe(onNext: { (image) in
                         self?.profile.image = image})
@@ -59,7 +61,7 @@ class ChatTableCell: UITableViewCell {
         super.awakeFromNib()
         profile.layer.cornerRadius = profile.frame.width / 2
         name.font = UIFont.NotoSansCJKkr(type: .medium, size: 14)
-        contents.font = UIFont.NotoSansCJKkr(type: .medium, size: 14)
+        contents.font = UIFont.NotoSansCJKkr(type: .medium, size: 12)
         contents.setTextWithLineHeight(text: contents.text, lineHeight: 14)
         date.font = UIFont.NotoSansCJKkr(type: .medium, size: 10)
         count.font = UIFont.NotoSansCJKkr(type: .medium, size: 10)

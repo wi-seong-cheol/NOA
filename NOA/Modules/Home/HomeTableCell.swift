@@ -11,20 +11,22 @@ import RxRelay
 
 protocol HomeTableDelegate: AnyObject {
     
-    func didSelectedProfile(_ homeTableCell: HomeTableCell, detailButtonTappedFor userId: String)
-    func didSelectedMore(_ homeTableCell: HomeTableCell, detailButtonTappedFor workId: String)
-    func didSelectedLike(_ homeTableCell: HomeTableCell, detailButtonTappedFor workId: String)
+    func didSelectedProfile(_ homeTableCell: HomeTableCell, detailButtonTappedFor artist: Artist)
+    func didSelectedMore(_ homeTableCell: HomeTableCell, detailButtonTappedFor workId: Int)
+    func didSelectedLike(_ homeTableCell: HomeTableCell, detailButtonTappedFor workId: Int)
 }
 
 class HomeTableCell: UITableViewCell {
     static let identifier = "HomeTableCell"
-   
-    @IBOutlet var thumbnail: UIImageView!
+    
     @IBOutlet weak var profile: UIImageView!
-    @IBOutlet var nickname: UILabel!
-    @IBOutlet var title: UILabel!
-    @IBOutlet weak var desc: UILabel!
+    @IBOutlet weak var nickname: UILabel!
+    @IBOutlet weak var thumbnail: UIImageView!
+    @IBOutlet weak var like: UIButton!
     @IBOutlet weak var likeCount: UILabel!
+    @IBOutlet weak var nft: UIImageView!
+    @IBOutlet weak var title: UILabel!
+    @IBOutlet weak var desc: UILabel!
     
     var delegate: HomeTableDelegate?
     
@@ -32,13 +34,14 @@ class HomeTableCell: UITableViewCell {
     private let cellDisposeBag = DisposeBag()
     
     var disposeBag = DisposeBag()
-    let onData: AnyObserver<Lecture>
+    let onData: AnyObserver<Feed>
     let onChanged: Observable<Int>
-    let profileId = BehaviorRelay<String>(value: "")
-    let workId = BehaviorRelay<String>(value: "")
+    let artist = BehaviorRelay<Artist>(value: Artist.EMPTY)
+    let profileId = BehaviorRelay<Int>(value: -1)
+    let workId = BehaviorRelay<Int>(value: -1)
     
     required init?(coder aDecoder: NSCoder) {
-        let data = PublishSubject<Lecture>()
+        let data = PublishSubject<Feed>()
         let changing = PublishSubject<Int>()
         onCountChanged = { changing.onNext($0) }
 
@@ -49,16 +52,30 @@ class HomeTableCell: UITableViewCell {
         
         // MARK: - UI Binding
         data.observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] lecture in
-                self?.profileId.accept(lecture.name)
-                self?.workId.accept(lecture.id)
+            .subscribe(onNext: { [weak self] feed in
+                self?.artist.accept(feed.user!)
+                self?.profileId.accept(feed.user!.user_code)
+                self?.workId.accept(feed.post.id)
+                
+                self?.profile.image = UIImage()
+                self?.nickname.text = feed.user!.nickname
                 self?.thumbnail.image = UIImage()
-                self?.nickname.text = lecture.number
-                self?.title.text = lecture.id
-                ImageLoader.loadImage(from: lecture.courseImage)
+                self?.like.imageView?.image = feed.post.isLike == 0 ? UIImage(named: "heart_blank_asset"): UIImage(named: "heart_fill_asset")
+                self?.likeCount.text = String(feed.post.like_count)
+                self?.nft.image = feed.post.nft == 0 ? UIImage() : UIImage(named: "nft_asset")
+                self?.title.text = feed.post.title
+                self?.desc.text = feed.post.text
+                
+                ImageLoader.loadImage(from: feed.post.img)
                     .observe(on: MainScheduler.instance)
                     .subscribe(onNext: { (image) in
                         self?.thumbnail.image = image})
+                    .disposed(by: self!.disposeBag)
+                
+                ImageLoader.loadImage(from: feed.user!.profile)
+                    .observe(on: MainScheduler.instance)
+                    .subscribe(onNext: { (image) in
+                        self?.profile.image = image})
                     .disposed(by: self!.disposeBag)
             })
             .disposed(by: cellDisposeBag)
@@ -83,7 +100,7 @@ class HomeTableCell: UITableViewCell {
     }
     
     @objc func didSelectedProfile(_ sender: UIButton) {
-        delegate?.didSelectedProfile(self, detailButtonTappedFor: profileId.value)
+        delegate?.didSelectedProfile(self, detailButtonTappedFor: artist.value)
     }
     
     @IBAction func didSelectedMore(_ sender: Any) {
@@ -92,5 +109,6 @@ class HomeTableCell: UITableViewCell {
     
     @IBAction func didSelectedLike(_ sender: Any) {
         delegate?.didSelectedLike(self, detailButtonTappedFor: workId.value)
+        
     }
 }

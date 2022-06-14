@@ -10,7 +10,7 @@ import RxSwift
 import RxRelay
 
 protocol FriendListTableDelegate: AnyObject {
-    func didSelectedMore(_ friendListTableCell: FriendListTableCell, detailButtonTappedFor workId: String)
+    func didSelectedMore(_ friendListTableCell: FriendListTableCell, detailButtonTappedFor profileId: String)
 }
 
 class FriendListTableCell: UITableViewCell {
@@ -18,6 +18,7 @@ class FriendListTableCell: UITableViewCell {
    
     @IBOutlet weak var profile: UIImageView!
     @IBOutlet var nickname: UILabel!
+    @IBOutlet weak var statusMessage: UILabel!
     
     var delegate: FriendListTableDelegate?
     
@@ -25,13 +26,12 @@ class FriendListTableCell: UITableViewCell {
     private let cellDisposeBag = DisposeBag()
     
     var disposeBag = DisposeBag()
-    let onData: AnyObserver<Lecture>
+    let onData: AnyObserver<UserResponse>
     let onChanged: Observable<Int>
     let profileId = BehaviorRelay<String>(value: "")
-    let workId = BehaviorRelay<String>(value: "")
     
     required init?(coder aDecoder: NSCoder) {
-        let data = PublishSubject<Lecture>()
+        let data = PublishSubject<UserResponse>()
         let changing = PublishSubject<Int>()
         onCountChanged = { changing.onNext($0) }
 
@@ -42,12 +42,12 @@ class FriendListTableCell: UITableViewCell {
         
         // MARK: - UI Binding
         data.observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] lecture in
-                self?.profileId.accept(lecture.name)
-                self?.workId.accept(lecture.id)
-                self?.nickname.text = lecture.number
+            .subscribe(onNext: { [weak self] user in
+                self?.profileId.accept(String(user.user_code))
+                self?.nickname.text = user.user_nickname
+                self?.statusMessage.text = user.user_desc ?? ""
                 self?.profile.image = UIImage()
-                ImageLoader.loadImage(from: lecture.courseImage)
+                ImageLoader.loadImage(from: user.user_profile)
                     .observe(on: MainScheduler.instance)
                     .subscribe(onNext: { (image) in
                         self?.profile.image = image})
@@ -60,6 +60,7 @@ class FriendListTableCell: UITableViewCell {
         super.awakeFromNib()
         profile.layer.cornerRadius = profile.frame.width / 2
         nickname.font = UIFont.NotoSansCJKkr(type: .medium, size: 14)
+        statusMessage.font = UIFont.NotoSansCJKkr(type: .regular, size: 10)
     }
     
     override func prepareForReuse() {
@@ -68,6 +69,6 @@ class FriendListTableCell: UITableViewCell {
     }
     
     @IBAction func didSelectedMore(_ sender: Any) {
-        delegate?.didSelectedMore(self, detailButtonTappedFor: workId.value)
+        delegate?.didSelectedMore(self, detailButtonTappedFor: profileId.value)
     }
 }

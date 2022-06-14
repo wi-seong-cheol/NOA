@@ -26,8 +26,8 @@ class SearchTableCell: UITableViewCell {
         super.init(coder: aDecoder)
         
         data.observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] item in
-                self?.word.text = item.repoName
+            .subscribe(onNext: { [weak self] search in
+                self?.word.text = search.post_title ?? ""
             })
             .disposed(by: cellDisposeBag)
     }

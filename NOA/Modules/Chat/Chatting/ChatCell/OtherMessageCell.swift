@@ -21,6 +21,7 @@ class OtherMessageCell: UITableViewCell {
     @IBOutlet weak var nickname: UILabel!
     @IBOutlet weak var message: UILabel!
     @IBOutlet weak var timestamp: UILabel!
+    @IBOutlet weak var background: UIView!
     
     var delegate: OtherMessageDelegate?
     
@@ -40,7 +41,16 @@ class OtherMessageCell: UITableViewCell {
         data.observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] msg in
                 self?.message.text = msg.message
-                self?.timestamp.text = msg.timestamp
+                self?.timestamp.text = Transform.shared.messageTimestamp(msg.timestamp)
+                self?.nickname.text = msg.nickname
+                
+                ImageLoader.loadImage(from: msg.profile)
+                    .observe(on: MainScheduler.instance)
+                    .subscribe(onNext: { (image) in
+                        self?.profile.image = image})
+                    .disposed(by: self!.disposeBag)
+                
+                self?.background.isHidden = false
             })
             .disposed(by: cellDisposeBag)
     }
@@ -48,6 +58,14 @@ class OtherMessageCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        background.layer.cornerRadius = 4
+        background.layer.borderWidth = 0.5
+        background.layer.borderColor = UIColor(red: 112, green: 112, blue: 112).cgColor
+        background.isHidden = true
+        
+        nickname.font = UIFont.NotoSansCJKkr(type: .medium, size: 12)
+        message.font = UIFont.NotoSansCJKkr(type: .regular, size: 12)
+        timestamp.font = UIFont.NotoSansCJKkr(type: .regular, size: 10)
         profile.layer.cornerRadius = profile.frame.width / 2
         
         self.profile.isUserInteractionEnabled = true
