@@ -8,58 +8,79 @@
 import Foundation
 import RxSwift
 import RxRelay
+import RxCocoa
 import RealmSwift
 
 protocol ChatViewModelType {
+    associatedtype Input
+    associatedtype Output
+    
     // MARK: INPUT
-    var fetchList: AnyObserver<Void> { get }
+    var fetchList$: PublishSubject<Void> { get }
     
     // MARK: OUTPUT
-    var items: Observable<[Lecture]> { get }
-    var activated: Observable<Bool> { get }
-    var errorMessage: Observable<NSError> { get }
+    var items$: BehaviorRelay<[ChatRoom]> { get }
+    var activated$: Observable<Bool> { get }
+    var errorMessage$: Observable<Error> { get }
 }
 
 class ChatViewModel: ChatViewModelType {
     
     let disposeBag = DisposeBag()
-    
     let realm = try! Realm()
+    
+    struct Input {
+        let fetchList: AnyObserver<Void>
+    }
+    
+    struct Output {
+        let items: Driver<[ChatRoom]>
+        let activated: Observable<Bool>
+        let errorMessage: Observable<NSError>
+    }
+        
+    let input: Input
+    let output: Output
+        
     // MARK: INPUT
-    let fetchList: AnyObserver<Void>
+    internal let fetchList$: PublishSubject<Void>
     
     // MARK: OUTPUT
-    let items: Observable<[Lecture]>
-    let activated: Observable<Bool>
-    let errorMessage: Observable<NSError>
+    internal let items$: BehaviorRelay<[ChatRoom]>
+    internal let activated$: Observable<Bool>
+    internal let errorMessage$: Observable<Error>
     
-    init(service: FeedFetchable = FeedService()) {
-        let fetching = PublishSubject<Void>()
+    init(service: ChatFetchable = ChatService()) {
+        // MARK: Input
+        let fetchList$ = PublishSubject<Void>()
         
-        let itemList = BehaviorRelay<[Lecture]>(value: [])
-        
-        let activating = BehaviorSubject<Bool>(value: false)
-        let error = PublishSubject<Error>()
+        // MARK: Output
+        let items$ = BehaviorRelay<[ChatRoom]>(value: [])
+        let activated$ = BehaviorSubject<Bool>(value: false)
+        let errorMessage$ = PublishSubject<Error>()
         
         // MARK: INPUT
-        fetchList = fetching.asObserver()
+        self.input = Input(fetchList: fetchList$.asObserver())
         
-        fetching
-            .do(onNext: { _ in activating.onNext(true) })
-            .flatMap(service.list)
-            .do(onNext: { _ in activating.onNext(false) })
-            .do(onError: { err in error.onNext(err) })
+        self.fetchList$ = fetchList$
+        
+        fetchList$
+            .do(onNext: { _ in activated$.onNext(true) })
+            .flatMapLatest(service.roomlist)
+            .do(onNext: { _ in activated$.onNext(false) })
+            .do(onError: { err in errorMessage$.onNext(err) })
             .subscribe(onNext: { response in
-                itemList.accept(response.lectures)
+                items$.accept(response)
             })
             .disposed(by: disposeBag)
         
         // MARK: OUTPUT
-        items = itemList.asObservable()
-                    
-        errorMessage = error.map { $0 as NSError }
-        
-        activated = activating.distinctUntilChanged()
+        self.output = Output(items: items$.asDriver(onErrorJustReturn: []),
+                             activated: activated$.distinctUntilChanged(),
+                             errorMessage: errorMessage$.map { $0 as NSError })
+        self.items$ = items$
+        self.activated$ = activated$
+        self.errorMessage$ = errorMessage$
     }
     
     func sendMessage() {
@@ -83,14 +104,14 @@ class ChatViewModel: ChatViewModelType {
         
         let content = ChatLocalDB(value: ["id": "", "name": "", "contents": "", "profile": "", "date": "", "count": 1])
             
-            if realm.objects(ChatListLocalDB.self).isEmpty == true {
-                let chatModel = ChatListLocalDB()
-                chatModel.chat.append(content)
-            } else {
-                try! realm.write {
-                    let chatModel = realm.objects(ChatListLocalDB.self)
-                    chatModel.first?.chat.append(content)
-                }
+        if realm.objects(ChatListLocalDB.self).isEmpty == true {
+            let chatModel = ChatListLocalDB()
+            chatModel.chat.append(content)
+        } else {
+            try! realm.write {
+                let chatModel = realm.objects(ChatListLocalDB.self)
+                chatModel.first?.chat.append(content)
             }
+        }
     }
 }

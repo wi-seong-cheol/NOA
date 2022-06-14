@@ -8,161 +8,181 @@
 import Foundation
 import RxSwift
 import RxRelay
+import RxCocoa
 import RealmSwift
 import web3swift
 import SwiftyJSON
+import UIKit
+import Alamofire
 
 protocol UploadViewModelType {
+    associatedtype Input
+    associatedtype Output
+    
     // MARK: INPUT
 //    var upload: AnyObserver<Void> { get }
-//    var uploadNFT: AnyObserver<Void> { get }
-    var image: BehaviorRelay<UIImage> { get }
-    var desc: BehaviorRelay<String> { get }
-    var subject: BehaviorRelay<String> { get }
-    var password: BehaviorRelay<String> { get }
+    var upload$: PublishSubject<Void> { get }
+    var uploadNFT$: PublishSubject<Void> { get }
+    var subject$: BehaviorSubject<String> { get }
+    var desc$: BehaviorSubject<String> { get }
+    var image$: BehaviorSubject<Data> { get }
     
     // MARK: OUTPUT
-    var alertMessage: Observable<String> { get }
-    var errorMessage: Observable<NSError> { get }
-    
-    func create() -> String
-    func createNFT(_ completion: @escaping (String) -> Void)
+    var move$: BehaviorSubject<Bool> { get }
+    var activated$: Observable<Bool> { get }
+    var alertMessage$: Observable<String> { get }
+    var errorMessage$: Observable<Error> { get }
 }
 
 class UploadViewModel: UploadViewModelType {
     
     let disposeBag = DisposeBag()
-    
     let realm = try! Realm()
+    
+    struct Input {
+        var upload: AnyObserver<Void>
+        var uploadNFT: AnyObserver<Void>
+        var subject: AnyObserver<String>
+        var desc: AnyObserver<String>
+        var image: AnyObserver<Data>
+    }
+    
+    struct Output {
+        var move: Observable<Bool>
+        var activated: Observable<Bool>
+        var alertMessage: Observable<String>
+        var errorMessage: Observable<NSError>
+    }
+    
+    let input: Input
+    let output: Output
+    
     // MARK: INPUT
-    let image = BehaviorRelay(value: UIImage())
-    let desc = BehaviorRelay(value: "")
-    let subject = BehaviorRelay(value: "")
-    let password = BehaviorRelay(value: "")
+    internal let upload$: PublishSubject<Void>
+    internal let uploadNFT$: PublishSubject<Void>
+    internal let subject$: BehaviorSubject<String>
+    internal let desc$: BehaviorSubject<String>
+    internal let image$: BehaviorSubject<Data>
     
     // MARK: OUTPUT
-    let alertMessage: Observable<String>
-    let errorMessage: Observable<NSError>
+    internal let move$: BehaviorSubject<Bool>
+    internal let activated$: Observable<Bool>
+    internal let alertMessage$: Observable<String>
+    internal let errorMessage$: Observable<Error>
     
-    init(service: FeedFetchable = FeedService()) {
-        let alert = BehaviorSubject<String>(value: "")
-        let error = PublishSubject<Error>()
+    init(service: UploadFetchable = UploadService()) {
+        // MARK: Input
+        let upload$ = PublishSubject<Void>()
+        let uploadNFT$ = PublishSubject<Void>()
+        let subject$ = BehaviorSubject<String>(value: "")
+        let desc$ = BehaviorSubject<String>(value: "")
+        let image$ = BehaviorSubject<Data>(value: Data())
+        
+        // MARK: Output
+        let postId$ = BehaviorRelay<Int>(value: -1)
+        let move$ = BehaviorSubject<Bool>(value: false)
+        let activated$ = BehaviorSubject<Bool>(value: false)
+        let alertMessage$ = BehaviorSubject<String>(value: "")
+        let errorMessage$ = PublishSubject<Error>()
         
         
-        // MARK: OUTPUT
+        // MARK: Input
+        self.input = Input(upload: upload$.asObserver(),
+                           uploadNFT: uploadNFT$.asObserver(),
+                           subject: subject$.asObserver(),
+                           desc: desc$.asObserver(),
+                           image: image$.asObserver())
         
-        alertMessage = alert.map { $0 as String }
+        self.upload$ = upload$
+        self.uploadNFT$ = uploadNFT$
+        self.subject$ = subject$
+        self.desc$ = desc$
+        self.image$ = image$
         
-        errorMessage = error.map { $0 as NSError }
-        
-        // MARK: INPUT
-    }
-    
-    func load() -> Data? {
-        // 1. 불러올 파일 이름
-        let fileNm: String = "ABI"
-        // 2. 불러올 파일의 확장자명
-        let extensionType = "json"
-        
-        // 3. 파일 위치
-        guard let fileLocation = Bundle.main.url(forResource: fileNm, withExtension: extensionType) else { return nil }
-        
-        
-        do {
-            // 4. 해당 위치의 파일을 Data로 초기화하기
-            let data = try Data(contentsOf: fileLocation)
-            return data
-        } catch {
-            // 5. 잘못된 위치나 불가능한 파일 처리 (오늘은 따로 안하기)
-            return nil
-        }
-    }
-    
-    func create() -> String {
-        return ""
-    }
-    
-    func createNFT(_ completion: @escaping (String) -> Void) {
-        var web3:web3?
-        var contract:web3.web3contract?
-        let abiVersion = 2
-
-        let wallet = UserInfo.shared.getWallet()
-        let myAddress = wallet.address
-        let contractAddress = DBInfo.contractAddress
-        
-        let data = wallet.data
-        let keystoreManager: KeystoreManager
-        if wallet.isHD {
-            let keystore = BIP32Keystore(data)!
-            keystoreManager = KeystoreManager([keystore])
-        } else {
-            let keystore = EthereumKeystoreV3(data)!
-            keystoreManager = KeystoreManager([keystore])
-        }
-//        let uploadImage = image.image
-        DispatchQueue.global(qos: .background).async { [weak self] in
-            do {
-                web3 = try Web3.new(URL(string: DBInfo.nftUrl)!)
-                web3!.addKeystoreManager(keystoreManager)
-                let ethContractAddress = EthereumAddress(contractAddress, ignoreChecksum: true)!
-                guard
-                    let jsonData = self?.load(),
-                    let abi = String(data: jsonData, encoding: String.Encoding(rawValue: String.Encoding.utf8.rawValue)) else {
-                    completion("ABI를 가져오지 못했습니다.")
-                    return
+        upload$
+            .filter{
+                if isEmpty(try! subject$.value(), try! desc$.value()) {
+                    return true
+                } else {
+                    alertMessage$.onNext("빈 칸을 채워주세요.")
+                    return false
                 }
-                
-                let contractABI = abi
-                contract = web3!.contract(contractABI, at: ethContractAddress, abiVersion: abiVersion)!
-                
-                let value: String = "0.000000000000000001"
-                let walletAddress = EthereumAddress(myAddress)!
-                let contractMethod = "uploadPhoto" // Contract method you want to write
-                let url = URL(string: "https://smtmap.com/wp-content/uploads/2019/05/20190509_220956.jpg")
-                let image = try Data(contentsOf: url!)
-//                44670
-//                311317
-//                let image = NSDataAsset(name: "Icon")?.data
-                    //.jpegData(compressionQuality: 0.01))!)//UIImage(named: "Icon")!.jpegData(compressionQuality: 0.01)//pngData()
-//                let image = uploadImage?.pngData()
-                let photo = image.bytes
-                print(image.count)
-                let title = "qweq"
-                let description = "asdfafd"
-                let parameters: [AnyObject] = [photo, title, description] as [AnyObject] // Parameters for contract method
-                let extraData: Data = Data() // Extra data for contract method
-
-                let amount = Web3.Utils.parseToBigUInt(value, units: .eth)
-
-                var options = TransactionOptions.defaultOptions
-                options.value = amount
-                options.from = walletAddress
-                options.gasPrice = .automatic
-                options.gasLimit = .manual(8500000)
-
-                guard let tokenTransactionIntermediate =
-                        contract?.method(contractMethod,
-                                       parameters: parameters,
-                                       extraData: extraData,
-                                       transactionOptions: options) else {
-                    completion("contract nil")
-                    return
-                }
-                
-                let mainTransaction = try tokenTransactionIntermediate.send(password: (self?.password.value)!, transactionOptions: options)
-                completion("\(mainTransaction.hash) is the hash of your transaction")
-            } catch DecodingError.dataCorrupted(let context) {
-                print("Decoding Error Message:")
-                print(context.codingPath)
-                print(context.debugDescription)
-                print(context.underlyingError ?? "")
-                
-                completion("Decoding Error")
-            } catch  {
-                completion("Error Message: \(error)")
             }
-        }
+            .do(onNext: { _ in activated$.onNext(true)})
+            .flatMapLatest{
+                service.upload(data: try! image$.value(),
+                               post_nft: 0,
+                               post_title: try! subject$.value(),
+                               post_text: try! desc$.value(),
+                               post_tag: "TEST")
+            }
+            .do(onNext: { _ in activated$.onNext(false)})
+            .do(onError: { err in errorMessage$.onNext(err) })
+            .subscribe(onNext: { response in
+                if response.status_code == 200 {
+                    print(response.message ?? "")
+                    move$.onNext(true)
+                } else {
+                    alertMessage$.onNext("업로드에 실패하였습니다.")
+                }
+            })
+            .disposed(by: disposeBag)
+                
+        uploadNFT$
+            .filter{
+                if isEmpty(try! subject$.value(), try! desc$.value()) {
+                    return true
+                } else {
+                    alertMessage$.onNext("빈 칸을 채워주세요.")
+                    return false
+                }
+            }
+            .do(onNext: { _ in activated$.onNext(true)})
+            .flatMapLatest{
+                service.upload(data: try! image$.value(),
+                               post_nft: 1,
+                               post_title: try! subject$.value(),
+                               post_text: try! desc$.value(),
+                               post_tag: "TEST")
+            }
+            .filter{ response in validation(response.message ?? "") }
+            .map{ $0.message! }
+            .observe(on: ConcurrentDispatchQueueScheduler(qos: .background))
+            .flatMapLatest{ service.createNFT(url: $0, title: try! subject$.value(), desc: try! desc$.value()) }
+            .do(onNext: { _ in activated$.onNext(false)})
+            .do(onError: { err in errorMessage$.onNext(err) })
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { response in
+                alertMessage$.onNext(response)
+                move$.onNext(true)
+            })
+            .disposed(by: disposeBag)
+                
+        // MARK: OUTPUT
+        self.output = Output(move: move$.asObservable(),
+                             activated: activated$.distinctUntilChanged(),
+                             alertMessage: alertMessage$.map { $0 as String },
+                             errorMessage: errorMessage$.map { $0 as NSError })
+                
+        self.move$ = move$
+        self.activated$ = activated$
+        self.alertMessage$ = alertMessage$
+        self.errorMessage$ = errorMessage$
     }
 }
 
+private func validation(_ url: String) -> Bool {
+    let pattern = "(?i)(http|https)(:\\/\\/)([^ .]+)(\\.)([^ \n]+)"
+    let address = NSPredicate(format: "SELF MATCHES %@", pattern)
+    let isValid = address.evaluate(with: url)
+    
+    return isValid
+}
+
+private func isEmpty(_ title: String, _ desc: String) -> Bool {
+    if title == "작품 제목을 입력해주세요." || desc == "작품 설명을 입력해주세요." {
+        return false
+    } else {
+        return true
+    }
+}

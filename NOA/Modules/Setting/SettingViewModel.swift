@@ -11,46 +11,65 @@ import RxRelay
 import RealmSwift
 
 protocol SettingViewModelType {
+    associatedtype Input
+    associatedtype Output
+    
     // MARK: INPUT
-    var logout: AnyObserver<Void> { get }
+    var logout$: PublishSubject<Void> { get }
     
     // MARK: OUTPUT
-    var present: Observable<Bool> { get }
-    var errorMessage: Observable<NSError> { get }
+    var present$: Observable<Bool> { get }
+    var errorMessage$: Observable<Error> { get }
 }
 
 class SettingViewModel: SettingViewModelType {
     
     let disposeBag = DisposeBag()
-    
     let realm = try! Realm()
+    
+    struct Input {
+        let logout: AnyObserver<Void>
+    }
+    
+    struct Output {
+        let present: Observable<Bool>
+        let errorMessage: Observable<NSError>
+    }
+    
+    let input: Input
+    let output: Output
+    
     // MARK: INPUT
-    let logout: AnyObserver<Void>
+    let logout$: PublishSubject<Void>
     
     // MARK: OUTPUT
-    let present: Observable<Bool>
-    let errorMessage: Observable<NSError>
+    let present$: Observable<Bool>
+    let errorMessage$: Observable<Error>
     
-    init(service: FeedFetchable = FeedService()) {
-        let loggingOut = PublishSubject<Void>()
+    init() {
+        // MARK: INPUT
+        let logout$ = PublishSubject<Void>()
         
-        let error = PublishSubject<Error>()
-        let show = BehaviorSubject<Bool>(value: false)
+        // MARK: OUTPUT
+        let present$ = BehaviorSubject<Bool>(value: false)
+        let errorMessage$ = PublishSubject<Error>()
         
         // MARK: INPUT
-        logout = loggingOut.asObserver()
+        self.input = Input(logout: logout$.asObserver())
         
-        loggingOut
+        self.logout$ = logout$
+        
+        logout$
             .subscribe(onNext: { _ in
-                
-                show.onNext(true)
+                present$.onNext(true)
             })
             .disposed(by: disposeBag)
         
         // MARK: OUTPUT
-        present = show.map { $0 as Bool }
-        
-        errorMessage = error.map { $0 as NSError }
+        self.output = Output(present: present$.map { $0 as Bool },
+                             errorMessage: errorMessage$.map { $0 as NSError })
+        self.present$ = present$
+        self.errorMessage$ = errorMessage$
     }
 }
 
