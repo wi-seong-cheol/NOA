@@ -23,25 +23,24 @@ class FriendListViewController: UIViewController {
                 y: self.view.frame.height/2 - 25,
                 width: 50,
                 height: 50),
-            type: .ballScaleMultiple,
+            type: .circleStrokeSpin,
             color: .black,
             padding: 0)
         
         indicator.center = self.view.center
                 
         // 기타 옵션
-        indicator.color = .purple
+        indicator.color = UIColor(red: 237, green: 106, blue: 201)
         
-        indicator.stopAnimating()
         return indicator
     }()
     
-    let viewModel: FriendListViewModelType
+    let viewModel: FriendListViewModel
     var disposeBag = DisposeBag()
 
     // MARK: - Life Cycle
 
-    init(viewModel: FriendListViewModelType = FriendListViewModel()) {
+    init(viewModel: FriendListViewModel = FriendListViewModel()) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -84,7 +83,7 @@ extension FriendListViewController {
     // MARK: - UI Setting
     func configure() {
         tableView.refreshControl = UIRefreshControl()
-//        tableView.rowHeight = UITableView.automaticDimension
+        self.view.addSubview(indicator)
     }
     
     // MARK: - UI Binding
@@ -102,13 +101,13 @@ extension FriendListViewController {
             .map { _ in () } ?? Observable.just(())
         
         Observable.merge([firstLoad, reload])
-            .bind(to: self.viewModel.fetchList)
+            .bind(to: self.viewModel.input.fetchList)
             .disposed(by: disposeBag)
         
         // 무한 스크롤
         self.tableView.rx_reachedBottom
             .map { _ in () }
-            .bind(to: self.viewModel.moreFetchList)
+            .bind(to: self.viewModel.input.moreFetchList)
             .disposed(by: disposeBag)
 
         // ------------------------------
@@ -116,25 +115,37 @@ extension FriendListViewController {
         // ------------------------------
 
         // 페이지 이동
-        Observable.zip(tableView.rx.modelSelected(Lecture.self), tableView.rx.itemSelected) .bind { [weak self] item, indexPath in
+        Observable.zip(tableView.rx.modelSelected(UserResponse.self), tableView.rx.itemSelected) .bind { [weak self] item, indexPath in
             let storyboard = UIStoryboard(name:"Profile", bundle: nil)
-            let pushVC = storyboard.instantiateViewController(withIdentifier: "OtherProfileViewController")
+            let pushVC = storyboard.instantiateViewController(withIdentifier: "OtherProfileViewController") as! OtherProfileViewController
+            pushVC.viewModel = OtherProfileViewModel(Artist(user_code: item.user_code,
+                                                            profile: item.user_profile,
+                                                            nickname: item.user_nickname))
             self?.navigationController?.pushViewController(pushVC, animated: true)
         } .disposed(by: disposeBag)
 
         // ------------------------------
         //     OUTPUT
         // ------------------------------
-
+        
+        // Alert
+        viewModel.output.alertMessage
+            .skip(1)
+            .map{ $0 as String }
+            .subscribe(onNext: { [weak self] message in
+                self?.OKDialog(message)
+            })
+            .disposed(by: disposeBag)
+        
         // 에러 처리
-        viewModel.errorMessage
+        viewModel.output.errorMessage
             .map { $0.domain }
             .subscribe(onNext: { [weak self] message in
                 self?.OKDialog("Order Fail")
             }).disposed(by: disposeBag)
         
         // 액티비티 인디케이터
-        viewModel.activated
+        viewModel.output.activated
             .map { !$0 }
             .observe(on: MainScheduler.instance)
             .do(onNext: { [weak self] finished in
@@ -146,8 +157,8 @@ extension FriendListViewController {
             .disposed(by: disposeBag)
                 
         // 테이블뷰 아이템들
-        viewModel.items
-            .bind(to: tableView.rx.items(cellIdentifier: FriendListTableCell.identifier, cellType: FriendListTableCell.self)) {
+        viewModel.output.items
+            .drive(tableView.rx.items(cellIdentifier: FriendListTableCell.identifier, cellType: FriendListTableCell.self)) {
                 _, item, cell in
                 cell.onData.onNext(item)
                 cell.delegate = self
@@ -158,19 +169,23 @@ extension FriendListViewController {
 
 extension FriendListViewController: FriendListTableDelegate {
     
-    func didSelectedMore(_ friendListTableCell: FriendListTableCell, detailButtonTappedFor workId: String) {
-        print(workId)
+    func didSelectedMore(_ friendListTableCell: FriendListTableCell, detailButtonTappedFor profileId: String) {
         
         let actions: [UIAlertController.AlertAction] = [
-            .action(title: "no", style: .destructive),
-            .action(title: "yes")
+            .action(title: "신고하기"),
+            .action(title: "취소", style: .cancel)
         ]
+
 
         UIAlertController
             .present(in: self, title: "Alert", message: "message", style: .actionSheet, actions: actions)
-            .subscribe(onNext: { buttonIndex in
-                print(buttonIndex)
-                // coding
+            .filter{ $0 == 0 }
+            .subscribe(onNext: { _ in
+                Observable.just(profileId)
+                    .subscribe(onNext: { id in
+                        self.viewModel.input.report.onNext(id)
+                    })
+                    .disposed(by: self.disposeBag)
             })
             .disposed(by: disposeBag)
     }

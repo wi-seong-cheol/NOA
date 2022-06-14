@@ -37,12 +37,12 @@ class SearchWorkViewController: UIViewController {
         return indicator
     }()
     
-    let viewModel: SearchWorkViewModelType
+    var viewModel: SearchWorkViewModel
     var disposeBag = DisposeBag()
 
     // MARK: - Life Cycle
 
-    init(viewModel: SearchWorkViewModelType = SearchWorkViewModel()) {
+    init(viewModel: SearchWorkViewModel = SearchWorkViewModel()) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -73,7 +73,7 @@ class SearchWorkViewController: UIViewController {
         let identifier = segue.identifier ?? ""
         
         if identifier == "FeedDetailSegue",
-           let selectedFeed = sender as? Lecture,
+           let selectedFeed = sender as? Feed,
            let feedVC = segue.destination as? FeedDetailViewController {
             let feedViewModel = FeedDetailViewModel(selectedFeed)
             feedVC.viewModel = feedViewModel
@@ -102,13 +102,13 @@ extension SearchWorkViewController {
             .map { _ in () } ?? Observable.just(())
         
         Observable.merge([firstLoad, reload])
-            .bind(to: self.viewModel.fetchList)
+            .bind(to: self.viewModel.input.fetchList)
             .disposed(by: disposeBag)
         
         // 무한 스크롤
         self.collectionView.rx_reachedBottom
             .map { _ in () }
-            .bind(to: self.viewModel.moreFetchList)
+            .bind(to: self.viewModel.input.moreFetchList)
             .disposed(by: disposeBag)
 
         // ------------------------------
@@ -116,7 +116,7 @@ extension SearchWorkViewController {
         // ------------------------------
 
         // 페이지 이동
-        Observable.zip(collectionView.rx.modelSelected(Lecture.self), collectionView.rx.itemSelected) .bind { [weak self] item, indexPath in
+        Observable.zip(collectionView.rx.modelSelected(Feed.self), collectionView.rx.itemSelected) .bind { [weak self] item, indexPath in
             let storyboard = UIStoryboard(name:"Feed", bundle: nil)
             let pushVC = storyboard.instantiateViewController(withIdentifier: "FeedDetailViewController") as! FeedDetailViewController
             pushVC.viewModel = FeedDetailViewModel(item)
@@ -128,20 +128,25 @@ extension SearchWorkViewController {
                 self?.navigationController?.popViewController(animated: true)
             }
             .disposed(by: disposeBag)
+        
+        
 
         // ------------------------------
         //     OUTPUT
         // ------------------------------
-
+        viewModel.output.keyword
+            .drive(keyword.rx.text)
+            .disposed(by: disposeBag)
+        
         // 에러 처리
-        viewModel.errorMessage
+        viewModel.output.errorMessage
             .map { $0.domain }
             .subscribe(onNext: { [weak self] message in
                 self?.OKDialog("Order Fail")
             }).disposed(by: disposeBag)
         
         // 액티비티 인디케이터
-        viewModel.activated
+        viewModel.output.activated
             .map { !$0 }
             .observe(on: MainScheduler.instance)
             .do(onNext: { [weak self] finished in
@@ -153,9 +158,8 @@ extension SearchWorkViewController {
             .disposed(by: disposeBag)
                 
         // 테이블뷰 아이템들
-        viewModel
-            .items
-            .bind(to: collectionView.rx.items(cellIdentifier: FeedCollectionCell.identifier, cellType: FeedCollectionCell.self)) {
+        viewModel.output.items
+            .drive(collectionView.rx.items(cellIdentifier: FeedCollectionCell.identifier, cellType: FeedCollectionCell.self)) {
                 indexPath, item, cell in
                 cell.onData.onNext(item)
             }

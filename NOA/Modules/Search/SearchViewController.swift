@@ -19,7 +19,6 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var items = [String]()
-    let samples = ["서울", "부산", "온수", "건대", "온수", "부천", "송파", "가", "가나", "가나다", "가나다라", "가카타파하", "에이", "a", "ab", "abc", "apple", "mac", "azxy"]
     
     lazy var indicator: NVActivityIndicatorView = {
         let indicator = NVActivityIndicatorView(
@@ -41,12 +40,12 @@ class SearchViewController: UIViewController {
         return indicator
     }()
     
-    let viewModel: SearchViewModelType
+    let viewModel: SearchViewModel
     var disposeBag = DisposeBag()
     
     // MARK: - Life Cycle
     
-    init(viewModel: SearchViewModelType = SearchViewModel()) {
+    init(viewModel: SearchViewModel = SearchViewModel()) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -68,14 +67,14 @@ class SearchViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        let identifier = segue.identifier ?? ""
-//        
-//        if identifier == "SearchSegue",
-//           let selectedFeed = sender as? Lecture,
-//           let feedVC = segue.destination as? SearchWorkViewController {
-//            let feedViewModel = SearchWorkViewModel(selectedFeed)
-//            feedVC.viewModel = feedViewModel
-//        }
+        let identifier = segue.identifier ?? ""
+        
+        if identifier == "SearchSegue",
+           let search = sender as? Search,
+           let feedVC = segue.destination as? SearchWorkViewController {
+            let keyword = search.post_title!
+            feedVC.viewModel = SearchWorkViewModel(keyword)
+        }
     }
 }
 
@@ -90,13 +89,6 @@ extension SearchViewController {
         //     INPUT
         // ------------------------------
         
-        viewModel.items
-            .drive(tableView.rx.items(cellIdentifier: SearchTableCell.identifier, cellType: SearchTableCell.self)) {
-                _, item, cell in
-                cell.onData.onNext(item)
-            }
-            .disposed(by: disposeBag)
-        
         cancel.rx.tap
             .bind { [weak self] in
                 self?.navigationController?.popViewController(animated: true)
@@ -108,7 +100,7 @@ extension SearchViewController {
             .skip(1)
             .debounce(.milliseconds(500), scheduler: MainScheduler.instance)
             .distinctUntilChanged()
-            .bind(to: viewModel.searchText)
+            .bind(to: viewModel.input.searchText)
             .disposed(by: disposeBag)
         
         // ------------------------------
@@ -118,15 +110,21 @@ extension SearchViewController {
         // 페이지 이동
         Observable.zip(tableView.rx.modelSelected(Search.self), tableView.rx.itemSelected) .bind { [weak self] item, indexPath in
             self?.performSegue(withIdentifier: "SearchSegue", sender: item)
-            
         } .disposed(by: disposeBag)
         
         // ------------------------------
         //     OUTPUT
         // ------------------------------
         
+        viewModel.output.items
+            .drive(tableView.rx.items(cellIdentifier: SearchTableCell.identifier, cellType: SearchTableCell.self)) {
+                _, item, cell in
+                cell.onData.onNext(item)
+            }
+            .disposed(by: disposeBag)
+        
         // 에러 처리
-        viewModel.errorMessage
+        viewModel.output.errorMessage
             .map { $0.domain }
             .subscribe(onNext: { [weak self] message in
                 self?.OKDialog("Order Fail")

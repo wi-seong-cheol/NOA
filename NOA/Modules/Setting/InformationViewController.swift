@@ -55,13 +55,13 @@ extension InformationViewController {
             .subscribe(onNext: { [weak self] indexPath in
                 switch(indexPath.row) {
                 case 0:
-                    self?.performSegue(withIdentifier: "WebSegue", sender: DBInfo.dataPolicy)
+                    self?.performSegue(withIdentifier: "WebSegue", sender: DBInfo.personalInformationPolicy)
                     break
                 case 1:
-                    self?.performSegue(withIdentifier: "WebSegue", sender: DBInfo.dataPolicy)
+                    self?.performSegue(withIdentifier: "WebSegue", sender: DBInfo.termsOfService)
                     break
                 case 2:
-                    self?.performSegue(withIdentifier: "WebSegue", sender: DBInfo.dataPolicy)
+                    self?.performSegue(withIdentifier: "WebSegue", sender: DBInfo.openSourceLicense)
                     break
                 default:
                     break

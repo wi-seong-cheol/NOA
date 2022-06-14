@@ -42,12 +42,12 @@ class ProfileViewController: UIViewController {
         return indicator
     }()
     
-    let viewModel: ProfileViewModelType
+    let viewModel: ProfileViewModel
     var disposeBag = DisposeBag()
 
     // MARK: - Life Cycle
 
-    init(viewModel: ProfileViewModelType = ProfileViewModel()) {
+    init(viewModel: ProfileViewModel = ProfileViewModel()) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -67,12 +67,27 @@ class ProfileViewController: UIViewController {
         switch title {
         case "ALL":
             let vc = UIStoryboard(name: "Profile", bundle: nil).instantiateViewController(identifier: "AllWorkViewController") as! AllWorkViewController
+            let user = UserInfo.shared.getUser()
+            let artist = Artist(user_code: user.id,
+                                profile: user.profile,
+                                nickname: user.nickname)
+            vc.viewModel = WorkViewModel(artist)
             return (menu: title, content: vc)
         case "NFT":
             let vc = UIStoryboard(name: "Profile", bundle: nil).instantiateViewController(identifier: "NFTWorkViewController") as! NFTWorkViewController
+            let user = UserInfo.shared.getUser()
+            let artist = Artist(user_code: user.id,
+                                profile: user.profile,
+                                nickname: user.nickname)
+            vc.viewModel = WorkViewModel(artist)
             return (menu: title, content: vc)
         default:
             let vc = UIStoryboard(name: "Profile", bundle: nil).instantiateViewController(identifier: "NFTWorkViewController") as! NFTWorkViewController
+            let user = UserInfo.shared.getUser()
+            let artist = Artist(user_code: user.id,
+                                profile: user.profile,
+                                nickname: user.nickname)
+            vc.viewModel = WorkViewModel(artist)
             return (menu: title, content: vc)
         }
     }
@@ -175,15 +190,6 @@ extension ProfileViewController {
         menuViewController.register(nib: UINib(nibName: "MenuCell", bundle: nil), forCellWithReuseIdentifier: "MenuCell")
         menuViewController.registerFocusView(nib: UINib(nibName: "FocusView", bundle: nil))
         contentViewController.scrollView.isScrollEnabled = true
-        /*
-         titleLabel: UILabel!
-         @IBOutlet weak var setting: UIButton!
-         @IBOutlet weak var profile: UIImageView!
-         @IBOutlet weak var nickname: UILabel!
-         @IBOutlet weak var editProfile: UIButton!
-         @IBOutlet weak var followList: UIButton!
-         @IBOutlet weak var statusMessage: UILabel!
-         */
         
         titleLabel.font = UIFont.NotoSansCJKkr(type: .medium, size: 22)
         profile.layer.cornerRadius = profile.frame.width / 2
@@ -195,6 +201,8 @@ extension ProfileViewController {
         editProfile.layer.cornerRadius = 3
         followList.layer.borderWidth = 1
         followList.layer.cornerRadius = 3
+        self.navigationController?.navigationBar.tintColor = .black
+        self.navigationController?.navigationBar.topItem?.title = ""
     }
     
     // MARK: - UI Binding
@@ -202,7 +210,13 @@ extension ProfileViewController {
         // ------------------------------
         //     INPUT
         // ------------------------------
-
+        
+        rx.viewWillAppear
+            .take(1)
+            .map { _ in () }
+            .bind(to: viewModel.input.load)
+            .disposed(by: disposeBag)
+        
         // ------------------------------
         //     Page Move
         // ------------------------------
@@ -234,5 +248,23 @@ extension ProfileViewController {
         // ------------------------------
         //     OUTPUT
         // ------------------------------
+        viewModel.output.profile
+            .drive(profile.rx.image)
+            .disposed(by: disposeBag)
+        
+        viewModel.output.nickname
+            .drive(nickname.rx.text)
+            .disposed(by: disposeBag)
+        
+        viewModel.output.status
+            .drive(statusMessage.rx.text)
+            .disposed(by: disposeBag)
+        
+        viewModel.output.errorMessage
+            .map { $0.domain }
+            .subscribe(onNext: { [weak self] message in
+                self?.OKDialog("Order Fail")
+            }).disposed(by: disposeBag)
+        
     }
 }

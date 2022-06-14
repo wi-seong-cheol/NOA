@@ -40,12 +40,12 @@ class OtherProfileViewController: UIViewController {
         return indicator
     }()
     
-    let viewModel: OtherProfileViewModelType
+    var viewModel: OtherProfileViewModel
     var disposeBag = DisposeBag()
 
     // MARK: - Life Cycle
 
-    init(viewModel: OtherProfileViewModelType = OtherProfileViewModel()) {
+    init(viewModel: OtherProfileViewModel = OtherProfileViewModel()) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -58,19 +58,34 @@ class OtherProfileViewController: UIViewController {
     var menuViewController: PagingMenuViewController!
     var contentViewController: PagingContentViewController!
     
-    let dataSource: [(menu: String, content: UIViewController)] = ["ALL", "NFT"].map {
+    private lazy var dataSource: [(menu: String, content: UIViewController)] = ["ALL", "NFT"].map {
         
         let title = $0
         
         switch title {
         case "ALL":
             let vc = UIStoryboard(name: "Profile", bundle: nil).instantiateViewController(identifier: "AllWorkViewController") as! AllWorkViewController
+            viewModel.output.artist
+                .drive{ artist in
+                    vc.viewModel = WorkViewModel(artist)
+                }
+                .disposed(by: disposeBag)
             return (menu: title, content: vc)
         case "NFT":
             let vc = UIStoryboard(name: "Profile", bundle: nil).instantiateViewController(identifier: "NFTWorkViewController") as! NFTWorkViewController
+            viewModel.output.artist
+                .drive{ artist in
+                    vc.viewModel = WorkViewModel(artist)
+                }
+                .disposed(by: disposeBag)
             return (menu: title, content: vc)
         default:
             let vc = UIStoryboard(name: "Profile", bundle: nil).instantiateViewController(identifier: "NFTWorkViewController") as! NFTWorkViewController
+            viewModel.output.artist
+                .drive{ artist in
+                    vc.viewModel = WorkViewModel(artist)
+                }
+                .disposed(by: disposeBag)
             return (menu: title, content: vc)
         }
     }
@@ -173,15 +188,6 @@ extension OtherProfileViewController {
         menuViewController.register(nib: UINib(nibName: "MenuCell", bundle: nil), forCellWithReuseIdentifier: "MenuCell")
         menuViewController.registerFocusView(nib: UINib(nibName: "FocusView", bundle: nil))
         contentViewController.scrollView.isScrollEnabled = true
-        /*
-         titleLabel: UILabel!
-         @IBOutlet weak var setting: UIButton!
-         @IBOutlet weak var profile: UIImageView!
-         @IBOutlet weak var nickname: UILabel!
-         @IBOutlet weak var editProfile: UIButton!
-         @IBOutlet weak var followList: UIButton!
-         @IBOutlet weak var statusMessage: UILabel!
-         */
         
         profile.layer.cornerRadius = profile.frame.width / 2
         nickname.font = UIFont.NotoSansCJKkr(type: .medium, size: 14)
@@ -192,6 +198,8 @@ extension OtherProfileViewController {
         sendMessage.titleLabel?.font = UIFont.NotoSansCJKkr(type: .medium, size: 12)
         sendMessage.layer.borderWidth = 1
         sendMessage.layer.cornerRadius = 3
+        self.navigationController?.navigationBar.tintColor = .black
+        self.navigationController?.navigationBar.topItem?.title = ""
     }
     
     // MARK: - UI Binding
@@ -199,22 +207,92 @@ extension OtherProfileViewController {
         // ------------------------------
         //     INPUT
         // ------------------------------
-
+        rx.viewWillAppear
+            .take(1)
+            .map { _ in () }
+            .bind(to: viewModel.input.load)
+            .disposed(by: disposeBag)
+        
+        follow.rx.tap
+            .bind(to: viewModel.input.follow)
+            .disposed(by: disposeBag)
+        
+        sendMessage.rx.tap
+            .bind(to: viewModel.input.message)
+            .disposed(by: disposeBag)
+        
         // ------------------------------
         //     Page Move
         // ------------------------------
-
-        // 페이지 이동
-        
-        // MARK: - sendMessage Page
-        sendMessage.rx.tap
-            .bind{ [weak self] in
-                
-            }
-            .disposed(by: disposeBag)
         
         // ------------------------------
         //     OUTPUT
         // ------------------------------
+        
+        viewModel.output.followLabel
+            .drive{ [weak self] text in
+                self?.follow.setTitle(text, for: .normal)
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.output.profile
+            .drive(profile.rx.image)
+            .disposed(by: disposeBag)
+        
+        viewModel.output.nickname
+            .drive(nickname.rx.text)
+            .disposed(by: disposeBag)
+        
+        viewModel.output.status
+            .drive(statusMessage.rx.text)
+            .disposed(by: disposeBag)
+        
+        viewModel.output.move
+            .subscribe(onNext: {
+                if $0 {
+                    let storyboard = UIStoryboard(name:"Chat", bundle: nil)
+                    let pushVC = storyboard.instantiateViewController(withIdentifier: "ChattingViewController") as! ChattingViewController
+                    self.viewModel.output.artist
+                        .drive(onNext: { artist in
+                            let chatRoom = ChatRoom(message: ChatRoomMessage(message: "",
+                                                              unreadCount: 0,
+                                                              created: ""),
+                                     owner: artist,
+                                                    roomId: self.viewModel.roomId.value)
+                            pushVC.viewModel = ChattingViewModel(chatRoom)
+                            self.navigationController?.pushViewController(pushVC, animated: true)
+                        })
+                        .disposed(by: self.disposeBag)
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.output.activated
+            .skip(1)
+            .map { $0 }
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: {[weak self] finished in
+                if finished {
+                    self?.indicator.startAnimating()
+                } else {
+                    self?.indicator.stopAnimating()
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        // Alert
+        viewModel.output.alertMessage
+            .skip(1)
+            .map{ $0 as String }
+            .subscribe(onNext: { [weak self] message in
+                self?.OKDialog(message)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.output.errorMessage
+            .map { $0.domain }
+            .subscribe(onNext: { [weak self] message in
+                self?.OKDialog("Order Fail")
+            }).disposed(by: disposeBag)
     }
 }

@@ -35,12 +35,12 @@ class NFTWorkViewController: UIViewController {
         return indicator
     }()
     
-    let viewModel: WorkViewModelType
+    var viewModel: WorkViewModel
     var disposeBag = DisposeBag()
 
     // MARK: - Life Cycle
 
-    init(viewModel: WorkViewModelType = WorkViewModel()) {
+    init(viewModel: WorkViewModel = WorkViewModel()) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -89,13 +89,13 @@ extension NFTWorkViewController {
             .map { _ in () } ?? Observable.just(())
         
         Observable.merge([firstLoad, reload])
-            .bind(to: self.viewModel.fetchList)
+            .bind(to: self.viewModel.input.fetchNFTList)
             .disposed(by: disposeBag)
         
         // 무한 스크롤
         self.collectionView.rx_reachedBottom
             .map { _ in () }
-            .bind(to: self.viewModel.moreFetchList)
+            .bind(to: self.viewModel.input.moreFetchNFTList)
             .disposed(by: disposeBag)
 
         // ------------------------------
@@ -103,11 +103,18 @@ extension NFTWorkViewController {
         // ------------------------------
 
         // 페이지 이동
-        Observable.zip(collectionView.rx.modelSelected(Lecture.self), collectionView.rx.itemSelected) .bind { [weak self] item, indexPath in
+        Observable.zip(collectionView.rx.modelSelected(Feed.self), collectionView.rx.itemSelected) .bind { [weak self] item, indexPath in
             let storyboard = UIStoryboard(name:"Feed", bundle: nil)
             let pushVC = storyboard.instantiateViewController(withIdentifier: "FeedDetailViewController") as! FeedDetailViewController
-            pushVC.viewModel = FeedDetailViewModel(item)
-            self?.navigationController?.pushViewController(pushVC, animated: true)
+            var feed = item
+            self?.viewModel.output.artist
+                .drive{ artist in
+                    feed.user = artist
+                    print(feed)
+                    pushVC.viewModel = FeedDetailViewModel(feed)
+                    self?.navigationController?.pushViewController(pushVC, animated: true)
+                }
+                .disposed(by: (self?.disposeBag)!)
         } .disposed(by: disposeBag)
 
         // ------------------------------
@@ -115,14 +122,14 @@ extension NFTWorkViewController {
         // ------------------------------
 
         // 에러 처리
-        viewModel.errorMessage
+        viewModel.output.errorMessage
             .map { $0.domain }
             .subscribe(onNext: { [weak self] message in
                 self?.OKDialog("Order Fail")
             }).disposed(by: disposeBag)
         
         // 액티비티 인디케이터
-        viewModel.activated
+        viewModel.output.activated
             .map { !$0 }
             .observe(on: MainScheduler.instance)
             .do(onNext: { [weak self] finished in
@@ -134,11 +141,15 @@ extension NFTWorkViewController {
             .disposed(by: disposeBag)
                 
         // 테이블뷰 아이템들
-        viewModel
+        viewModel.output
             .items
-            .bind(to: collectionView.rx.items(cellIdentifier: FeedCollectionCell.identifier, cellType: FeedCollectionCell.self)) {
+            .drive(collectionView.rx.items(cellIdentifier: FeedCollectionCell.identifier, cellType: FeedCollectionCell.self)) {
                 indexPath, item, cell in
-                cell.onData.onNext(item)
+                let user = UserInfo.shared.getUser()
+                let artist: Artist = Artist(user_code: user.id, profile: user.profile, nickname: user.nickname)
+                var feed = item
+                feed.user = artist
+                cell.onData.onNext(feed)
             }
             .disposed(by: disposeBag)
         
