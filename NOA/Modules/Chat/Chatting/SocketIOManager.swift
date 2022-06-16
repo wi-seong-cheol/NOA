@@ -5,31 +5,23 @@
 //  Created by wi_seong on 2022/05/06.
 //
 
+import Foundation
 import RxCocoa
 import RxSwift
 import SocketIO
+import RealmSwift
 
 final class SocketIOManager {
 
     static let shared = SocketIOManager()
 
-    private var socketManager: SocketManager!
+    private var socketManager = SocketManager(
+        socketURL: URL(string: DBInfo.chatting_url)!,
+        config: [.log(true), .compress]
+    )
     private let disposeBag = DisposeBag()
     private var socket: SocketIOClient {
         return socketManager.defaultSocket //.socket(forNamespace: "/my-namespace")
-    }
-
-    // Call start from the singleton
-    func start() {
-        guard socketManager == nil else {
-            return
-        }
-
-        // Initialize socket manager
-        socketManager = SocketManager(
-            socketURL: URL(string: "ws://localhost:3000")!,
-            config: [.log(true), .compress]
-        )
     }
     
     // socket connection state
@@ -38,44 +30,48 @@ final class SocketIOManager {
         
         // socket listenermes
     }
-    
-    // socket common function
-//    func emitMessage(events: String, message: [String: Any]) {
-//        socket.emit(events, with: [message], completion: nil)
-//    }
-//
-//    func listenMessage(events: String, message: [String: Any],
-//                       handler: @escaping (_ message: Message) -> Void){
-//        socket.on(events){ (data, ack) in
-//            handler(message)
-//        }
-//    }
-    
+    func join(_ roomId: String) {
+        let msg: [String: Any] = [
+            "room_id": roomId
+        ]
+        socket.emit("join", with: [msg], completion: nil)
+    }
     // socket emit
     func sendMessage(message: MyMessage) {
-//        let msg: [String: Any] = [
-//            "NodeJS Server Port": "Hello"
-//        ]
-        //("sendMessage", with: [msg], completion: nil)
-        socket.emit("NodeJS Server Port", message.message)
+        let msg: [String: Any] = [
+            "room_id": message.roomId,
+            "msg_to": message.to,
+            "msg_from": message.from,
+            "msg_content": message.message,
+            "msg_time": message.timestamp
+        ]
+        socket.emit("chatting", with: [msg], completion: nil)
     }
     
     // socket listener
     func newMessage(handler: @escaping (_ message: OtherMessage) -> Void) {
-        socket.on("iOS Client Port") { (data, ack) in
+        socket.on("chatting") { (data, ack) in
             let msg = data[0] as! [String: Any]
             let message = OtherMessage(id: "",
-                                       nickname: "Test",
+                                       nickname:  msg["msg_from"]  as! String,
                                        profile: "",
-                                       message: msg["msg"]  as! String,
-                                       timestamp: "1231")
+                                       message: msg["msg_content"]  as! String,
+                                       timestamp: msg["msg_time"] as! String)
             handler(message)
+        }
+    }
+    
+    func chatHistory(handler: @escaping ( _: Any) -> Void){
+        socket.on("msg") { (data, ack) in
+//            let json = data[0] as! AnyObject
+//            let JSON = json as? [String : AnyObject]
+//            print(map(JSON))
+            handler(data[0])
         }
     }
     
     // socket connection state
     func connect() {
-        print("dsf")
         socket.connect()
     }
     
