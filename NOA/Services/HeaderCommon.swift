@@ -11,18 +11,16 @@ import Alamofire
 //공통 헤더
 class HeaderCommon {
 
-    func headerSetting()-> HTTPHeaders{
+    func headerSetting() -> HTTPHeaders{
         let requestUUID: String = UUID().uuidString.lowercased()
         let userAgent:String = HTTPHeader.defaultUserAgent.value
         
         let headers: HTTPHeaders = [
-            "Content-Type":"application/json",
+            "Content-Type":"application/json"
 //            "User-Agent": "Postman v9.0.8",
 //            "Accept": "application/json",
-//            "Accept-Encoding": "gzip",
+//            "Accept-Encoding": "gzip, deflate, br",
 //            "Connection": "keep-alive"
-//            "X-Naver-Client-Id": Const.NaverClientId,
-//            "X-Naver-Client-Secret": Const.NaverClientSecret,
         ]
 
         return headers
