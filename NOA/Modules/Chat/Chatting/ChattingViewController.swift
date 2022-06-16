@@ -49,10 +49,12 @@ class ChattingViewController: UIViewController {
             return cell
         case let .dateCell(cellModel):
             let cell = tableview.dequeueReusableCell(withIdentifier: DateCell.identifier, for: indexPath) as! DateCell
+            cell.onData.onNext(cellModel)
             return cell
         case let .otherMessageCell(cellModel):
             let cell = tableview.dequeueReusableCell(withIdentifier: OtherMessageCell.identifier, for: indexPath) as! OtherMessageCell
             cell.onData.onNext(cellModel)
+            cell.delegate = self
             return cell
         case let .myMessageCell(cellModel):
             let cell = tableview.dequeueReusableCell(withIdentifier: MyMessageCell.identifier, for: indexPath) as! MyMessageCell
@@ -61,12 +63,15 @@ class ChattingViewController: UIViewController {
         }
     }
     
-    var viewModel: ChattingViewModelType
+    var oldContentSizeHeight: CGFloat = 0.0
+    var nowContentSizeHeight: CGFloat = 0.0
+    var more: Bool = false
+    var viewModel: ChattingViewModel
     var disposeBag = DisposeBag()
 
     // MARK: - Life Cycle
 
-    init(viewModel: ChattingViewModelType = ChattingViewModel()) {
+    init(viewModel: ChattingViewModel = ChattingViewModel()) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -86,7 +91,8 @@ class ChattingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print("-----------> \(self.tableView.contentSize.height)")
+
         configure()
         setupBindings()
     }
@@ -94,7 +100,6 @@ class ChattingViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         
-//        self.tabBarController?.selectedIndex = 1
         self.tabBarController?.tabBar.isHidden = false
     }
     
@@ -106,6 +111,7 @@ class ChattingViewController: UIViewController {
 extension ChattingViewController {
     // MARK: - UI Setting
     func configure() {
+        
         let window = UIApplication.shared.windows.first
         let extra = window!.safeAreaInsets.bottom
         
@@ -128,9 +134,14 @@ extension ChattingViewController {
             })
             .disposed(by: disposeBag)
         
-        
-        let tapGuesterHideKeyboard = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
-        tableView.addGestureRecognizer(tapGuesterHideKeyboard)
+        tableView.delegate = self
+        messageTextView.delegate = self
+        textViewSetupView(messageTextView)
+        messageTextView.layer.cornerRadius = 4
+        messageTextView.layer.borderWidth = 0.5
+        messageTextView.layer.borderColor = UIColor(red: 112, green: 112, blue: 112).cgColor
+        messageTextView.font = UIFont.NotoSansCJKkr(type: .regular, size: 12)
+        self.hideKeyboard()
     }
     
     // MARK: - UI Binding
@@ -143,37 +154,37 @@ extension ChattingViewController {
             .take(1)
             .map { _ in () }
         
-        let disappear = rx.viewDidDisappear
-            .take(1)
+        tableView.rx_reachedTop
+            .skip(2)
+            .map { _ in () }
+            .subscribe(onNext: { _ in
+                self.more = true
+                self.viewModel.input.moreFetchList.onNext(())
+            })
+            .disposed(by: disposeBag)
+        
+        let didDisappear = rx.viewDidDisappear
             .map { _ in () }
         
         firstLoad
-            .debug()
-            .bind(to: self.viewModel.register)
+            .bind(to: self.viewModel.input.registerSocket,
+                  self.viewModel.input.fetchList)
             .disposed(by: disposeBag)
         
-        disappear
-            .bind(to: self.viewModel.disconnect)
-            .disposed(by: disposeBag)
-        
-        // MARK: - Message Bind
-        viewModel.messages
-            .do(onNext: { _ in
-                self.tableView.setContentOffset(CGPoint(x: 0, y : CGFloat.greatestFiniteMagnitude), animated: true)
-            })
-            .bind(to: tableView.rx.items(dataSource: dataSource))
+        didDisappear
+            .bind(to: self.viewModel.input.disconnect)
             .disposed(by: disposeBag)
         
         // MARK: - TextView Bind
         messageTextView.rx.text
             .orEmpty
             .distinctUntilChanged()
-            .bind(to: viewModel.message)
+            .bind(to: viewModel.input.message)
             .disposed(by: disposeBag)
         
         // MARK: - Message Send
         sendButton.rx.tap
-            .bind(to: viewModel.sendMessage)
+            .bind(to: viewModel.input.sendMessage)
             .disposed(by: disposeBag)
         
         // MARK: - Socket IO
@@ -181,16 +192,96 @@ extension ChattingViewController {
         // ------------------------------
         //     OUTPUT
         // ------------------------------
+//            .subscribe(onNext: { currentSize in
+//                print("currentSize --> \(currentSize)")
+//            })
+//            .disposed(by: disposeBag)
+        
+        // MARK: - Message Bind
+        viewModel.output.messages
+            .do(onNext: { _ in
+                if self.more {
+                    print("-----------> 1")
+                } else {
+                    print("-----------> 2")
+                    self.tableView.setContentOffset(CGPoint(x: 0, y : CGFloat.greatestFiniteMagnitude), animated: true)
+                }
 
+            })
+            .drive(tableView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
+                
         // MARK: - 에러 처리
-        viewModel.errorMessage
+        viewModel.output.errorMessage
             .map { $0.domain }
             .subscribe(onNext: { [weak self] message in
                 self?.OKDialog("Order Fail")
             }).disposed(by: disposeBag)
     }
+}
+
+extension ChattingViewController: OtherMessageDelegate {
+    func didSelectedProfile(_ otherMessageCell: OtherMessageCell, detailButtonTappedFor userId: String) {
+//        let storyboard = UIStoryboard(name:"Profile", bundle: nil)
+//        let pushVC = storyboard.instantiateViewController(withIdentifier: "OtherProfileViewController")
+//        self.navigationController?.pushViewController(pushVC, animated: true)
+    }
+}
+
+//MARK: - textView 관련 메서드
+extension ChattingViewController {
+    func textViewSetupView(_ textView: UITextView) {
+        textCheck(textView, "텍스트를 입력해주세요")
+    }
     
-    @objc func hideKeyboard() {
-        messageTextView.resignFirstResponder()
+    func textCheck(_ textView: UITextView, _ text: String) {
+        if textView.text == text {
+            textView.text = ""
+            textView.textColor = UIColor.black
+        } else if textView.text == "" {
+            textView.text = text
+            textView.textColor = UIColor.lightGray
+        }
+    }
+}
+
+//MARK: - UITextViewDelegate 관련 메서드
+extension ChattingViewController: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        textViewSetupView(textView)
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text == "" {
+            textViewSetupView(textView)
+        }
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        return true
+    }
+}
+
+//MARK: - UITableViewDelegate 관련 메서드
+extension ChattingViewController: UITableViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if self.more {
+            self.more = false
+            self.oldContentSizeHeight = self.tableView.contentSize.height
+            viewModel.output.scroll
+                .filter{ $0 }
+                .subscribe(onNext: { _ in
+    //                if self.more {
+    //
+                        let newContentSizeHeight = self.tableView.contentSize.height
+                        print("-----------> \(self.oldContentSizeHeight)")
+                        print("-----------> \(newContentSizeHeight)")
+                        print("-----------> \(newContentSizeHeight - self.oldContentSizeHeight)")
+                        self.more = false
+                        self.tableView.setContentOffset(CGPoint(x: 0, y : newContentSizeHeight - self.oldContentSizeHeight), animated: false)
+    //                }
+                })
+                .disposed(by: disposeBag)
+        }
     }
 }

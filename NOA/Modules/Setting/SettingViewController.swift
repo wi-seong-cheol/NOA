@@ -14,12 +14,12 @@ import PagingKit
 
 class SettingViewController: UITableViewController {
     
-    let viewModel: SettingViewModelType
+    let viewModel: SettingViewModel
     var disposeBag = DisposeBag()
 
     // MARK: - Life Cycle
 
-    init(viewModel: SettingViewModelType = SettingViewModel()) {
+    init(viewModel: SettingViewModel = SettingViewModel()) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -61,6 +61,8 @@ class SettingViewController: UITableViewController {
 extension SettingViewController {
     // MARK: - UI Setting
     func configure() {
+        self.navigationController?.navigationBar.tintColor = .black
+        self.navigationController?.navigationBar.topItem?.title = ""
     }
     
     // MARK: - UI Binding
@@ -104,7 +106,7 @@ extension SettingViewController {
         // ------------------------------
 
         // 페이지 이동
-        viewModel.present
+        viewModel.output.present
             .skip(1)
             .filter{ $0 }
             .subscribe(onNext: {[weak self] _ in
@@ -119,7 +121,7 @@ extension SettingViewController {
         // ------------------------------
 
         // 에러 처리
-        viewModel.errorMessage
+        viewModel.output.errorMessage
             .map { $0.domain }
             .subscribe(onNext: { [weak self] message in
                 self?.OKDialog("Order Fail")

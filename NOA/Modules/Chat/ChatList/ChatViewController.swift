@@ -36,12 +36,12 @@ class ChatViewController: UIViewController {
         return indicator
     }()
     
-    let viewModel: ChatViewModelType
+    let viewModel: ChatViewModel
     var disposeBag = DisposeBag()
 
     // MARK: - Life Cycle
 
-    init(viewModel: ChatViewModelType = ChatViewModel()) {
+    init(viewModel: ChatViewModel = ChatViewModel()) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -72,7 +72,7 @@ class ChatViewController: UIViewController {
         let identifier = segue.identifier ?? ""
 
         if identifier == "ChattingSegue",
-           let selectedFeed = sender as? Lecture,
+           let selectedFeed = sender as? ChatRoom,
            let chatVC = segue.destination as? ChattingViewController {
             let chatViewModel = ChattingViewModel(selectedFeed)
             chatVC.viewModel = chatViewModel
@@ -86,6 +86,8 @@ extension ChatViewController {
         tableView.refreshControl = UIRefreshControl()
         tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         titleLabel.font = UIFont.NotoSansCJKkr(type: .medium, size: 22)
+        self.navigationController?.navigationBar.tintColor = .black
+        self.navigationController?.navigationBar.topItem?.title = ""
     }
     
     // MARK: - UI Binding
@@ -104,7 +106,7 @@ extension ChatViewController {
             .map { _ in () } ?? Observable.just(())
 
         Observable.merge([firstLoad, reload])
-            .bind(to: self.viewModel.fetchList)
+            .bind(to: self.viewModel.input.fetchList)
             .disposed(by: disposeBag)
 
         // ------------------------------
@@ -112,7 +114,7 @@ extension ChatViewController {
         // ------------------------------
 
         // 페이지 이동
-        Observable.zip(tableView.rx.modelSelected(Lecture.self), tableView.rx.itemSelected) .bind { [weak self] item, indexPath in
+        Observable.zip(tableView.rx.modelSelected(ChatRoom.self), tableView.rx.itemSelected) .bind { [weak self] item, indexPath in
             self?.performSegue(withIdentifier: "ChattingSegue", sender: item)
 
         } .disposed(by: disposeBag)
@@ -122,14 +124,14 @@ extension ChatViewController {
         // ------------------------------
 
         // 에러 처리
-        viewModel.errorMessage
+        viewModel.output.errorMessage
             .map { $0.domain }
             .subscribe(onNext: { [weak self] message in
                 self?.OKDialog("Order Fail")
             }).disposed(by: disposeBag)
 
         // 액티비티 인디케이터
-        viewModel.activated
+        viewModel.output.activated
             .map { !$0 }
             .observe(on: MainScheduler.instance)
             .do(onNext: { [weak self] finished in
@@ -141,8 +143,8 @@ extension ChatViewController {
             .disposed(by: disposeBag)
 
         // 테이블뷰 아이템들
-        viewModel.items
-            .bind(to: tableView.rx.items(cellIdentifier: ChatTableCell.identifier, cellType: ChatTableCell.self)) {
+        viewModel.output.items
+            .drive(tableView.rx.items(cellIdentifier: ChatTableCell.identifier, cellType: ChatTableCell.self)) {
                 _, item, cell in
                 cell.onData.onNext(item)
                 cell.delegate = self
@@ -154,7 +156,8 @@ extension ChatViewController {
 extension ChatViewController: ChatTableDelegate {
     func didSelectedProfile(_ chatTableCell: ChatTableCell, detailButtonTappedFor userId: String) {
         let storyboard = UIStoryboard(name:"Profile", bundle: nil)
-        let pushVC = storyboard.instantiateViewController(withIdentifier: "OtherProfileViewController")
+        let pushVC = storyboard.instantiateViewController(withIdentifier: "OtherProfileViewController") as! OtherProfileViewController
+        pushVC.viewModel = OtherProfileViewModel(chatTableCell.artist.value)
         self.navigationController?.pushViewController(pushVC, animated: true)
     }
 }

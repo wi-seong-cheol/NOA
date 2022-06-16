@@ -31,25 +31,24 @@ class FeedDetailViewController: UIViewController {
                 y: self.view.frame.height/2 - 25,
                 width: 50,
                 height: 50),
-            type: .ballScaleMultiple,
+            type: .circleStrokeSpin,
             color: .black,
             padding: 0)
         
         indicator.center = self.view.center
                 
         // 기타 옵션
-        indicator.color = .purple
+        indicator.color = UIColor(red: 237, green: 106, blue: 201)
         
-        indicator.stopAnimating()
         return indicator
     }()
     
-    var viewModel: FeedDetailViewModelType
+    var viewModel: FeedDetailViewModel
     var disposeBag = DisposeBag()
 
     // MARK: - Life Cycle
 
-    init(viewModel: FeedDetailViewModelType = FeedDetailViewModel()) {
+    init(viewModel: FeedDetailViewModel = FeedDetailViewModel()) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -87,6 +86,9 @@ extension FeedDetailViewController {
         desc.font = UIFont.NotoSansCJKkr(type: .regular, size: 14)
         profile.isUserInteractionEnabled = true
         profile.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.didSelectedProfile(_:))))
+        self.navigationController?.navigationBar.tintColor = .black
+        self.navigationController?.navigationBar.topItem?.title = ""
+        self.view.addSubview(indicator)
     }
     
     // MARK: - UI Binding
@@ -94,14 +96,16 @@ extension FeedDetailViewController {
         // ------------------------------
         //     INPUT
         // ------------------------------
-        viewModel.work
-            .bind(to: work.rx.image)
+        more.rx.tap
+            .subscribe(onNext: {[weak self] _ in
+                self?.reportAlert()
+            })
             .disposed(by: disposeBag)
         
-        viewModel.profile
-            .bind(to: profile.rx.image)
+        like.rx.tap
+            .bind(to: viewModel.input.likeClick)
             .disposed(by: disposeBag)
-        
+            
         // ------------------------------
         //     Page Move
         // ------------------------------
@@ -111,18 +115,97 @@ extension FeedDetailViewController {
         // ------------------------------
         //     OUTPUT
         // ------------------------------
-
+        
+        viewModel.output.work
+            .drive(work.rx.image)
+            .disposed(by: disposeBag)
+        
+        viewModel.output.profile
+            .drive(profile.rx.image)
+            .disposed(by: disposeBag)
+        
+        viewModel.output.nickname
+            .drive(nickname.rx.text)
+            .disposed(by: disposeBag)
+        
+        viewModel.output.like
+            .drive((like.imageView?.rx.image)!)
+            .disposed(by: disposeBag)
+        
+        viewModel.output.likeCount
+            .drive(likeCount.rx.text)
+            .disposed(by: disposeBag)
+        
+        viewModel.output.nft
+            .drive(nft.rx.image)
+            .disposed(by: disposeBag)
+        
+        viewModel.output.titleLabel
+            .drive(titleLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        viewModel.output.desc
+            .drive(desc.rx.text)
+            .disposed(by: disposeBag)
+        
+        // Alert
+        viewModel.output.alertMessage
+            .skip(1)
+            .map{ $0 as String }
+            .subscribe(onNext: { [weak self] message in
+                self?.OKDialog(message)
+            })
+            .disposed(by: disposeBag)
+        
         // 에러 처리
-        viewModel.errorMessage
+        viewModel.output.errorMessage
             .map { $0.domain }
             .subscribe(onNext: { [weak self] message in
                 self?.OKDialog("Order Fail")
             }).disposed(by: disposeBag)
+        
+        // 액티비티 인디케이터
+        viewModel.output.activated
+            .skip(1)
+            .map { $0 }
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: {[weak self] finished in
+                if finished {
+                    self?.indicator.startAnimating()
+                } else {
+                    self?.indicator.stopAnimating()
+                }
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func reportAlert() {
+        let actions: [UIAlertController.AlertAction] = [
+            .action(title: "신고하기"),
+            .action(title: "취소", style: .cancel)
+        ]
+
+        return UIAlertController
+            .present(in: self, title: "Alert", message: "message", style: .actionSheet, actions: actions)
+            .filter{ $0 == 0 }
+            .subscribe(onNext: { _ in
+                Observable<Void>.just(Void())
+                    .subscribe(onNext: { _ in
+                        self.viewModel.input.report.onNext(Void())
+                    })
+                    .disposed(by: self.disposeBag)
+            })
+            .disposed(by: disposeBag)
     }
     
     @objc func didSelectedProfile(_ sender: UIButton) {
         let storyboard = UIStoryboard(name:"Profile", bundle: nil)
-        let pushVC = storyboard.instantiateViewController(withIdentifier: "OtherProfileViewController")
-        self.navigationController?.pushViewController(pushVC, animated: true)
+        let pushVC = storyboard.instantiateViewController(withIdentifier: "OtherProfileViewController") as! OtherProfileViewController
+        viewModel.output.artist
+            .drive{ artist in
+                pushVC.viewModel = OtherProfileViewModel(artist)
+                self.navigationController?.pushViewController(pushVC, animated: true)
+            }
+            .disposed(by: disposeBag)
     }
 }
