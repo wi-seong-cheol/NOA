@@ -47,6 +47,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             }
         }
         
+        // Navigation bar bottom 라인 없애기
+        UINavigationBar.appearance().shadowImage = UIImage()
+        UINavigationBar.appearance().isTranslucent = true
+        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+        
         return true
     }
     
@@ -63,15 +68,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         DIContainer.shared.register(HeaderCommon())
         DIContainer.shared.register(APIRequestService())
         DIContainer.shared.register(APIUrlService())
-        DIContainer.shared.register(FeedService())
+//        DIContainer.shared.register(FeedService())
         let headerCommon: HeaderCommon = DIContainer.shared.resolve()
         let apiRequestService: APIRequestService = DIContainer.shared.resolve()
         let apiUrlService: APIUrlService = DIContainer.shared.resolve()
-        let feedService: FeedService = DIContainer.shared.resolve()
+//        let feedService: FeedService = DIContainer.shared.resolve()
         DIContainer.shared.register(headerCommon)
         DIContainer.shared.register(apiRequestService)
         DIContainer.shared.register(apiUrlService)
-        DIContainer.shared.register(feedService)
+//        DIContainer.shared.register(feedService)
     }
     
     // MARK: UISceneSession Lifecycle
@@ -245,7 +250,8 @@ extension AppDelegate: MessagingDelegate {
             userInfo: dataDict
         )
         
-        
-        UserInfo.shared.savePushToken(fcmToken ?? "")
+        var user = UserInfo.shared.getUser()
+        user.push_token = fcmToken ?? ""
+        UserInfo.shared.saveUser(user)
     }
 }
