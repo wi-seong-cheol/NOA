@@ -31,20 +31,11 @@ target 'NOA' do
   # pod SwiftyJSON
   pod 'SwiftyJSON'
   
-  # pod Alamofire
-  pod 'Alamofire'
-  
   # pod Socket.io
   pod 'Socket.IO-Client-Swift'
   
-  # pod RealmSwift
-  pod 'RealmSwift', '~> 10.25.0'
-  
   # pod CropViewController
   pod 'CropViewController'
-  
-  # pod SwiftyStoreKit
-  pod 'SwiftyStoreKit'
   
   # pod NVActivityIndicatorView
   pod 'NVActivityIndicatorView'

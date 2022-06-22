@@ -62,14 +62,6 @@ class AllWorkViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        let identifier = segue.identifier ?? ""
-//
-//        if identifier == "FeedDetailSegue",
-//           let selectedFeed = sender as? Lecture,
-//           let feedVC = segue.destination as? FeedDetailViewController {
-//            let feedViewModel = FeedDetailViewModel(selectedFeed)
-//            feedVC.viewModel = feedViewModel
-//        }
     }
 }
 

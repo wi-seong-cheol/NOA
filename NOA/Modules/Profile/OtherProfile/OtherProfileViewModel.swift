@@ -9,7 +9,6 @@ import Foundation
 import RxSwift
 import RxRelay
 import RxCocoa
-import RealmSwift
 
 protocol OtherProfileViewModelType {
     associatedtype Input
@@ -38,7 +37,6 @@ protocol OtherProfileViewModelType {
 class OtherProfileViewModel: OtherProfileViewModelType {
     
     let disposeBag = DisposeBag()
-    let realm = try! Realm()
     
     struct Input {
         var load: AnyObserver<Void>

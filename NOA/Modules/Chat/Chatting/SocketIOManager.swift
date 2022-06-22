@@ -63,9 +63,6 @@ final class SocketIOManager {
     
     func chatHistory(handler: @escaping ( _: Any) -> Void){
         socket.on("msg") { (data, ack) in
-//            let json = data[0] as! AnyObject
-//            let JSON = json as? [String : AnyObject]
-//            print(map(JSON))
             handler(data[0])
         }
     }

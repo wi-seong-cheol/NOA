@@ -1,0 +1,6 @@
+app_identifier("com.wi-seong.NOA") # The bundle identifier of your app
+apple_id("tjd9248@naver.com") # Your Apple email address
+
+
+# For more information about the Appfile, see:
+#     https://docs.fastlane.tools/advanced/#appfile

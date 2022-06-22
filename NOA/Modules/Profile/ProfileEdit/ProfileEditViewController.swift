@@ -73,14 +73,6 @@ class ProfileEditViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        let identifier = segue.identifier ?? ""
-//
-//        if identifier == "HomeDetailSegue",
-//           let selectedFeed = sender as? Lecture,
-//           let feedVC = segue.destination as? HomeDetailViewController {
-//            let feedViewModel = HomeDetailViewModel(selectedFeed)
-//            feedVC.viewModel = feedViewModel
-//        }
     }
 }
 

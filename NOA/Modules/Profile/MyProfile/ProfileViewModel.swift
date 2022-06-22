@@ -9,7 +9,6 @@ import Foundation
 import RxSwift
 import RxRelay
 import RxCocoa
-import RealmSwift
 import UIKit
 
 protocol ProfileViewModelType {
@@ -30,7 +29,6 @@ class ProfileViewModel: ProfileViewModelType {
     
     
     let disposeBag = DisposeBag()
-    let realm = try! Realm()
     
     struct Input {
         var load: AnyObserver<Void>

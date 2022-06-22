@@ -107,5 +107,3 @@ extension WebViewController: WKUIDelegate, WKNavigationDelegate {
         self.present(alert, animated: true, completion: nil)
     }
 }
-//, WKUIDelegate, WKNavigationDelegate
-

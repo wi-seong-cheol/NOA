@@ -112,7 +112,6 @@ class LoginViewModel: LoginViewModelType {
             })
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { result in
-//                print(result.datax)
                 if result.status_code == 200 {
                     guard let data = result.data else {
                         return
@@ -152,7 +151,3 @@ private func validation(_ walletAddress: String) -> Bool {
     
     return isValid
 }
-// 0x6FCA51AD4461eE27Ae92f3e11596b23EC107b4a7
-// d16b6f87af2c110e957a3564d461f168174e0bbf1c38b4338ca2652227c8eabed16b6f87af2c110e957a3564d461f168174e0bbf1c38b4338ca2652227c8eabed16b6f87af2c110e957a3564d461f168174e0bbf1c38b4338ca2652227c8eabed16b6f87af2c110e957a3564d461f168174e0bbf1c38b4338ca2652227c8eabe
-// noa12345
-//62826d11709638661f985034350ef489716500870a30cad82efd605999cf9603

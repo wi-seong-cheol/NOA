@@ -53,7 +53,7 @@ class AuthService: AuthFetchable {
     
     // MARK: Refresh Token 갱신
     func refresh() -> Observable<[Duplicate]> {
-        let URL: String = apiUrlService.serviceUrl(.duplication)
+        let URL: String = apiUrlService.serviceUrl(.login)
         let refreshToken = Token.shared.load(account: "refreshToken")!
         let query: [String: Any] = ["refresh_token": refreshToken]
         let interceptor: Interceptor = Interceptor(interceptors: [BaseInterceptor()])

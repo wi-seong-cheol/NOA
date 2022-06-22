@@ -10,7 +10,6 @@ import RxSwift
 import Alamofire
 
 protocol UserFetchable {
-//    func getSelfUser() -> Observable<UserResponse>
     func getUser(_ otherId: String) -> Observable<UserResponse>
     func follow(_ otherId: String) -> Observable<CommonResponse>
     func isFriend(_ otherId: String) -> Observable<CommonResponse>

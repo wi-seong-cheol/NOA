@@ -9,7 +9,6 @@ import Foundation
 import RxSwift
 import RxRelay
 import RxCocoa
-import RealmSwift
 
 protocol ChatViewModelType {
     associatedtype Input
@@ -27,7 +26,6 @@ protocol ChatViewModelType {
 class ChatViewModel: ChatViewModelType {
     
     let disposeBag = DisposeBag()
-    let realm = try! Realm()
     
     struct Input {
         let fetchList: AnyObserver<Void>
@@ -81,37 +79,5 @@ class ChatViewModel: ChatViewModelType {
         self.items$ = items$
         self.activated$ = activated$
         self.errorMessage$ = errorMessage$
-    }
-    
-    func sendMessage() {
-        let content = ChatLocalDB(value: ["id": "", "name": "", "contents": "", "profile": "", "date": "", "count": 1])
-        if realm.objects(ChatListLocalDB.self).isEmpty == true {
-            let chatModel = ChatListLocalDB()
-            chatModel.chat.append(content)
-            
-            try! realm.write {
-                realm.add(chatModel)
-            }
-        } else {
-            try! realm.write {
-                let chatModel = realm.objects(ChatListLocalDB.self)
-                chatModel.first?.chat.append(content)
-            }
-        }
-    }
-    
-    func receiveMessage(sender: String, text: String) {
-        
-        let content = ChatLocalDB(value: ["id": "", "name": "", "contents": "", "profile": "", "date": "", "count": 1])
-            
-        if realm.objects(ChatListLocalDB.self).isEmpty == true {
-            let chatModel = ChatListLocalDB()
-            chatModel.chat.append(content)
-        } else {
-            try! realm.write {
-                let chatModel = realm.objects(ChatListLocalDB.self)
-                chatModel.first?.chat.append(content)
-            }
-        }
     }
 }

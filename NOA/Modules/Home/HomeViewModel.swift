@@ -70,7 +70,6 @@ class HomeViewModel: HomeViewModelType {
         // MARK: OUTPUT
         let items$ = BehaviorRelay<[Feed]>(value: [])
         let page$ = BehaviorRelay<Int>(value: 0)
-//        let next$ = BehaviorRelay<String>(value: "")
         let state$ = BehaviorRelay<Bool>(value: false)
         let activated$ = BehaviorSubject<Bool>(value: false)
         let alertMessage$ = BehaviorSubject<String>(value: "")

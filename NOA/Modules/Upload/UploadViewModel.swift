@@ -20,7 +20,6 @@ protocol UploadViewModelType {
     associatedtype Output
     
     // MARK: INPUT
-//    var upload: AnyObserver<Void> { get }
     var upload$: PublishSubject<Void> { get }
     var uploadNFT$: PublishSubject<Void> { get }
     var subject$: BehaviorSubject<String> { get }

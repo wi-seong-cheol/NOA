@@ -1,0 +1,6 @@
+framework module Pods_NOA_NOAUITests {
+  umbrella header "Pods-NOA-NOAUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

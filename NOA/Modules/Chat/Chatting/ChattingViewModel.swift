@@ -118,10 +118,6 @@ class ChattingViewModel: ChattingViewModelType {
             .subscribe(onNext: { response in
                 var message: [MessageItem] = []
                 for msg in response {
-//                    if message.count != 0 && Transform.shared.compareDate(msg.created, created$.value) {
-//                        let dateMessage = DateMessage(date: msg.created)
-//                        message.insert(MessageItem.dateCell(dateMessage), at: 0)
-//                    }
                     if msg.msg_from == user.nickname {
                         let otherMessage = OtherMessage(id: String(selectedRoom.owner.user_code),
                                                         nickname: selectedRoom.owner.nickname,
@@ -138,10 +134,6 @@ class ChattingViewModel: ChattingViewModelType {
                                                   timestamp: msg.created)
                         message.insert(MessageItem.myMessageCell(myMessage), at: 0)
                     }
-//                    if response.count == 1 {
-//                        let dateMessage = DateMessage(date: msg.created)
-//                        message.insert(MessageItem.dateCell(dateMessage), at: 0)
-//                    }
                     created$.accept(msg.created)
                 }
                 messages$.accept([MessageSection(items: message)])
@@ -157,10 +149,6 @@ class ChattingViewModel: ChattingViewModelType {
             .subscribe(onNext: { response in
                 var message: [MessageItem] = []
                 for msg in response {
-//                    if Transform.shared.compareDate(msg.created, created$.value) {
-//                        let dateMessage = DateMessage(date: msg.created)
-//                        message.insert(MessageItem.dateCell(dateMessage), at: 0)
-//                    }
                     if msg.msg_from == user.nickname {
                         let otherMessage = OtherMessage(id: String(selectedRoom.owner.user_code),
                                                         nickname: selectedRoom.owner.nickname,
@@ -206,14 +194,6 @@ class ChattingViewModel: ChattingViewModelType {
                 }
                 SocketIOManager.shared.chatHistory { (messages) in
                     
-//                    for i in 0..<messages.si {
-//                        let msg = message as! [String: Any]
-//                        if msg["msg_from"] as! String == user.nickname {
-//                            print("My Message -> \(msg)")
-//                        } else {
-//                            print("Other Message -> \(msg)")
-//                        }
-//                    }
                 }
             })
             .disposed(by: disposeBag)
@@ -225,12 +205,6 @@ class ChattingViewModel: ChattingViewModelType {
                     .subscribe(onNext: {
                         var message: [MessageItem] = []
                         let created = Transform.shared.dateToKTime(time: Date(), format: "yyyy-MM-dd HH:mm:ss")
-//
-//                        if created$.value == "" || Transform.shared.compareDate(created, created$.value) {
-//                            let dateMessage = DateMessage(date: created)
-//                            message.append(MessageItem.dateCell(dateMessage))
-//                            print("fdsafs")
-//                        }
                         let sendMessage = MyMessage(id: String(user.id),
                                                   roomId: String(selectedRoom.roomId),
                                                   to: user.nickname,
@@ -246,15 +220,6 @@ class ChattingViewModel: ChattingViewModelType {
         disconnect$
             .subscribe(onNext: {SocketIOManager.shared.disconnect()})
             .disposed(by: disposeBag)
-        
-//        exitChatting
-//            .subscribe(onNext: {})
-        
-//        (onErrorJustReturn: [Message(id: "",
-//                                                                    nickname: "",
-//                                                                    profile: "",
-//                                                                    message: "error",
-//                                                                    timestamp: "오후 12:12")])
         
         // MARK: OUTPUT
         self.output = Output(messages: messages$.asDriver(onErrorJustReturn: []),

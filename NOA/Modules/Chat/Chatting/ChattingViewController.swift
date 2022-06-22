@@ -192,18 +192,11 @@ extension ChattingViewController {
         // ------------------------------
         //     OUTPUT
         // ------------------------------
-//            .subscribe(onNext: { currentSize in
-//                print("currentSize --> \(currentSize)")
-//            })
-//            .disposed(by: disposeBag)
         
         // MARK: - Message Bind
         viewModel.output.messages
             .do(onNext: { _ in
-                if self.more {
-                    print("-----------> 1")
-                } else {
-                    print("-----------> 2")
+                if !self.more {
                     self.tableView.setContentOffset(CGPoint(x: 0, y : CGFloat.greatestFiniteMagnitude), animated: true)
                 }
 
@@ -222,9 +215,6 @@ extension ChattingViewController {
 
 extension ChattingViewController: OtherMessageDelegate {
     func didSelectedProfile(_ otherMessageCell: OtherMessageCell, detailButtonTappedFor userId: String) {
-//        let storyboard = UIStoryboard(name:"Profile", bundle: nil)
-//        let pushVC = storyboard.instantiateViewController(withIdentifier: "OtherProfileViewController")
-//        self.navigationController?.pushViewController(pushVC, animated: true)
     }
 }
 
@@ -271,15 +261,9 @@ extension ChattingViewController: UITableViewDelegate {
             viewModel.output.scroll
                 .filter{ $0 }
                 .subscribe(onNext: { _ in
-    //                if self.more {
-    //
-                        let newContentSizeHeight = self.tableView.contentSize.height
-                        print("-----------> \(self.oldContentSizeHeight)")
-                        print("-----------> \(newContentSizeHeight)")
-                        print("-----------> \(newContentSizeHeight - self.oldContentSizeHeight)")
-                        self.more = false
-                        self.tableView.setContentOffset(CGPoint(x: 0, y : newContentSizeHeight - self.oldContentSizeHeight), animated: false)
-    //                }
+                    let newContentSizeHeight = self.tableView.contentSize.height
+                    self.more = false
+                    self.tableView.setContentOffset(CGPoint(x: 0, y : newContentSizeHeight - self.oldContentSizeHeight), animated: false)
                 })
                 .disposed(by: disposeBag)
         }

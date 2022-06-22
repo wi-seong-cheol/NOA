@@ -8,7 +8,6 @@
 import Foundation
 import RxSwift
 import RxRelay
-import RealmSwift
 
 protocol SettingViewModelType {
     associatedtype Input
@@ -25,7 +24,6 @@ protocol SettingViewModelType {
 class SettingViewModel: SettingViewModelType {
     
     let disposeBag = DisposeBag()
-    let realm = try! Realm()
     
     struct Input {
         let logout: AnyObserver<Void>
