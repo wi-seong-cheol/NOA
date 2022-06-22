@@ -41,6 +41,7 @@ playground.xcworkspace
 # file: .gitignore
 Info.plist
 DBInfo.swift
+GoogleService-Info.plist
 ABI.json
 
 # Swift Package Manager
