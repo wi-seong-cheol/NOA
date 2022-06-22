@@ -67,4 +67,4 @@ All the icons were made by me.
 License
 =======
 
-MIT License. See [LICENSE](https://github.com/wi-seong-cheol/NOA/tree/main/LICENSE).
+MIT License. See [LICENSE](https://github.com/wi-seong-cheol/NOA/blob/main/License).
