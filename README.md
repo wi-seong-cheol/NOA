@@ -41,10 +41,10 @@
 
 ## Tools
 - [x] [Brew](https://github.com/Homebrew/brew) - The missing package manager for macOS
-- [x] [Bundler](https://github.com/bundler/bundler) - Manage your Ruby application's gem dependencies
 - [x] [Fastlane](https://github.com/fastlane/fastlane) - The easiest way to automate building and releasing your iOS and Android apps
 - [x] [Postman](https://www.getpostman.com) - A powerful HTTP client for testing web services
 - [x] [XD](https://helpx.adobe.com/xd/user-guide.html) - A digital design app for Mac (paid)
+- [ ] [Bundler](https://github.com/bundler/bundler) - Manage your Ruby application's gem dependencies
 recommendations
 
 ## Building and Running
