@@ -1,6 +1,0 @@
-framework module Pods_NOA {
-  umbrella header "Pods-NOA-umbrella.h"
-
-  export *
-  module * { export * }
-}
